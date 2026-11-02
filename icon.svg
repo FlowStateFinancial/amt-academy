@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <rect width="512" height="512" rx="112" fill="#090d16"/>
+  <rect x="24" y="24" width="464" height="464" rx="96" fill="#111827" stroke="#1f293d" stroke-width="12"/>
+  <defs>
+    <linearGradient id="amtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <!-- Bell Profile Silhouette -->
+  <path d="M 120 380 Q 200 380 256 160 Q 312 380 392 380" fill="none" stroke="#38bdf8" stroke-width="24" stroke-linecap="round"/>
+  <!-- POC Line -->
+  <line x1="160" y1="260" x2="352" y2="260" stroke="#f59e0b" stroke-width="20" stroke-linecap="round"/>
+  <!-- Text AMT -->
+  <text x="256" y="440" fill="url(#amtGrad)" font-size="72" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle" letter-spacing="4">AMT</text>
+</svg>
