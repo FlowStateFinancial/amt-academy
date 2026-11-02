@@ -3,7 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>AMT Master Academy | Institutional Auction Market Theory</title>
+  
+  <script>
+    // Immediate legacy service worker & cache purge
+    if ('caches' in window) {
+      caches.keys().then((keys) => {
+        keys.forEach((key) => {
+          if (key !== 'amt-academy-v3') {
+            caches.delete(key);
+          }
+        });
+      });
+    }
+  </script>
   
   <!-- PWA & Mobile Meta Tags -->
   <meta name="theme-color" content="#080c14">
@@ -183,6 +199,12 @@
         </div>
         <span id="top-progress-text" class="text-xs font-mono font-bold text-cyan-400">0%</span>
       </div>
+
+      <!-- App Version & Force Refresh -->
+      <button onclick="purgeCacheAndReload()" title="Click to refresh latest version & clear cache" class="btn-modern flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs shadow-sm transition">
+        <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        <span class="text-[11px] font-mono text-cyan-300 font-bold">v3.0</span>
+      </button>
 
       <!-- Share Action -->
       <button onclick="openShareModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
@@ -4439,9 +4461,44 @@
       }
     }
 
+    function purgeCacheAndReload() {
+      if ('caches' in window) {
+        caches.keys().then((keys) => {
+          return Promise.all(keys.map(k => caches.delete(k)));
+        }).then(() => {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then((regs) => {
+              return Promise.all(regs.map(r => r.unregister()));
+            }).then(() => {
+              window.location.href = window.location.origin + window.location.pathname + '?nocache=' + Date.now();
+            });
+          } else {
+            window.location.href = window.location.origin + window.location.pathname + '?nocache=' + Date.now();
+          }
+        });
+      } else {
+        window.location.href = window.location.origin + window.location.pathname + '?nocache=' + Date.now();
+      }
+    }
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=3.0', { updateViaCache: 'none' })
+          .then((reg) => {
+            reg.update();
+            reg.onupdatefound = () => {
+              const installing = reg.installing;
+              if (installing) {
+                installing.onstatechange = () => {
+                  if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+                    console.log('[SW] New version installed. Reloading...');
+                    window.location.reload();
+                  }
+                };
+              }
+            };
+          })
+          .catch(() => {});
       });
     }
   </script>
