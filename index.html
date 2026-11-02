@@ -78,6 +78,13 @@
     .btn-modern:hover {
       transform: translateY(-1px);
     }
+    
+    /* 3D Flip Card Styles */
+    .perspective-1000 { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
+
     .btn-modern:active {
       transform: translateY(0.5px) scale(0.98);
     }
@@ -150,6 +157,18 @@
 
     <!-- Quick Stats & Actions -->
     <div class="flex items-center space-x-2 sm:space-x-3">
+      <!-- Flashcards Mode -->
+      <button onclick="openFlashcardsModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-950/40 to-sky-950/40 hover:from-cyan-900/60 hover:to-sky-900/60 border border-cyan-800/60 hover:border-cyan-500 text-cyan-300 hover:text-white text-xs font-semibold shadow-sm transition">
+        <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        <span class="hidden sm:inline">Flashcards (28)</span>
+      </button>
+
+      <!-- Web Audio Sound FX Toggle -->
+      <button id="sound-toggle-btn" onclick="SoundFX.toggle()" class="btn-modern flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-800/60 text-cyan-300 text-xs shadow-sm transition" title="Toggle Synthesized UI Sound FX">
+        <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+        <span class="hidden md:inline text-[11px] font-mono text-cyan-300">Audio ON</span>
+      </button>
+
       <!-- Global Search / Encyclopedia -->
       <button onclick="openTermDictionaryModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
         <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -199,12 +218,20 @@
       <div class="p-3 border-t border-dark-border bg-dark-base/40 space-y-2">
         <a href="#interactive-tools" onclick="showModule('interactive-tools')" class="btn-modern flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-950/40 to-dark-card border border-cyan-800/40 text-cyan-300 hover:text-white hover:border-cyan-500/60 text-xs font-semibold shadow-sm transition">
           <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-          <span>Setup Calculators</span>
+          <span>AMT Interactive Lab</span>
         </a>
+        <button onclick="openFlashcardsModal()" class="btn-modern w-full text-left flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          <span>Flashcards Study (28)</span>
+        </button>
         <a href="#mastery-drills" onclick="showModule('mastery-drills')" class="btn-modern flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-gradient-to-r from-amber-950/40 to-dark-card border border-amber-800/40 text-amber-300 hover:text-white hover:border-amber-500/60 text-xs font-semibold shadow-sm transition">
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span>Self-Assessment & Drills</span>
+          <span>10 Mastery Case Studies</span>
         </a>
+        <button onclick="openCertificateModal()" class="btn-modern w-full text-left flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-gradient-to-r from-amber-950/20 to-dark-card border border-amber-900/40 text-amber-300 hover:text-white hover:border-amber-500 text-xs font-semibold shadow-sm transition">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+          <span>Graduation Certificate</span>
+        </button>
       </div>
     </aside>
 
@@ -287,11 +314,11 @@
     </button>
     <button onclick="showModule('interactive-tools')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-      <span class="text-[10px] font-semibold">Calculator</span>
+      <span class="text-[10px] font-semibold">Tools & Lab</span>
     </button>
     <button onclick="showModule('mastery-drills')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span class="text-[10px] font-semibold">Drills</span>
+      <span class="text-[10px] font-semibold">10 Drills</span>
     </button>
     <button onclick="openShareModal()" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
@@ -394,6 +421,160 @@
       <button onclick="closeShareModal()" class="btn-modern w-full py-2 bg-dark-card hover:bg-dark-cardHover text-white rounded-xl text-xs font-semibold transition border border-dark-border">
         Done
       </button>
+    </div>
+  </div>
+
+  
+  <!-- ================= MODAL: 3D INTERACTIVE FLASHCARDS (28 TERMS) ================= -->
+  <div id="flashcards-backdrop" onclick="closeFlashcardsModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden transition-opacity"></div>
+  <div id="flashcards-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 hidden">
+    <div class="bg-dark-surface border border-dark-border rounded-2xl w-full max-w-2xl max-h-[95vh] flex flex-col shadow-2xl overflow-hidden relative">
+      <!-- Modal Header -->
+      <div class="p-4 border-b border-dark-border flex items-center justify-between bg-dark-card">
+        <div class="flex items-center space-x-2">
+          <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase font-mono tracking-wider">AMT Interactive Flashcards</h3>
+            <p class="text-[10px] text-slate-400">Master all 28 Institutional Auction Market Concepts</p>
+          </div>
+        </div>
+        <button onclick="closeFlashcardsModal()" class="btn-modern text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-dark-surface">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Controls & Progress Bar -->
+      <div class="p-3 bg-dark-base border-b border-dark-border flex flex-wrap items-center justify-between gap-2 text-xs">
+        <!-- Filter Tabs -->
+        <div class="flex items-center space-x-1 font-mono text-[11px]">
+          <button id="fc-tab-all" onclick="setFlashcardFilter('all')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-800 font-bold transition">All (28)</button>
+          <button id="fc-tab-review" onclick="setFlashcardFilter('review')" class="px-2.5 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border transition">Need Review (<span id="fc-count-review">0</span>)</button>
+          <button id="fc-tab-mastered" onclick="setFlashcardFilter('mastered')" class="px-2.5 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border transition">Mastered (<span id="fc-count-mastered">0</span>)</button>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="flex items-center space-x-2">
+          <div class="w-24 bg-dark-card h-2 rounded-full overflow-hidden p-0.5 border border-dark-border">
+            <div id="fc-progress-bar" class="bg-gradient-to-r from-cyan-500 to-emerald-400 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <span id="fc-progress-text" class="text-[11px] font-mono font-bold text-cyan-400">0 / 28</span>
+          <button onclick="shuffleFlashcards()" class="btn-modern px-2 py-1 rounded-lg bg-dark-surface border border-dark-border text-slate-400 hover:text-white text-[10px] font-mono" title="Shuffle Deck">🔀 Shuffle</button>
+        </div>
+      </div>
+
+      <!-- 3D Flip Card Container -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col items-center justify-center min-h-[380px]">
+        <div class="w-full max-w-lg perspective-1000 cursor-pointer select-none" onclick="flipFlashcard()">
+          <div id="fc-card-inner" class="relative w-full min-h-[320px] transform-style-3d transition-transform duration-500 rounded-2xl shadow-card">
+            <!-- Front Face -->
+            <div id="fc-card-front" class="absolute inset-0 backface-hidden bg-gradient-to-br from-dark-card to-dark-surface border border-dark-border p-6 rounded-2xl flex flex-col justify-between shadow-2xl">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span id="fc-front-tag" class="text-[10px] font-mono uppercase font-bold text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-800">Tag</span>
+                  <span id="fc-front-counter" class="text-[11px] font-mono text-slate-400">Card 1 of 28</span>
+                </div>
+                <h2 id="fc-front-title" class="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-mono mb-3">Term Title</h2>
+                <p id="fc-front-subtitle" class="text-xs sm:text-sm text-slate-300 leading-relaxed">Term Subtitle</p>
+              </div>
+
+              <div class="pt-4 border-t border-dark-border/60 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                <span>💡 Click card or press [Space] to reveal Dalton Rule & Setup</span>
+                <span class="text-cyan-400 flex items-center space-x-1"><span>Flip</span> &rarr;</span>
+              </div>
+            </div>
+
+            <!-- Back Face -->
+            <div id="fc-card-back" class="absolute inset-0 backface-hidden rotate-y-180 bg-gradient-to-br from-dark-surface to-dark-card border border-cyan-800/60 p-6 rounded-2xl flex flex-col justify-between shadow-2xl overflow-y-auto">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between border-b border-dark-border pb-2">
+                  <span id="fc-back-title" class="text-xs font-mono font-bold text-cyan-300">Term Title</span>
+                  <span class="text-[10px] font-mono text-amber-400 font-semibold">Institutional Breakdown</span>
+                </div>
+
+                <div class="text-xs text-slate-300 leading-relaxed">
+                  <p id="fc-back-overview">Overview text</p>
+                </div>
+
+                <div class="p-3 bg-dark-base/80 rounded-xl border border-dark-border space-y-1 text-xs">
+                  <span class="text-[10px] font-mono font-bold uppercase text-amber-400 block">Dalton Rule / Principle</span>
+                  <p id="fc-back-principle" class="text-slate-200">Principle text</p>
+                </div>
+
+                <div class="p-3 bg-cyan-950/20 rounded-xl border border-cyan-900/40 space-y-1 text-xs">
+                  <span class="text-[10px] font-mono font-bold uppercase text-cyan-300 block">Tactical Trade Setup</span>
+                  <p id="fc-back-setup" class="text-slate-300 text-[11px]">Setup text</p>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-dark-border/60 flex items-center justify-between text-[11px] text-slate-500 font-mono">
+                <span>💡 Click card or press [Space] to flip back</span>
+                <span class="text-cyan-400">&larr; Back</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Action Buttons -->
+      <div class="p-4 border-t border-dark-border bg-dark-card flex items-center justify-between gap-2">
+        <button onclick="prevFlashcard()" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-slate-300 hover:text-white text-xs font-mono flex items-center space-x-1">
+          <span>&larr; Prev</span>
+        </button>
+
+        <div class="flex items-center space-x-2">
+          <button onclick="markFlashcard('review')" class="btn-modern px-4 py-2 rounded-xl bg-rose-950/30 hover:bg-rose-900/50 border border-rose-800/70 text-rose-300 font-bold text-xs flex items-center space-x-1.5 shadow-sm">
+            <span>↺ Need Review</span>
+            <span class="text-[10px] font-mono opacity-60">[1]</span>
+          </button>
+          <button onclick="markFlashcard('mastered')" class="btn-modern px-4 py-2 rounded-xl bg-emerald-950/30 hover:bg-emerald-900/50 border border-emerald-800/70 text-emerald-300 font-bold text-xs flex items-center space-x-1.5 shadow-sm">
+            <span>✓ Mastered</span>
+            <span class="text-[10px] font-mono opacity-60">[2]</span>
+          </button>
+        </div>
+
+        <button onclick="nextFlashcard()" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-slate-300 hover:text-white text-xs font-mono flex items-center space-x-1">
+          <span>Next &rarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: CANVAS GRADUATION CERTIFICATE ================= -->
+  <div id="certificate-backdrop" onclick="closeCertificateModal()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden transition-opacity"></div>
+  <div id="certificate-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 hidden">
+    <div class="bg-dark-surface border border-dark-border rounded-2xl w-full max-w-4xl max-h-[96vh] flex flex-col shadow-2xl overflow-hidden relative">
+      <!-- Modal Header -->
+      <div class="p-4 border-b border-dark-border flex items-center justify-between bg-dark-card">
+        <div class="flex items-center space-x-2">
+          <div class="w-3 h-3 rounded-full bg-amber-400 shadow-glow-amber"></div>
+          <div>
+            <h3 class="text-sm font-bold text-white uppercase font-mono tracking-wider">Graduation Certificate of Mastery</h3>
+            <p class="text-[10px] text-slate-400">Institutional Market Profile & Auction Market Theory Credential</p>
+          </div>
+        </div>
+        <button onclick="closeCertificateModal()" class="btn-modern text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-dark-surface">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Controls: Name Input -->
+      <div class="p-4 bg-dark-base border-b border-dark-border flex flex-wrap items-center justify-between gap-3">
+        <div class="flex-1 min-w-[240px]">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Enter Your Full Name (For Institutional Credential & Verification):</label>
+          <input id="cert-student-name" type="text" value="Institutional Trader" oninput="drawCertificate()" placeholder="e.g. Alexander Vance, CMT" class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+        </div>
+        <div class="flex items-center space-x-2 pt-4 sm:pt-0">
+          <button onclick="downloadCertificatePNG()" class="btn-modern px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-glow-amber flex items-center space-x-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Download PNG Certificate</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas Viewport -->
+      <div class="flex-1 overflow-y-auto p-4 flex items-center justify-center bg-black/40">
+        <canvas id="certificate-canvas" width="1600" height="1100" class="max-w-full h-auto rounded-xl border border-dark-border shadow-2xl bg-dark-base"></canvas>
+      </div>
     </div>
   </div>
 
@@ -1981,9 +2162,14 @@
               <p class="text-xs text-slate-300 max-w-md mx-auto">
                 Proceed to the interactive self-assessment drills and test your decision-making in real historical market scenarios.
               </p>
-              <button onclick="showModule('mastery-drills')" class="btn-modern px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-glow-cyan">
-                Launch Self-Assessment Drills
-              </button>
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="showModule('mastery-drills')" class="btn-modern px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-glow-cyan">
+                  Launch 10 Mastery Drills
+                </button>
+                <button onclick="openCertificateModal()" class="btn-modern px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-glow-amber flex items-center space-x-1.5">
+                  <span>🎓 Claim Certificate of Mastery</span>
+                </button>
+              </div>
             </div>
           </div>
         `
@@ -2066,55 +2252,302 @@
     /* =====================================================================
        INTERACTIVE DRILLS / QUIZZES
        ===================================================================== */
+    /* =====================================================================
+       EXPANDED 10 INSTITUTIONAL MASTERY SCENARIO CASE STUDIES
+       ===================================================================== */
     const DRILLS = [
       {
         id: "scenario-1",
-        title: "Scenario 1: The Gap Open",
-        context: "S&P 500 E-mini (ES) closed yesterday at 5,000 with a Value Area between 4,980 (VAL) and 5,010 (VAH). Overnight catalyst creates a large gap, opening at 5,035. During the first 30 minutes (Period A), price violently prints up to 5,045 on heavy volume, never once pulling back to 5,010.",
-        question: "What opening type is this? Should you fade this move back toward the prior day's Value Area?",
+        title: "Case Study 1: The Gap Open (Open-Drive)",
+        context: "S&P 500 E-mini (ES) closed yesterday with Value Area at 5,000 to 5,020 (POC 5,012). Overnight geopolitical breakthrough generates an aggressive gap, opening at 5,045 (25 points above prior day range). In Period A (9:30-10:00 AM), price prints violently from 5,045 up to 5,062 on 350,000 contracts with +12,500 positive delta, never pulling back to test the open.",
+        question: "What opening type has formed, and what is the institutional trade plan?",
         options: [
-          { text: "Open-Auction; Yes, fade immediately because gaps must always fill.", correct: false, explanation: "Gaps do NOT always fill immediately on trend days. Fading an Open-Drive is the fastest way to blow an account." },
-          { text: "Open-Drive; No, do NOT fade. Trade with the initiative buyers.", correct: true, explanation: "Correct! The market opened with a gap outside range and charged in one direction without testing the open. This is a classic Open-Drive driven by OTF initiative buyers." },
-          { text: "Open-Rejection-Reverse; Yes, short with target at 4,980 VAL.", correct: false, explanation: "Rejection-Reverse requires price to attempt to move in one direction, get rejected, and traverse the open. Here price drove straight up!" }
+          { text: "Open-Auction; Fade immediately with a short because gaps must statistically fill.", correct: false, explanation: "Catastrophic retail trap. On high-conviction trend days, gaps do NOT fill. Fading an Open-Drive into other-timeframe initiative flow is the quickest way to blow up capital." },
+          { text: "Open-Drive; Do NOT fade. Trade with initiative buyers by buying Period B/C pullbacks.", correct: true, explanation: "Correct! The market opened with a true gap outside range and charged in one direction without testing the open. This is an Open-Drive driven by other-timeframe (OTF) initiative buyers. Join the trend on pullbacks toward the upper third of Period A." },
+          { text: "Open-Rejection-Reverse; Short aggressively with target at prior VAH (5,020).", correct: false, explanation: "Incorrect. An Open-Rejection-Reverse requires price to attempt to move in one direction, get rejected, and traverse back through the open price. Here price drove straight up with relentless velocity." },
+          { text: "Neutral Bracket; Scalp two-way range between 5,045 and 5,062.", correct: false, explanation: "Incorrect. The market is in an extreme initiative trending imbalance, not a neutral bracket." }
         ]
       },
       {
         id: "scenario-2",
-        title: "Scenario 2: The Two-Bar Failure",
-        context: "Nasdaq E-mini (NQ) opens inside value at 18,200. In Period C, price rallies to test prior day VAH at 18,250, pokes to 18,255, but leaves a single print tail and immediately rotates down below 18,230 with negative delta absorption.",
-        question: "What auction behavior occurred at 18,255, and what is your primary trade target?",
+        title: "Case Study 2: The Two-Bar Failure at VAH",
+        context: "Nasdaq E-mini (NQ) opens inside value at 18,200 (Prior VAH: 18,250, VAL: 18,130, POC: 18,190). In Period C, price rallies to test 18,250, pokes to 18,258 for 4 minutes, but leaves an excess wick, prints -1,800 contracts of negative delta absorption at highs, and closes back at 18,235. Period D opens and trades down to 18,220.",
+        question: "What auction behavior occurred at 18,258, and what is your primary trade setup?",
         options: [
-          { text: "Initiative Breakout; target 18,350.", correct: false, explanation: "Price failed to accept above VAH and was rejected back inside. This is not an initiative breakout." },
-          { text: "Excess High Rejection; Responsive short targeting Session POC and VAL.", correct: true, explanation: "Bingo! Price poked outside VAH, spent zero time there (Price without Time = Rejection), and printed negative delta. Responsive traders take this short toward POC and opposite VAL." },
-          { text: "Trend Day continuation; Buy the dip at 18,230.", correct: false, explanation: "Opening inside value and failing at VAH indicates a balanced, rotational day, not a trend day." }
+          { text: "Initiative Breakout; Buy the dip at 18,235 targeting 18,350.", correct: false, explanation: "Incorrect. Price failed to accept outside VAH and was swiftly rejected back inside value. There is zero initiative follow-through." },
+          { text: "Failed Auction / Look Above and Fail; Responsive short targeting POC (18,190) and VAL (18,130).", correct: true, explanation: "Bingo! Price poked outside VAH, spent zero time there (Price without Time = Rejection), and printed heavy negative delta absorption. Responsive sellers took control, making this a prime short toward the POC and opposite VAL." },
+          { text: "Trend Day continuation; Add heavy long leverage.", correct: false, explanation: "Incorrect. Opening inside value and failing at the value area perimeter indicates rotational two-way auction conditions, not a trend day." },
+          { text: "Poor High; Expect continuation through 18,258.", correct: false, explanation: "Incorrect. The wick rejected rapidly, leaving single-print excess rejection rather than a flat, multiple-TPO poor high." }
         ]
       },
       {
         id: "scenario-3",
-        title: "Scenario 3: The Flat Top",
-        context: "At session close in Crude Oil (CL), the high of the day has exactly 3 TPO letters side-by-side at $78.50 with zero single-print excess tail.",
-        question: "What is this structural feature called, and what is your bias for the next session if price opens near $78.30?",
+        title: "Case Study 3: The Flat Top (Poor High Unfinished Auction)",
+        context: "Crude Oil (CL) rallies during the afternoon session. At the 2:30 PM settlement close, the session high at $78.50 has exactly 3 TPO letters (J, K, L) printed flat side-by-side with zero single-print excess tail. Next morning, Globex opens at $78.30.",
+        question: "What does this structural feature represent according to Dalton, and what is your bias for the upcoming session?",
         options: [
-          { text: "Excess High; Strong resistance, short aggressively.", correct: false, explanation: "An excess high requires a clean tail of single prints, which signals long-term participants rejected the price. Side-by-side letters indicate the opposite!" },
-          { text: "Poor High; Unfinished auction. Expect price to auction through 78.50 to repair it.", correct: true, explanation: "Excellent! A Poor High represents an auction that ran out of time, not buyers. It acts like a magnet for future auctions to clean up unfinished business." },
-          { text: "Double Distribution; Expect sideways chop.", correct: false, explanation: "A Poor High is an extreme structural flaw, not a double distribution." }
+          { text: "Excess High; Strong resistance, short aggressively with full size.", correct: false, explanation: "Incorrect. An excess high requires a clean tail of single prints where long-term participants rejected price. Flat side-by-side letters indicate the opposite." },
+          { text: "Poor High / Unfinished Auction; Bullish bias expecting price to auction through $78.50.", correct: true, explanation: "Excellent! A Poor High represents an auction that ran out of time, not buyers. It acts as an upside magnet for future auctions to auction through and seek genuine excess." },
+          { text: "Double Distribution; Expect sideways chop between $78.00 and $78.50.", correct: false, explanation: "Incorrect. A Poor High is a structural flaw at an extreme, not a double distribution." },
+          { text: "Liquidation Break; Expect immediate collapse to $75.00.", correct: false, explanation: "Incorrect. There is no evidence of liquidation; buyers were actively contesting the high right into the final bell." }
+        ]
+      },
+      {
+        id: "scenario-4",
+        title: "Case Study 4: Liquidating P-Shape Short Squeeze vs Real OTF Accumulation",
+        context: "Gold Futures (GC) spikes $22 in 20 minutes on rumors of an emergency rate cut. The session profile forms an elongated P-shape: a thin single-print buying stem from $2,325 to $2,342, with heavy volume rotating at the top from $2,342 to $2,347 (HVN/POC). In Period F (12:00 PM), new highs fail to attract volume, and Period G rotates back below $2,342 into the thin stem.",
+        question: "How does Dalton interpret a P-shape that rotates back into its thin stem, and what trade should you take?",
+        options: [
+          { text: "Bullish Flag; Buy aggressively at $2,340 for target at $2,380.", correct: false, explanation: "Incorrect. The P-shape was driven by emotional short covering, not sustained new buying. When price slips back into the thin LVN stem, buying power has dried up." },
+          { text: "Short Squeeze Exhaustion; Short into the thin stem targeting the origin at $2,325.", correct: true, explanation: "Spot on! In Jim Dalton's profile taxonomy, a P-shape is typically created by short covering (old shorts buying to exit). Once price re-enters the thin low-volume stem, the squeeze has ended and price cascades swiftly down the LVN toward the base." },
+          { text: "Balanced Auction; Place limit orders at $2,345.", correct: false, explanation: "Incorrect. The market is asymmetric and unstable inside the thin LVN stem." },
+          { text: "Initiative Breakout; Wait for another gap up.", correct: false, explanation: "Incorrect. Re-entry into the stem invalidates any bullish initiative thesis." }
+        ]
+      },
+      {
+        id: "scenario-5",
+        title: "Case Study 5: Inside Day Balance Breakout vs False Probe",
+        context: "ES has traded for 3 consecutive days in a tight 25-point bracket between 5,010 and 5,035. Today, price opens at 5,025. In Period E, price breaks above 5,035 to 5,038.50. However, cumulative volume delta (CVD) does not make a new high, resting buy iceberg orders are absent, and within 8 minutes price drops back to 5,033.",
+        question: "How does Jim Dalton classify this price action, and what is the institutional trade?",
+        options: [
+          { text: "Initiative Trend Breakout; Buy at market targeting 5,080.", correct: false, explanation: "Incorrect. The breakout lacked volume, delta expansion, and time acceptance. Buying here is a classic retail breakout trap." },
+          { text: "Look Above Balance and Fail; Take a responsive short targeting the opposite bracket extreme (5,010).", correct: true, explanation: "Masterful! Dalton's famous dictum states: 'Look above balance and fail' leads to a rotation all the way through the balance area to the opposite perimeter. Short with a tight stop above 5,038.50 and target 5,010." },
+          { text: "Neutral Day; Close all charts and stop trading.", correct: false, explanation: "Incorrect. 'Look Above and Fail' is one of the highest expectancy setups in all of Auction Market Theory." },
+          { text: "Trend Day with Single Prints; Long on Period F open.", correct: false, explanation: "Incorrect. There are zero single prints; price was rejected immediately back into the bracket." }
+        ]
+      },
+      {
+        id: "scenario-6",
+        title: "Case Study 6: Poor Low Repair at Globex / RTH Open",
+        context: "Yesterday's ES session ended with a blunt, double-TPO flat low at 5,005.00. Overnight in Globex, price held above 5,015. At today's 9:30 AM RTH open, price opens at 5,018, probes up to 5,022, but in Period B (10:15 AM) begins rotating downward toward yesterday's close.",
+        question: "How should an institutional trader treat yesterday's 5,005.00 poor low?",
+        options: [
+          { text: "Unfinished Auction Magnet; Expect price to sweep 5,005.00 to seek true excess before sustained upside.", correct: true, explanation: "Exact! Poor Lows represent unfinished business where sellers were halted by the clock, not by responsive buying excess. Markets have >70% historical tendency to repair poor extremes. Anticipate a flush through 5,005 before looking for long reversals." },
+          { text: "Impenetrable Support; Place aggressive buy limit orders at 5,005.25 with wide stops.", correct: false, explanation: "High risk! A poor low lacks excess; price will frequently pierce it by 2-5 points to trigger retail stop losses and discover real liquidity." },
+          { text: "Irrelevant historical artifact; Only today's Initial Balance matters.", correct: false, explanation: "Incorrect. Dalton emphasizes that structural profile anomalies from prior days carry forward as high-probability targets." },
+          { text: "Initiative Sell Signal; Short with target at 4,900.", correct: false, explanation: "Incorrect. Repairing a poor low is a mean-reverting structural cleanup, not necessarily a multi-hundred point crash." }
+        ]
+      },
+      {
+        id: "scenario-7",
+        title: "Case Study 7: Double Distribution Trend Day: Break of Single Prints",
+        context: "NQ experiences a powerful upward trend day forming a Double Distribution (B-shape): lower distribution at 18,100-18,160, upper distribution at 18,240-18,300, separated by 80 points of single prints (18,160 to 18,240). In Period J (2:00 PM), a large institutional seller pushes price down to 18,235, entering the top of the single print zone.",
+        question: "What is the institutional role of the single print zone, and what does acceptance back inside signal?",
+        options: [
+          { text: "Single prints act as dynamic support; Acceptance inside invalidates the trend day and signals rotational balance.", correct: true, explanation: "Perfection! Single prints represent speed and initiative conviction, serving as a dynamic line in the sand. If price merely tests and rejects, the trend continues. If price spends 30+ minutes inside and fills the prints, the trend has failed and the day reverts to a wide two-way balance." },
+          { text: "Single prints are irrelevant; Only the session POC at 18,270 matters.", correct: false, explanation: "Incorrect. Single prints are the defining structural feature of a Double Distribution trend day." },
+          { text: "Guaranteed bounce; Go 100% long with no stop loss.", correct: false, explanation: "Extremely reckless. Risk must always be defined outside the single print boundary." },
+          { text: "Immediate breakdown to 17,500.", correct: false, explanation: "Incorrect. The lower distribution POC (18,130) provides immediate secondary support." }
+        ]
+      },
+      {
+        id: "scenario-8",
+        title: "Case Study 8: Overnight Inventory 100% Net Short Correction",
+        context: "Globex session auctioned 95% of its volume below yesterday's RTH VAL and settle price. At 9:30 AM RTH open, ES opens at 5,002 (20 points below prior settle of 5,022). In Period A, price fails to make any new low below 5,000, and passive buyers absorb 8,000 sell market orders on the DOM without price dropping a single tick.",
+        question: "What is the primary risk for retail traders trying to short this gap down at the open?",
+        options: [
+          { text: "Overnight inventory is 100% net short and trapped; Lack of follow-through triggers a violent short-covering squeeze.", correct: true, explanation: "Spot on! When overnight inventory is 100% net short, the market is already short-loaded. If aggressive initiative sellers fail to show up in Period A, trapped overnight shorts are forced to buy to cover, squeezing price straight back toward prior settlement (5,022) and POC." },
+          { text: "The market is in an Open-Drive down; Retail should sell market orders immediately.", correct: false, explanation: "Incorrect. There is no downward drive; price stalled immediately at 5,000 and absorption took place on the bid." },
+          { text: "Delta divergence does not work on futures; Follow moving averages instead.", correct: false, explanation: "Incorrect. Delta absorption at key auction reference levels is one of the strongest institutional order flow signals." },
+          { text: "Price is in an unfinished auction at 4,950.", correct: false, explanation: "Incorrect. There is no evidence of an unfinished auction below." }
+        ]
+      },
+      {
+        id: "scenario-9",
+        title: "Case Study 9: Late-Day Liquidation Break (b-shape trap)",
+        context: "ES spends the entire morning in a quiet, tight bracket at 5,040-5,050. Suddenly in Period I (1:30 PM), large stop cascades trigger a rapid 30-point plunge down to 5,015, printing a long thin selling stem with an HVN cluster forming between 5,015 and 5,022 (a classic elongated b-shape). Retail traders jump in to short at 5,018.",
+        question: "What does the b-shape profile represent, and why is shorting at 5,018 a retail trap?",
+        options: [
+          { text: "b-shape represents long liquidation (old longs puking), not new initiative selling; Once stops clear, price mean-reverts up the stem.", correct: true, explanation: "Superb! In Dalton's profile analysis, a b-shape is created by long liquidation (trapped buyers selling to stop out). Because it lacks fresh initiative short selling, once the stop run concludes, selling dries up and price snaps back into the low-volume stem." },
+          { text: "b-shape indicates an institutional flash crash; Short targeting 4,800.", correct: false, explanation: "Incorrect. Long liquidation breaks are self-limiting and lack the follow-through of genuine new short selling." },
+          { text: "b-shape is identical to a D-shape balanced day.", correct: false, explanation: "Incorrect. A b-shape has a distinct thin upper stem and volume concentrated at the lows." },
+          { text: "Always buy the highs of a b-shape.", correct: false, explanation: "Incorrect. Buying the highs of the stem fights the entire morning distribution." }
+        ]
+      },
+      {
+        id: "scenario-10",
+        title: "Case Study 10: Economic Catalyst: Failed Auction & 80% Rule Execution",
+        context: "CPI is released at 8:30 AM, triggering an immediate spike in ES up to 5,060 (Prior day VAH: 5,030, VAL: 5,005, POC: 5,018). Price opens RTH at 5,055. In Period B, price attempts to test 5,060, gets heavily rejected, and rotates down. Period C closes at 5,027 (inside prior Value Area). Period D also closes inside at 5,024.",
+        question: "According to Dalton's 80% Rule, what criteria have been fulfilled, and what are your trade execution parameters?",
+        options: [
+          { text: "The 80% Rule has formally triggered; Short with Target 1 at prior POC (5,018) and Target 2 at VAL (5,005), stop above VAH.", correct: true, explanation: "Mastery achieved! The two core criteria of Dalton's 80% Rule are met: (1) Market opened outside prior Value Area, and (2) Two consecutive 30-minute periods (Periods C and D) closed inside prior Value Area. Statistically, there is an 80% probability of traversing to the opposite VAL (5,005). Stop is placed safely above VAH/Period B high." },
+          { text: "The 80% Rule requires 4 hours of closes; Do not trade.", correct: false, explanation: "Incorrect. Two consecutive 30-minute bar closes (60 minutes total) satisfy the Dalton rule requirement." },
+          { text: "Buy the dip because CPI was bullish.", correct: false, explanation: "Dangerous narrative trap. Price action and value acceptance always trump economic headlines in AMT." },
+          { text: "Wait for cash close at 4:00 PM before placing any orders.", correct: false, explanation: "Incorrect. Waiting for the close misses the entire high-probability rotation through value." }
         ]
       }
     ];
 
     /* =====================================================================
-       APPLICATION STATE & CONTROLS
+       WEB AUDIO API SYNTHESIZED SOUND FX (ZERO ASSET DEPENDENCY)
+       ===================================================================== */
+    const SoundFX = {
+      ctx: null,
+      enabled: localStorage.getItem('amt_sound_fx') !== 'false',
+
+      init() {
+        if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().catch(() => {});
+        }
+      },
+
+      toggle() {
+        this.enabled = !this.enabled;
+        localStorage.setItem('amt_sound_fx', this.enabled ? 'true' : 'false');
+        this.updateUI();
+        if (this.enabled) this.click();
+      },
+
+      updateUI() {
+        const btn = document.getElementById("sound-toggle-btn");
+        if (btn) {
+          btn.innerHTML = this.enabled ? `
+            <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+            <span class="hidden md:inline text-[11px] font-mono text-cyan-300">Audio ON</span>
+          ` : `
+            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z m12-4l-6 6m0-6l6 6"/></svg>
+            <span class="hidden md:inline text-[11px] font-mono text-slate-500">Audio Muted</span>
+          `;
+          btn.className = this.enabled
+            ? "btn-modern flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-800/60 text-cyan-300 text-xs shadow-sm transition"
+            : "btn-modern flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-400 text-xs shadow-sm transition";
+        }
+      },
+
+      click() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(350, this.ctx.currentTime + 0.035);
+          gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.035);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.035);
+        } catch(e) {}
+      },
+
+      flip() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(260, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(650, this.ctx.currentTime + 0.07);
+          gain.gain.setValueAtTime(0.07, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.07);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.07);
+        } catch(e) {}
+      },
+
+      success() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          [523.25, 659.25, 783.99].forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+            gain.gain.setValueAtTime(0.09, now + idx * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.25);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.06);
+            osc.stop(now + idx * 0.06 + 0.25);
+          });
+        } catch(e) {}
+      },
+
+      error() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          [200, 150].forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+            gain.gain.setValueAtTime(0.06, now + idx * 0.07);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.1);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.07);
+            osc.stop(now + idx * 0.07 + 0.1);
+          });
+        } catch(e) {}
+      },
+
+      fanfare() {
+        if (!this.enabled) return;
+        this.init();
+        if (!this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+            gain.gain.setValueAtTime(0.12, now + idx * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.35);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.08);
+            osc.stop(now + idx * 0.08 + 0.35);
+          });
+        } catch(e) {}
+      }
+    };
+
+    /* =====================================================================
+       APPLICATION STATE & INITIALIZATION
        ===================================================================== */
     let currentModuleId = "module-1";
     let completedModules = JSON.parse(localStorage.getItem('amt_completed_modules') || '[]');
     let quizAnswers = JSON.parse(localStorage.getItem('amt_quiz_answers') || '{}');
     let heroVisible = false;
 
+    // Flashcards State
+    const flashcardKeys = Object.keys(AMT_DEEP_DIVES);
+    let flashcardDeck = [...flashcardKeys];
+    let currentCardIndex = 0;
+    let isCardFlipped = false;
+    let flashcardFilter = 'all';
+    let flashcardMastery = JSON.parse(localStorage.getItem('amt_flashcards_mastery') || '{}');
+
+    // TPO Simulator State
+    let activeArchetypeKey = 'd-shape';
+    let currentTPOPeriodIdx = 0; // 0 (A) to 11 (L)
+    let tpoPlayInterval = null;
+    let activeToolsTab = 'tpo-sim';
+
     document.addEventListener("DOMContentLoaded", () => {
       renderNav();
       showModule(currentModuleId);
       updateProgressUI();
       renderDictionaryList();
+      SoundFX.updateUI();
+      updateFlashcardCounts();
       
       const banner = document.getElementById("hero-welcome-banner");
       if (banner) {
@@ -2128,7 +2561,28 @@
           closeDeepDiveModal();
           closeTermDictionaryModal();
           closeShareModal();
+          closeFlashcardsModal();
+          closeCertificateModal();
           toggleSidebar(false);
+        }
+      });
+
+      // Keyboard shortcuts for Flashcards modal
+      document.addEventListener("keydown", (e) => {
+        const modal = document.getElementById("flashcards-modal");
+        if (modal && !modal.classList.contains("hidden")) {
+          if (e.code === "Space") {
+            e.preventDefault();
+            flipFlashcard();
+          } else if (e.key === "ArrowLeft") {
+            prevFlashcard();
+          } else if (e.key === "ArrowRight") {
+            nextFlashcard();
+          } else if (e.key === "1") {
+            markFlashcard('review');
+          } else if (e.key === "2") {
+            markFlashcard('mastered');
+          }
         }
       });
     });
@@ -2137,6 +2591,7 @@
        HERO BANNER TOGGLE & START BUTTON
        ===================================================================== */
     function startCurriculumAndDismissHero() {
+      SoundFX.click();
       const banner = document.getElementById("hero-welcome-banner");
       if (banner) {
         banner.style.display = "none";
@@ -2147,6 +2602,7 @@
     }
 
     function toggleHeroBanner() {
+      SoundFX.click();
       const banner = document.getElementById("hero-welcome-banner");
       if (!banner) return;
       heroVisible = !heroVisible;
@@ -2162,9 +2618,10 @@
     }
 
     /* =====================================================================
-       FULL SUB-LESSON / DEEP-DIVE MODAL CONTROLLER
+       FULL SUB-LESSON / DEEP-DIVE MODAL CONTROLLER (28 TERMS)
        ===================================================================== */
     function openDeepDive(termKey) {
+      SoundFX.click();
       const item = AMT_DEEP_DIVES[termKey];
       if (!item) return;
 
@@ -2258,6 +2715,7 @@
     }
 
     function closeDeepDiveModal() {
+      SoundFX.click();
       document.getElementById("deepdive-backdrop").classList.add("hidden");
       document.getElementById("deepdive-modal").classList.add("hidden");
     }
@@ -2266,11 +2724,13 @@
        FULL TERM ENCYCLOPEDIA MODAL
        ===================================================================== */
     function openTermDictionaryModal() {
+      SoundFX.click();
       document.getElementById("dictionary-modal").classList.remove("hidden");
       renderDictionaryList();
     }
 
     function closeTermDictionaryModal() {
+      SoundFX.click();
       document.getElementById("dictionary-modal").classList.add("hidden");
     }
 
@@ -2313,31 +2773,48 @@
     }
 
     /* =====================================================================
-       NAVIGATION & MODULE RENDERING
+       CURRICULUM NAVIGATION ENGINE
        ===================================================================== */
     function renderNav() {
       const navContainer = document.getElementById("module-nav");
-      navContainer.innerHTML = MODULES.map((m, idx) => {
-        const isDone = completedModules.includes(m.id);
+      if (!navContainer) return;
+
+      navContainer.innerHTML = MODULES.map((mod, index) => {
+        const isDone = completedModules.includes(mod.id);
+        const isActive = mod.id === currentModuleId;
+        
+        let statusBadge = '';
+        if (isDone) {
+          statusBadge = '<span class="text-emerald-400 font-mono text-[10px] font-bold">✓ DONE</span>';
+        } else {
+          statusBadge = '<span class="text-slate-500 font-mono text-[10px]">' + (index + 1).toString().padStart(2, '0') + '</span>';
+        }
+
+        let btnClass = "btn-modern w-full text-left px-3 py-2.5 rounded-xl text-xs flex items-center justify-between transition ";
+        if (isActive) {
+          btnClass += "bg-cyan-500/10 text-cyan-400 border border-cyan-800/50 shadow-glow-cyan font-bold";
+        } else {
+          btnClass += "text-slate-300 hover:bg-dark-cardHover hover:text-white border border-transparent font-medium";
+        }
+
         return `
-          <button onclick="showModule('${m.id}')" id="nav-btn-${m.id}" class="btn-modern w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between group transition ${currentModuleId === m.id ? 'bg-cyan-500/10 text-cyan-400 font-bold border border-cyan-800/50 shadow-glow-cyan' : 'text-slate-300 hover:bg-dark-cardHover hover:text-white border border-transparent'}">
-            <div class="flex items-center space-x-2.5 truncate">
-              <span class="w-5 h-5 rounded-md flex items-center justify-center font-mono text-[10px] ${isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-dark-card text-slate-500'}">
-                ${isDone ? '✓' : (idx + 1)}
-              </span>
-              <span class="truncate">${m.title}</span>
+          <button id="nav-btn-${mod.id}" onclick="showModule('${mod.id}')" class="${btnClass}">
+            <div class="flex items-center space-x-2.5 overflow-hidden">
+              <span class="w-1.5 h-1.5 rounded-full ${isDone ? 'bg-emerald-400' : (isActive ? 'bg-cyan-400' : 'bg-slate-600')}"></span>
+              <span class="truncate">${mod.title}</span>
             </div>
+            ${statusBadge}
           </button>
         `;
       }).join('');
     }
 
     function showModule(moduleId) {
+      SoundFX.click();
       currentModuleId = moduleId;
       const viewport = document.getElementById("lesson-viewport");
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Dismiss hero banner once any module is loaded
       const banner = document.getElementById("hero-welcome-banner");
       if (banner && heroVisible) {
         banner.style.display = "none";
@@ -2349,7 +2826,7 @@
 
       if (moduleId === 'interactive-tools') {
         renderInteractiveToolsView(viewport);
-        document.getElementById("current-lesson-crumb").textContent = "Setup Calculators";
+        document.getElementById("current-lesson-crumb").textContent = "Interactive AMT Lab & Simulators";
         if (completeBtn) completeBtn.style.display = "none";
         updateNavHighlight();
         toggleSidebar(false);
@@ -2358,7 +2835,7 @@
 
       if (moduleId === 'mastery-drills') {
         renderDrillsView(viewport);
-        document.getElementById("current-lesson-crumb").textContent = "Self-Assessment Drills";
+        document.getElementById("current-lesson-crumb").textContent = "10 Mastery Case Studies";
         if (completeBtn) completeBtn.style.display = "none";
         updateNavHighlight();
         toggleSidebar(false);
@@ -2385,7 +2862,6 @@
         </article>
       `;
 
-      // Auto-render Module 4 Archetype Tab if viewing Module 4
       if (moduleId === 'module-4') {
         selectShapeTab('d-shape');
       }
@@ -2409,6 +2885,7 @@
     }
 
     function navigateLesson(direction) {
+      SoundFX.click();
       const currentIndex = MODULES.findIndex(m => m.id === currentModuleId);
       if (currentIndex === -1) {
         showModule(MODULES[0].id);
@@ -2423,13 +2900,13 @@
     }
 
     function toggleCurrentModuleComplete() {
-      // Only complete valid lesson modules
       if (!MODULES.some(m => m.id === currentModuleId)) return;
 
       if (completedModules.includes(currentModuleId)) {
         completedModules = completedModules.filter(id => id !== currentModuleId);
       } else {
         completedModules.push(currentModuleId);
+        SoundFX.success();
       }
       localStorage.setItem('amt_completed_modules', JSON.stringify(completedModules));
       renderNav();
@@ -2446,7 +2923,6 @@
     }
 
     function updateProgressUI() {
-      // Ensure only valid modules count and cap at 100%
       const validCompleted = completedModules.filter(id => MODULES.some(m => m.id === id));
       const total = MODULES.length;
       const pct = Math.min(100, Math.round((validCompleted.length / total) * 100));
@@ -2458,9 +2934,10 @@
     }
 
     /* =====================================================================
-       PROFILE SHAPES TAB SWITCHER
+       PROFILE SHAPES TAB SWITCHER (FOR MODULE 4)
        ===================================================================== */
     function selectShapeTab(shapeKey) {
+      SoundFX.click();
       ['d-shape', 'p-shape', 'b-shape', 'B-shape'].forEach(k => {
         const btn = document.getElementById(`tab-${k}`);
         if (btn) {
@@ -2496,90 +2973,790 @@
     }
 
     /* =====================================================================
-       INTERACTIVE TOOLS VIEW (80% Rule Calculator & Dalton Wizard)
+       TPO SIMULATOR DATA & LOGIC ENGINE
+       ===================================================================== */
+    const TPO_PERIOD_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+    const TPO_PERIOD_TIMES = {
+      'A': '09:30 - 10:00 AM', 'B': '10:00 - 10:30 AM', 'C': '10:30 - 11:00 AM',
+      'D': '11:00 - 11:30 AM', 'E': '11:30 - 12:00 PM', 'F': '12:00 - 12:30 PM',
+      'G': '12:30 - 01:00 PM', 'H': '01:00 - 01:30 PM', 'I': '01:30 - 02:00 PM',
+      'J': '02:00 - 02:30 PM', 'K': '02:30 - 03:00 PM', 'L': '03:00 - 03:30 PM'
+    };
+
+    const TPO_ARCHETYPES = {
+      'd-shape': {
+        name: "Archetype 1: Balanced D-Shape (Rotational Mean Reversion)",
+        badge: "Normal Distribution",
+        tag: "Market Equilibrium",
+        instrument: "ES (S&P 500 E-mini)",
+        prices: [5032.5, 5030.0, 5027.5, 5025.0, 5022.5, 5020.0, 5017.5, 5015.0, 5012.5, 5010.0, 5007.5, 5005.0, 5002.5, 5000.0],
+        data: {
+          'A': { high: 5025.0, low: 5012.5, comment: "Period A opens at 5017.5. Initial auction explores 5012.5 to 5025.0. Two-way trade facilitation established without directional conviction." },
+          'B': { high: 5022.5, low: 5010.0, comment: "Period B completes Initial Balance (IB: 5010.0 - 5025.0). Range is balanced and compact, signaling high rotational mean-reversion probability." },
+          'C': { high: 5027.5, low: 5017.5, comment: "Period C attempts a slight upside probe outside IB. Responsive sellers immediately step in above 5025 to defend value." },
+          'D': { high: 5030.0, low: 5020.0, comment: "Period D probes to 5030.0, leaving an excess wick. Responsive traders hammer price back to 5022.5 into value." },
+          'E': { high: 5022.5, low: 5012.5, comment: "Period E rotates straight back across the developing Point of Control (POC at 5017.5). Classic mean reversion in action." },
+          'F': { high: 5020.0, low: 5015.0, comment: "Midday lunch slowdown (Period F). Tight consolidation building heavy volume node (HVN) at 5015.0 - 5017.5." },
+          'G': { high: 5017.5, low: 5007.5, comment: "Period G tests the bottom of the bracket (5007.5 - 5010.0). Responsive buyers absorb bids and reject lower prices." },
+          'H': { high: 5015.0, low: 5002.5, comment: "Period H tests 5002.5, leaving an excess low wick. Aggressive commercial responsive buying pushes price back into value." },
+          'I': { high: 5020.0, low: 5007.5, comment: "Period I traverses the entire Value Area back up to the POC (5017.5). Demonstrates 80% Rule rotational mechanics." },
+          'J': { high: 5022.5, low: 5012.5, comment: "Period J sustains trade inside the developing Value Area. Value Area encloses ~68% of total daily volume." },
+          'K': { high: 5020.0, low: 5012.5, comment: "Late afternoon trade (Period K). Day Timeframe (DTT) participants begin squaring intraday positions near POC." },
+          'L': { high: 5017.5, low: 5012.5, comment: "Period L cash close. Market settles dead on the POC (5017.5). Perfect D-shape profile reflecting complete auction equilibrium." }
+        }
+      },
+      'trend-single-prints': {
+        name: "Archetype 2: Trend Day with Single Prints (Aggressive OTF Drive)",
+        badge: "Double Distribution",
+        tag: "High Conviction Trend",
+        instrument: "NQ (Nasdaq E-mini)",
+        prices: [5050.0, 5045.0, 5040.0, 5035.0, 5030.0, 5025.0, 5020.0, 5015.0, 5010.0, 5005.0, 5000.0, 4995.0, 4990.0, 4985.0],
+        singlePrintPrices: [5015.0, 5020.0],
+        data: {
+          'A': { high: 5000.0, low: 4985.0, comment: "Open-Drive! Period A opens at 4985.0 and charges straight up to 5000.0 without any pullback. Maximum initiative conviction." },
+          'B': { high: 5010.0, low: 4995.0, comment: "Period B continues One-Time Framing (OTF) higher to 5010.0. Higher highs, higher lows. Do NOT counter-trend short!" },
+          'C': { high: 5025.0, low: 5010.0, comment: "⚡ INITIATIVE BREAKOUT! Period C blasts from 5010.0 to 5025.0, leaving SINGLE PRINTS at 5015.0 - 5020.0. Aggressive OTF buyers in full control." },
+          'D': { high: 5035.0, low: 5025.0, comment: "Period D maintains the gap above single prints. Single prints now act as immovable dynamic support." },
+          'E': { high: 5040.0, low: 5030.0, comment: "Period E initiates a secondary upper distribution at 5030.0 - 5040.0. The market pauses to build new value higher." },
+          'F': { high: 5045.0, low: 5035.0, comment: "Period F consolidates in upper distribution. Notice cumulative delta remains strongly positive (+8,500 contracts)." },
+          'G': { high: 5040.0, low: 5030.0, comment: "Period G tests down to 5030.0. Buyers aggressively defend the top of the upper distribution. No test of single prints allowed." },
+          'H': { high: 5045.0, low: 5035.0, comment: "Period H builds high density at 5040.0. A new upper POC is migrating higher to 5040.0." },
+          'I': { high: 5050.0, low: 5035.0, comment: "Period I prints new high of day at 5050.0. Other Timeframe (OTF) buyers continue pressing the offer." },
+          'J': { high: 5050.0, low: 5040.0, comment: "Period J sustains upper distribution value. Two distinct distributions now confirmed (classic 'B-shape' profile)." },
+          'K': { high: 5050.0, low: 5040.0, comment: "Period K pre-close positioning. Trapped counter-trend shorts are forced to buy at market to cover before the bell." },
+          'L': { high: 5050.0, low: 5045.0, comment: "Period L cash close at the absolute high of the day (5050.0). Single prints remain 100% unfilled. Textbook Trend Day!" }
+        }
+      },
+      'unfinished-poor-high': {
+        name: "Archetype 3: Unfinished Auction with Poor High (Magnet Setup)",
+        badge: "Structural Flaw",
+        tag: "Unfinished Business",
+        instrument: "ES / CL (Crude Oil)",
+        prices: [5040.0, 5037.5, 5035.0, 5032.5, 5030.0, 5027.5, 5025.0, 5022.5, 5020.0, 5017.5, 5015.0, 5012.5, 5010.0, 5007.5, 5005.0],
+        poorHighPrice: 5040.0,
+        data: {
+          'A': { high: 5022.5, low: 5010.0, comment: "Period A opens at 5012.5 and rotates quietly inside value." },
+          'B': { high: 5025.0, low: 5012.5, comment: "Period B establishes Initial Balance (IB: 5010.0 - 5025.0). Normal day conditions." },
+          'C': { high: 5027.5, low: 5017.5, comment: "Period C begins slow upward rotation toward IB high." },
+          'D': { high: 5027.5, low: 5020.0, comment: "Period D holds above 5020.0, building acceptance at higher prices." },
+          'E': { high: 5032.5, low: 5022.5, comment: "Period E extends the range to 5032.5. Buyers are probing higher liquidity." },
+          'F': { high: 5035.0, low: 5027.5, comment: "Period F continues methodical upward rotation. One-Time Framing higher on light volume." },
+          'G': { high: 5037.5, low: 5030.0, comment: "Period G pushes to 5037.5. Resistance at 5040.0 major key level approaches." },
+          'H': { high: 5037.5, low: 5030.0, comment: "Period H tests 5037.5 but pauses. Waiting for afternoon flow." },
+          'I': { high: 5040.0, low: 5032.5, comment: "Period I touches exactly 5040.0 for the first time. Halts dead on the tick." },
+          'J': { high: 5040.0, low: 5035.0, comment: "Period J pushes to 5040.0 again! Prints side-by-side letter at the exact identical tick." },
+          'K': { high: 5040.0, low: 5035.0, comment: "Period K tests 5040.0 a third time! Now 'I', 'J', and 'K' are all flat at 5040.0 with 0 excess." },
+          'L': { high: 5040.0, low: 5035.0, comment: "⚠️ POOR HIGH CONFIRMED! Period L closes at 5040.0. Four letters (I, J, K, L) print flat with zero single-print tail. The auction ran out of time, not buyers! Over 75% probability of auctioning through 5040.0 in the subsequent session." }
+        }
+      }
+    };
+
+    function calcTPOStats(archKey, upToPeriodIdx) {
+      const arch = TPO_ARCHETYPES[archKey];
+      const activePeriods = TPO_PERIOD_LETTERS.slice(0, upToPeriodIdx + 1);
+      const profile = {};
+      
+      arch.prices.forEach(p => {
+        profile[p] = [];
+        activePeriods.forEach(letter => {
+          const d = arch.data[letter];
+          if (p <= d.high && p >= d.low) {
+            if (archKey === 'trend-single-prints' && (p === 5015.0 || p === 5020.0)) {
+              if (letter === 'C') profile[p].push(letter);
+            } else {
+              profile[p].push(letter);
+            }
+          }
+        });
+      });
+
+      let maxCount = 0;
+      let poc = arch.prices[Math.floor(arch.prices.length / 2)];
+      arch.prices.forEach(p => {
+        if (profile[p].length > maxCount) {
+          maxCount = profile[p].length;
+          poc = p;
+        }
+      });
+
+      let totalTPOs = 0;
+      arch.prices.forEach(p => { totalTPOs += profile[p].length; });
+      const vaTarget = Math.round(totalTPOs * 0.682);
+
+      const pocIdx = arch.prices.indexOf(poc);
+      let upperIdx = pocIdx;
+      let lowerIdx = pocIdx;
+      let currentVATPOs = profile[poc].length;
+
+      while (currentVATPOs < vaTarget && (upperIdx > 0 || lowerIdx < arch.prices.length - 1)) {
+        let aboveCount = 0;
+        if (upperIdx > 0) aboveCount += profile[arch.prices[upperIdx - 1]].length;
+        if (upperIdx > 1) aboveCount += profile[arch.prices[upperIdx - 2]].length;
+
+        let belowCount = 0;
+        if (lowerIdx < arch.prices.length - 1) belowCount += profile[arch.prices[lowerIdx + 1]].length;
+        if (lowerIdx < arch.prices.length - 2) belowCount += profile[arch.prices[lowerIdx + 2]].length;
+
+        if (aboveCount >= belowCount && upperIdx > 0) {
+          upperIdx = Math.max(0, upperIdx - (upperIdx > 1 ? 2 : 1));
+        } else if (lowerIdx < arch.prices.length - 1) {
+          lowerIdx = Math.min(arch.prices.length - 1, lowerIdx + (lowerIdx < arch.prices.length - 2 ? 2 : 1));
+        } else if (upperIdx > 0) {
+          upperIdx = Math.max(0, upperIdx - 1);
+        } else {
+          break;
+        }
+
+        let sum = 0;
+        for (let i = upperIdx; i <= lowerIdx; i++) {
+          sum += profile[arch.prices[i]].length;
+        }
+        currentVATPOs = sum;
+      }
+
+      const vah = arch.prices[upperIdx];
+      const val = arch.prices[lowerIdx];
+
+      let sessionHigh = -Infinity;
+      let sessionLow = Infinity;
+      arch.prices.forEach(p => {
+        if (profile[p].length > 0) {
+          if (p > sessionHigh) sessionHigh = p;
+          if (p < sessionLow) sessionLow = p;
+        }
+      });
+
+      return {
+        profile,
+        poc,
+        vah,
+        val,
+        maxCount,
+        totalTPOs,
+        currentVATPOs,
+        sessionHigh,
+        sessionLow,
+        activePeriods
+      };
+    }
+
+    function switchTPOArchetype(key) {
+      SoundFX.click();
+      activeArchetypeKey = key;
+      currentTPOPeriodIdx = 0;
+      pauseTPOSim();
+      renderTPOSimulator();
+    }
+
+    function stepTPOPeriod(delta) {
+      SoundFX.click();
+      const newIdx = currentTPOPeriodIdx + delta;
+      if (newIdx >= 0 && newIdx < TPO_PERIOD_LETTERS.length) {
+        currentTPOPeriodIdx = newIdx;
+        renderTPOSimulator();
+      }
+    }
+
+    function jumpTPOPeriod(idx) {
+      SoundFX.click();
+      currentTPOPeriodIdx = Math.max(0, Math.min(idx, TPO_PERIOD_LETTERS.length - 1));
+      renderTPOSimulator();
+    }
+
+    function toggleTPOPlay() {
+      SoundFX.click();
+      if (tpoPlayInterval) {
+        pauseTPOSim();
+      } else {
+        playTPOSim();
+      }
+    }
+
+    function playTPOSim() {
+      if (currentTPOPeriodIdx >= TPO_PERIOD_LETTERS.length - 1) {
+        currentTPOPeriodIdx = 0;
+      }
+      const playBtn = document.getElementById("tpo-btn-play");
+      if (playBtn) playBtn.innerHTML = '<span>⏸ Pause</span>';
+      
+      tpoPlayInterval = setInterval(() => {
+        if (currentTPOPeriodIdx < TPO_PERIOD_LETTERS.length - 1) {
+          currentTPOPeriodIdx++;
+          SoundFX.click();
+          renderTPOSimulator();
+        } else {
+          pauseTPOSim();
+        }
+      }, 1200);
+    }
+
+    function pauseTPOSim() {
+      if (tpoPlayInterval) {
+        clearInterval(tpoPlayInterval);
+        tpoPlayInterval = null;
+      }
+      const playBtn = document.getElementById("tpo-btn-play");
+      if (playBtn) playBtn.innerHTML = '<span>▶ Auto-Play</span>';
+    }
+
+    function resetTPOSim() {
+      SoundFX.click();
+      pauseTPOSim();
+      currentTPOPeriodIdx = 0;
+      renderTPOSimulator();
+    }
+
+    function renderTPOSimulator() {
+      const container = document.getElementById("tpo-sim-display");
+      if (!container) return;
+
+      const arch = TPO_ARCHETYPES[activeArchetypeKey];
+      const stats = calcTPOStats(activeArchetypeKey, currentTPOPeriodIdx);
+      const activeLetter = TPO_PERIOD_LETTERS[currentTPOPeriodIdx];
+      const periodComment = arch.data[activeLetter]?.comment || "";
+
+      function getLetterBadge(letter) {
+        if (letter === 'A' || letter === 'B') {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 shadow-sm" title="Period ${letter} (Initial Balance)">${letter}</span>`;
+        } else if (letter === 'C' || letter === 'D') {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700/60 shadow-sm" title="Period ${letter}">${letter}</span>`;
+        } else if (letter === 'E' || letter === 'F') {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-amber-950/80 text-amber-300 border border-amber-700/60 shadow-sm" title="Period ${letter}">${letter}</span>`;
+        } else if (letter === 'G' || letter === 'H') {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-950/80 text-purple-300 border border-purple-700/60 shadow-sm" title="Period ${letter}">${letter}</span>`;
+        } else if (letter === 'I' || letter === 'J') {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-rose-950/80 text-rose-300 border border-rose-700/60 shadow-sm" title="Period ${letter}">${letter}</span>`;
+        } else {
+          return `<span class="px-1 py-0.5 rounded text-[11px] font-mono font-bold bg-indigo-950/80 text-indigo-300 border border-indigo-700/60 shadow-sm" title="Period ${letter}">${letter}</span>`;
+        }
+      }
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <!-- Profile Metrics Bar -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 text-center font-mono">
+            <div class="p-2.5 bg-dark-card rounded-xl border border-dark-border">
+              <span class="text-[10px] text-slate-400 block uppercase">Session High</span>
+              <span class="text-xs font-bold text-emerald-400">${stats.sessionHigh > -Infinity ? stats.sessionHigh.toFixed(2) : '-'}</span>
+            </div>
+            <div class="p-2.5 bg-dark-card rounded-xl border border-dark-border">
+              <span class="text-[10px] text-slate-400 block uppercase">Session Low</span>
+              <span class="text-xs font-bold text-rose-400">${stats.sessionLow < Infinity ? stats.sessionLow.toFixed(2) : '-'}</span>
+            </div>
+            <div class="p-2.5 bg-dark-card rounded-xl border border-amber-900/50 shadow-glow-amber">
+              <span class="text-[10px] text-amber-400 font-bold block uppercase">POC (★ Highest TPO)</span>
+              <span class="text-xs font-bold text-amber-300">${stats.poc.toFixed(2)} (${stats.maxCount} TPOs)</span>
+            </div>
+            <div class="p-2.5 bg-dark-card rounded-xl border border-cyan-900/50">
+              <span class="text-[10px] text-cyan-400 font-bold block uppercase">VAH (68.2%)</span>
+              <span class="text-xs font-bold text-cyan-300">${stats.vah.toFixed(2)}</span>
+            </div>
+            <div class="p-2.5 bg-dark-card rounded-xl border border-cyan-900/50">
+              <span class="text-[10px] text-cyan-400 font-bold block uppercase">VAL (68.2%)</span>
+              <span class="text-xs font-bold text-cyan-300">${stats.val.toFixed(2)}</span>
+            </div>
+            <div class="p-2.5 bg-dark-card rounded-xl border border-dark-border">
+              <span class="text-[10px] text-slate-400 block uppercase">Total TPOs</span>
+              <span class="text-xs font-bold text-white">${stats.totalTPOs} (${Math.round((stats.currentVATPOs / (stats.totalTPOs || 1)) * 100)}% in VA)</span>
+            </div>
+          </div>
+
+          <!-- TPO Graphic Chart Display -->
+          <div class="bg-dark-base rounded-2xl border border-dark-border p-4 overflow-x-auto shadow-inner">
+            <div class="min-w-[540px] space-y-1">
+              ${arch.prices.map(price => {
+                const letters = stats.profile[price] || [];
+                const isPOC = price === stats.poc;
+                const isVAH = price === stats.vah;
+                const isVAL = price === stats.val;
+                const inVA = price <= stats.vah && price >= stats.val;
+                const isSinglePrint = archKey === 'trend-single-prints' && arch.singlePrintPrices?.includes(price) && letters.length === 1;
+                const isPoorHigh = archKey === 'unfinished-poor-high' && price === arch.poorHighPrice && letters.length >= 3;
+
+                let rowBg = "hover:bg-dark-card/60 transition ";
+                let borderStyle = "border-transparent";
+
+                if (isPOC) {
+                  rowBg = "bg-amber-500/10 hover:bg-amber-500/15 ";
+                  borderStyle = "border-l-4 border-amber-400 pl-2";
+                } else if (inVA) {
+                  rowBg = "bg-cyan-500/5 hover:bg-cyan-500/10 ";
+                  if (isVAH) borderStyle = "border-l-4 border-cyan-400 pl-2";
+                  else if (isVAL) borderStyle = "border-l-4 border-cyan-600 pl-2";
+                }
+
+                if (isSinglePrint) {
+                  rowBg = "bg-sky-950/40 border border-dashed border-cyan-500/60 ";
+                }
+                if (isPoorHigh) {
+                  rowBg = "bg-rose-950/30 border border-rose-500/60 ";
+                }
+
+                return `
+                  <div class="flex items-center text-xs py-1 px-2 rounded-lg ${rowBg} ${borderStyle}">
+                    <div class="w-28 flex items-center space-x-1.5 font-mono flex-shrink-0">
+                      <span class="${isPOC ? 'text-amber-400 font-bold' : (inVA ? 'text-cyan-300 font-semibold' : 'text-slate-400')}">${price.toFixed(2)}</span>
+                      ${isPOC ? '<span class="text-[10px] text-amber-400 font-bold">★ POC</span>' : ''}
+                      ${isVAH ? '<span class="text-[9px] px-1 py-0.2 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded font-bold">VAH</span>' : ''}
+                      ${isVAL ? '<span class="text-[9px] px-1 py-0.2 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded font-bold">VAL</span>' : ''}
+                      ${isSinglePrint ? '<span class="text-[9px] px-1 py-0.2 bg-cyan-500 text-slate-950 font-bold rounded">SINGLES</span>' : ''}
+                      ${isPoorHigh ? '<span class="text-[9px] px-1 py-0.2 bg-rose-500 text-white font-bold rounded animate-pulse">POOR HIGH</span>' : ''}
+                    </div>
+
+                    <div class="flex-1 flex flex-wrap gap-1 items-center px-2">
+                      ${letters.length > 0 ? letters.map(l => getLetterBadge(l)).join('') : '<span class="text-slate-700 text-[11px] font-mono">-</span>'}
+                    </div>
+
+                    <div class="w-16 flex items-center justify-end space-x-1.5 text-right font-mono text-[11px] text-slate-400 flex-shrink-0">
+                      <span>${letters.length}</span>
+                      <div class="w-10 bg-dark-card h-1.5 rounded-full overflow-hidden">
+                        <div class="${isPOC ? 'bg-amber-400' : (inVA ? 'bg-cyan-400' : 'bg-slate-600')} h-full rounded-full" style="width: ${Math.min(100, (letters.length / (stats.maxCount || 1)) * 100)}%"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- Dalton Commentary Card for Active Period -->
+          <div class="p-4 bg-gradient-to-r from-dark-surface to-dark-card rounded-2xl border border-dark-border space-y-2 shadow-card">
+            <div class="flex items-center justify-between border-b border-dark-border pb-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></span>
+                <span class="text-xs font-mono font-bold text-white uppercase">Period ${activeLetter} Commentary (${TPO_PERIOD_TIMES[activeLetter]})</span>
+              </div>
+              <span class="text-[11px] font-mono text-cyan-300">${arch.instrument}</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed font-sans">
+              <strong>Jim Dalton Auction Insight:</strong> ${periodComment}
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* =====================================================================
+       PRE-MARKET INSTITUTIONAL GAMEPLAN GENERATOR LOGIC
+       ===================================================================== */
+    function generateGameplan() {
+      SoundFX.click();
+      const vah = parseFloat(document.getElementById("gp-vah")?.value) || 5020.00;
+      const val = parseFloat(document.getElementById("gp-val")?.value) || 4990.00;
+      const poc = parseFloat(document.getElementById("gp-poc")?.value) || 5005.00;
+      const onh = parseFloat(document.getElementById("gp-onh")?.value) || 5032.00;
+      const onl = parseFloat(document.getElementById("gp-onl")?.value) || 5000.00;
+      const openPrice = parseFloat(document.getElementById("gp-open")?.value) || 5028.00;
+      const inventory = document.getElementById("gp-inv")?.value || "long";
+
+      const resultContainer = document.getElementById("gp-results");
+      if (!resultContainer) return;
+
+      let stateName = "";
+      let stateBadge = "";
+      let stateBadgeColor = "";
+      let bias = "";
+      let playbookName = "";
+      let playbookType = "";
+      let entryDesc = "";
+      let stopDesc = "";
+      let t1Desc = "";
+      let t2Desc = "";
+      let rrRatio = "";
+      let daltonWarning = "";
+
+      if (openPrice > onh) {
+        stateName = "True Gap Open Above Overnight High & Prior Range";
+        stateBadge = "Initiative Gap Up";
+        stateBadgeColor = "bg-emerald-950 text-emerald-300 border-emerald-800";
+        bias = "Aggressive Bullish Initiative";
+        playbookName = "Open-Drive / Initiative Trend Continuation";
+        playbookType = "Go-With Momentum";
+        entryDesc = `Join shallow Period B pullback to ${(openPrice - 2.0).toFixed(2)} or break above Period A high`;
+        stopDesc = `${onh.toFixed(2)} (Back inside overnight range)`;
+        t1Desc = `${(openPrice + (onh - onl) * 0.5).toFixed(2)} (+0.5x Range Extension)`;
+        t2Desc = `${(openPrice + (onh - onl)).toFixed(2)} (+1.0x Range Extension)`;
+        rrRatio = "3.4 : 1";
+        daltonWarning = "Dalton Axiom: Never fade an Open-Drive out of range! When other-timeframe initiative buyers revalue the market outside prior range, gaps do NOT fill easily. Trade strictly with the trend.";
+      } else if (openPrice < onl) {
+        stateName = "True Gap Open Below Overnight Low & Prior Range";
+        stateBadge = "Initiative Gap Down";
+        stateBadgeColor = "bg-rose-950 text-rose-300 border-rose-800";
+        bias = "Aggressive Bearish Initiative";
+        playbookName = "Open-Drive / Initiative Short Continuation";
+        playbookType = "Go-With Breakdown";
+        entryDesc = `Join Period B pullback to ${(openPrice + 2.0).toFixed(2)} or breakdown below Period A low`;
+        stopDesc = `${onl.toFixed(2)} (Back inside overnight range)`;
+        t1Desc = `${(openPrice - (onh - onl) * 0.5).toFixed(2)} (-0.5x Range Extension)`;
+        t2Desc = `${(openPrice - (onh - onl)).toFixed(2)} (-1.0x Range Extension)`;
+        rrRatio = "3.6 : 1";
+        daltonWarning = "Dalton Axiom: Gaps down outside range signify violent other-timeframe seller participation. Bottom-fishing early is high risk. Only cover or reverse if clean excess forms.";
+      } else if (openPrice > vah) {
+        stateName = "Outside Prior Value, Inside Prior Day / Overnight Range";
+        stateBadge = "80% Rule Candidate";
+        stateBadgeColor = "bg-amber-950 text-amber-300 border-amber-800";
+        bias = "Responsive Fade / Mean Reversion";
+        playbookName = "The Dalton 80% Rule (Value Area Acceptance Re-entry)";
+        playbookType = "Responsive Mean Reversion";
+        entryDesc = `Short upon 2 consecutive 30-min bar closes &le; ${(vah - 0.50).toFixed(2)}`;
+        stopDesc = `${(Math.max(onh, openPrice + 3.0)).toFixed(2)} (1 tick above opening swing high)`;
+        t1Desc = `${poc.toFixed(2)} (Prior Day Point of Control)`;
+        t2Desc = `${val.toFixed(2)} (Opposite Value Area Low)`;
+        const risk = Math.max(onh, openPrice + 3.0) - (vah - 0.50);
+        const rew = (vah - 0.50) - val;
+        rrRatio = `${(rew / (risk || 1)).toFixed(2)} : 1`;
+        daltonWarning = "Dalton 80% Rule: Price probed outside value but failed to establish initiative buying. If price prints two consecutive 30-minute bar closes inside VAH, there is an 80% probability of rotating completely to VAL.";
+      } else if (openPrice < val) {
+        stateName = "Outside Prior Value Below, Inside Range";
+        stateBadge = "80% Rule Candidate";
+        stateBadgeColor = "bg-amber-950 text-amber-300 border-amber-800";
+        bias = "Responsive Fade / Mean Reversion";
+        playbookName = "The Dalton 80% Rule (Value Area Acceptance Re-entry)";
+        playbookType = "Responsive Mean Reversion";
+        entryDesc = `Long upon 2 consecutive 30-min bar closes &ge; ${(val + 0.50).toFixed(2)}`;
+        stopDesc = `${(Math.min(onl, openPrice - 3.0)).toFixed(2)} (1 tick below opening swing low)`;
+        t1Desc = `${poc.toFixed(2)} (Prior Day Point of Control)`;
+        t2Desc = `${vah.toFixed(2)} (Opposite Value Area High)`;
+        const risk = (val + 0.50) - Math.min(onl, openPrice - 3.0);
+        const rew = vah - (val + 0.50);
+        rrRatio = `${(rew / (risk || 1)).toFixed(2)} : 1`;
+        daltonWarning = "Dalton 80% Rule: Failed probe below value. Two consecutive 30-minute bar closes back above VAL confirm value acceptance and trigger rotation to prior POC and VAH.";
+      } else {
+        stateName = "Inside Prior Day Value Area (Equilibrium / Bracket)";
+        stateBadge = "Equilibrium Bracket";
+        stateBadgeColor = "bg-cyan-950 text-cyan-300 border-cyan-800";
+        bias = "Neutral / Two-Way Auction";
+        playbookName = "Perimeter Bracket Fade (VAH Short / VAL Long)";
+        playbookType = "Perimeter Responsive Scalp";
+        entryDesc = `Fade tests at VAH (${vah.toFixed(2)}) or VAL (${val.toFixed(2)}). Never enter near POC (${poc.toFixed(2)})!`;
+        stopDesc = "2 to 3 points beyond bracket extreme (outside excess tail)";
+        t1Desc = `${poc.toFixed(2)} (Mean Reversion to Fair Value)`;
+        t2Desc = "Opposite Value Area boundary";
+        rrRatio = "2.8 : 1";
+        daltonWarning = "Dalton Axiom: Opening inside value represents efficient trade facilitation. Day Timeframe participants dominate. Volatility is lowest near the POC with highest whipsaws. Trade ONLY at perimeter extremes.";
+      }
+
+      let invAlert = "";
+      if (inventory === 'long') {
+        if (openPrice <= onh) {
+          invAlert = `⚠️ OVERNIGHT INVENTORY 100% LONG: Globex inventory traded heavily above prior settlement. If Period A fails to drive cleanly through Overnight High (${onh.toFixed(2)}), expect an aggressive long liquidation unwind flush back down to Settlement/POC (${poc.toFixed(2)}) at the bell!`;
+        } else {
+          invAlert = `Overnight inventory is 100% Long and price has accepted above Overnight High (${onh.toFixed(2)}). Initiative buying confirmed.`;
+        }
+      } else if (inventory === 'short') {
+        if (openPrice >= onl) {
+          invAlert = `⚠️ OVERNIGHT INVENTORY 100% SHORT: Globex inventory traded heavily below prior settlement. If Period A fails to drive lower through Overnight Low (${onl.toFixed(2)}), expect an aggressive short-covering squeeze violently back up to Settlement/POC (${poc.toFixed(2)})!`;
+        } else {
+          invAlert = `Overnight inventory is 100% Short and price has broken below Overnight Low (${onl.toFixed(2)}). Initiative selling confirmed.`;
+        }
+      } else {
+        invAlert = "Overnight inventory is balanced (50/50). No overnight position squeeze skew is active; follow standard opening type rules.";
+      }
+
+      resultContainer.innerHTML = `
+        <div class="space-y-4">
+          <div class="p-4 bg-dark-card rounded-xl border border-dark-border flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Diagnosed Opening State</span>
+              <h3 class="text-sm font-bold text-white font-mono">${stateName}</h3>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold uppercase ${stateBadgeColor} border">${stateBadge}</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl border text-xs leading-relaxed ${inventory === 'balanced' ? 'bg-cyan-950/20 border-cyan-800/50 text-cyan-200' : 'bg-amber-950/30 border-amber-800/70 text-amber-200'}">
+            ${invAlert}
+          </div>
+
+          <div class="bg-dark-card rounded-xl border border-dark-border p-4 space-y-3">
+            <div class="flex items-center justify-between border-b border-dark-border pb-2">
+              <div>
+                <span class="text-[10px] font-mono uppercase text-cyan-400 font-bold block">Primary Strategy</span>
+                <h4 class="text-xs font-bold text-white font-mono">${playbookName} (${playbookType})</h4>
+              </div>
+              <span class="text-xs font-mono font-bold text-emerald-400">R:R ~ ${rrRatio}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-xs font-mono">
+              <div class="p-2.5 bg-dark-surface rounded-lg border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Execution Trigger</span>
+                <span class="font-bold text-cyan-300">${entryDesc}</span>
+              </div>
+              <div class="p-2.5 bg-dark-surface rounded-lg border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Stop Loss Level</span>
+                <span class="font-bold text-rose-400">${stopDesc}</span>
+              </div>
+              <div class="p-2.5 bg-dark-surface rounded-lg border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Target 1 (Scale 50%)</span>
+                <span class="font-bold text-amber-300">${t1Desc}</span>
+              </div>
+              <div class="p-2.5 bg-dark-surface rounded-lg border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Target 2 (Runner)</span>
+                <span class="font-bold text-emerald-300">${t2Desc}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-gradient-to-r from-dark-surface to-dark-card rounded-xl border border-cyan-800/50 text-xs text-slate-300 space-y-1">
+            <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider block">Dalton Protocol Warning</span>
+            <p>${daltonWarning}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    /* =====================================================================
+       INTERACTIVE TOOLS VIEW (4-TAB WORKSTATION)
        ===================================================================== */
     function renderInteractiveToolsView(container) {
       container.innerHTML = `
-        <div class="space-y-8">
+        <div class="space-y-6">
           <div class="border-b border-dark-border pb-4 space-y-1">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">Interactive Execution</span>
-            <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">AMT Trade Calculators & Diagnostic Wizards</h1>
-            <p class="text-xs sm:text-sm text-slate-400">Calculate 80% Rule parameters and diagnose RTH opening conviction.</p>
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">Institutional Lab</span>
+              <span class="text-xs text-slate-400 font-mono">4 Master Diagnostic Tools</span>
+            </div>
+            <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">AMT Interactive Lab & Setup Calculators</h1>
+            <p class="text-xs sm:text-sm text-slate-400">Step-by-step TPO Profile simulator, pre-market gameplan engine, and 80% Rule execution calculators.</p>
           </div>
 
-          <!-- Tool 1: 80% Rule Calculator -->
-          <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
-            <div class="flex items-center justify-between">
-              <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-glow-amber"></span>
-                <span>The 80% Rule Execution Calculator</span>
-              </h2>
-              <span class="text-[11px] text-amber-400 font-mono font-semibold">Value Area Acceptance</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAH</label>
-                <input id="calc-vah" type="number" step="0.25" value="5020.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
-              </div>
-              <div>
-                <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day POC</label>
-                <input id="calc-poc" type="number" step="0.25" value="5005.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
-              </div>
-              <div>
-                <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAL</label>
-                <input id="calc-val" type="number" step="0.25" value="4990.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
-              </div>
-            </div>
-
-            <div class="flex space-x-3 pt-1">
-              <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
-                <input type="radio" name="calc-dir" value="short" checked onchange="calculate80Rule()" class="text-rose-500 focus:ring-0">
-                <span>Short (Price opened above VAH & entered back in)</span>
-              </label>
-              <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
-                <input type="radio" name="calc-dir" value="long" onchange="calculate80Rule()" class="text-emerald-500 focus:ring-0">
-                <span>Long (Price opened below VAL & entered back in)</span>
-              </label>
-            </div>
-
-            <div id="calc-results" class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-2"></div>
+          <!-- Tools Tab Navigation -->
+          <div class="flex flex-wrap gap-2 border-b border-dark-border pb-3 text-xs font-mono">
+            <button id="tools-tab-tpo-sim" onclick="switchToolsTab('tpo-sim')" class="btn-modern px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan transition flex items-center space-x-1.5">
+              <span>📊 1. TPO Profile Simulator</span>
+            </button>
+            <button id="tools-tab-gameplan" onclick="switchToolsTab('gameplan')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-card border border-dark-border text-slate-300 hover:text-white transition flex items-center space-x-1.5">
+              <span>🎯 2. Pre-Market Gameplan</span>
+            </button>
+            <button id="tools-tab-calc-80" onclick="switchToolsTab('calc-80')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-card border border-dark-border text-slate-300 hover:text-white transition flex items-center space-x-1.5">
+              <span>📐 3. The 80% Rule Calculator</span>
+            </button>
+            <button id="tools-tab-diag-open" onclick="switchToolsTab('diag-open')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-card border border-dark-border text-slate-300 hover:text-white transition flex items-center space-x-1.5">
+              <span>🔍 4. Opening Diagnostic Engine</span>
+            </button>
           </div>
 
-          <!-- Tool 2: Dalton Opening Diagnostic Engine -->
-          <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
-            <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></span>
-              <span>Dalton Opening Diagnostic Engine</span>
-            </h2>
+          <!-- TAB 1: TPO Profile Simulator -->
+          <div id="tool-section-tpo-sim" class="space-y-4">
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
+              <div class="flex flex-wrap items-center justify-between gap-3 border-b border-dark-border pb-3">
+                <div>
+                  <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></span>
+                    <span>Dynamic TPO Profile Simulator & Playground</span>
+                  </h2>
+                  <p class="text-[11px] text-slate-400">Select an archetype and step through 30-min periods (A through L) to watch TPO stacking and live Dalton commentary.</p>
+                </div>
 
-            <div class="space-y-3">
+                <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                  <button onclick="switchTPOArchetype('d-shape')" class="btn-modern px-3 py-1.5 rounded-lg ${activeArchetypeKey === 'd-shape' ? 'bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan' : 'bg-dark-surface border border-dark-border text-slate-300 hover:text-white'} transition">
+                    1: Balanced D-Shape
+                  </button>
+                  <button onclick="switchTPOArchetype('trend-single-prints')" class="btn-modern px-3 py-1.5 rounded-lg ${activeArchetypeKey === 'trend-single-prints' ? 'bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan' : 'bg-dark-surface border border-dark-border text-slate-300 hover:text-white'} transition">
+                    2: Trend Day + Singles
+                  </button>
+                  <button onclick="switchTPOArchetype('unfinished-poor-high')" class="btn-modern px-3 py-1.5 rounded-lg ${activeArchetypeKey === 'unfinished-poor-high' ? 'bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan' : 'bg-dark-surface border border-dark-border text-slate-300 hover:text-white'} transition">
+                    3: Unfinished Poor High
+                  </button>
+                </div>
+              </div>
+
+              <!-- Transport Controls & Timeline Bar -->
+              <div class="flex flex-wrap items-center justify-between gap-3 bg-dark-base p-3 rounded-xl border border-dark-border">
+                <div class="flex items-center space-x-2 font-mono text-xs">
+                  <button onclick="stepTPOPeriod(-1)" class="btn-modern px-3 py-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-300 hover:text-white flex items-center space-x-1" title="Previous 30-Min Period">
+                    <span>◀ Prev</span>
+                  </button>
+                  <button id="tpo-btn-play" onclick="toggleTPOPlay()" class="btn-modern px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 text-slate-950 font-bold shadow-glow-cyan flex items-center space-x-1">
+                    <span>▶ Auto-Play</span>
+                  </button>
+                  <button onclick="stepTPOPeriod(1)" class="btn-modern px-3 py-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-300 hover:text-white flex items-center space-x-1" title="Next 30-Min Period">
+                    <span>Next ▶</span>
+                  </button>
+                  <button onclick="resetTPOSim()" class="btn-modern px-2.5 py-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-400 hover:text-white" title="Reset to Period A">
+                    <span>↺ Reset</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center space-x-1 font-mono text-[11px]">
+                  ${TPO_PERIOD_LETTERS.map((letter, idx) => {
+                    const isActive = idx === currentTPOPeriodIdx;
+                    const isPassed = idx < currentTPOPeriodIdx;
+                    let pillClass = "btn-modern px-2 py-1 rounded ";
+                    if (isActive) {
+                      pillClass += "bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan scale-110";
+                    } else if (isPassed) {
+                      pillClass += "bg-cyan-950/60 text-cyan-300 border border-cyan-800";
+                    } else {
+                      pillClass += "bg-dark-surface text-slate-500 border border-dark-border hover:text-slate-300";
+                    }
+                    return `<button onclick="jumpTPOPeriod(${idx})" class="${pillClass}" title="Period ${letter} (${TPO_PERIOD_TIMES[letter]})">${letter}</button>`;
+                  }).join('')}
+                </div>
+              </div>
+
+              <div id="tpo-sim-display"></div>
+            </div>
+          </div>
+
+          <!-- TAB 2: Pre-Market Institutional Gameplan Generator -->
+          <div id="tool-section-gameplan" class="space-y-4 hidden">
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
+              <div class="border-b border-dark-border pb-3">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-glow-amber"></span>
+                  <span>Pre-Market Institutional Gameplan Generator</span>
+                </h2>
+                <p class="text-[11px] text-slate-400">Input prior session parameters and overnight inventory to generate actionable Dalton execution playbooks.</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAH</label>
+                  <input id="gp-vah" type="number" step="0.25" value="5020.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day POC</label>
+                  <input id="gp-poc" type="number" step="0.25" value="5005.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAL</label>
+                  <input id="gp-val" type="number" step="0.25" value="4990.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Overnight High (ONH)</label>
+                  <input id="gp-onh" type="number" step="0.25" value="5032.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Overnight Low (ONL)</label>
+                  <input id="gp-onl" type="number" step="0.25" value="5000.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Current / Projected Open Price</label>
+                  <input id="gp-open" type="number" step="0.25" value="5028.00" oninput="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+              </div>
+
               <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Step 1: Where did price open relative to prior Value Area?</label>
-                <select id="diag-location" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
-                  <option value="gap">Outside Prior Range (Gap Open)</option>
-                  <option value="outside-va">Outside Value Area, but inside Prior Range</option>
-                  <option value="inside-va">Inside Prior Value Area</option>
+                <label class="block text-[11px] font-mono text-slate-400 mb-1">Overnight Inventory Position Skew</label>
+                <select id="gp-inv" onchange="generateGameplan()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                  <option value="long">100% Net Long (Overnight volume traded predominantly above prior settlement)</option>
+                  <option value="balanced">Balanced / Mixed (50/50 two-way rotation around prior close)</option>
+                  <option value="short">100% Net Short (Overnight volume traded predominantly below prior settlement)</option>
                 </select>
               </div>
 
-              <div>
-                <label class="block text-xs font-medium text-slate-300 mb-1">Step 2: How did the first 30 minutes (Period A) behave?</label>
-                <select id="diag-behavior" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
-                  <option value="drive">Drove violently in one direction with zero pullback</option>
-                  <option value="test-drive">Briefly tested a reference level, failed, and drove opposite</option>
-                  <option value="reversal">Attempted to auction in one direction, failed, swept whole range</option>
-                  <option value="chop">Quiet rotation overlapping the open price</option>
-                </select>
+              <div id="gp-results" class="space-y-4 pt-2"></div>
+            </div>
+          </div>
+
+          <!-- TAB 3: 80% Rule Calculator -->
+          <div id="tool-section-calc-80" class="space-y-4 hidden">
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
+              <div class="flex items-center justify-between border-b border-dark-border pb-3">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-glow-amber"></span>
+                  <span>The 80% Rule Execution Calculator</span>
+                </h2>
+                <span class="text-[11px] text-amber-400 font-mono font-semibold">Value Area Acceptance</span>
               </div>
 
-              <div id="diag-result" class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-1.5"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAH</label>
+                  <input id="calc-vah" type="number" step="0.25" value="5020.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day POC</label>
+                  <input id="calc-poc" type="number" step="0.25" value="5005.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAL</label>
+                  <input id="calc-val" type="number" step="0.25" value="4990.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-4 pt-1">
+                <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
+                  <input type="radio" name="calc-dir" value="short" checked onchange="calculate80Rule()" class="text-rose-500 focus:ring-0">
+                  <span>Short (Price opened above VAH & entered back in)</span>
+                </label>
+                <label class="flex items-center space-x-2 text-xs text-slate-300 cursor-pointer">
+                  <input type="radio" name="calc-dir" value="long" onchange="calculate80Rule()" class="text-emerald-500 focus:ring-0">
+                  <span>Long (Price opened below VAL & entered back in)</span>
+                </label>
+              </div>
+
+              <div id="calc-results" class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-2"></div>
+            </div>
+          </div>
+
+          <!-- TAB 4: Dalton Opening Diagnostic Engine -->
+          <div id="tool-section-diag-open" class="space-y-4 hidden">
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
+              <div class="border-b border-dark-border pb-3">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></span>
+                  <span>Dalton Opening Diagnostic Engine</span>
+                </h2>
+                <p class="text-[11px] text-slate-400">Classify opening behavior and determine initial conviction.</p>
+              </div>
+
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1">Step 1: Where did price open relative to prior Value Area?</label>
+                  <select id="diag-location" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    <option value="gap">Outside Prior Range (Gap Open)</option>
+                    <option value="outside-va">Outside Value Area, but inside Prior Range</option>
+                    <option value="inside-va">Inside Prior Value Area</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-300 mb-1">Step 2: How did the first 30 minutes (Period A) behave?</label>
+                  <select id="diag-behavior" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    <option value="drive">Drove violently in one direction with zero pullback</option>
+                    <option value="test-drive">Briefly tested a reference level, failed, and drove opposite</option>
+                    <option value="reversal">Attempted to auction in one direction, failed, swept whole range</option>
+                    <option value="chop">Quiet rotation overlapping the open price</option>
+                  </select>
+                </div>
+
+                <div id="diag-result" class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-1.5"></div>
+              </div>
             </div>
           </div>
         </div>
       `;
-      calculate80Rule();
-      diagnoseOpen();
+
+      switchToolsTab(activeToolsTab);
+    }
+
+    function switchToolsTab(tabKey) {
+      SoundFX.click();
+      activeToolsTab = tabKey;
+      ['tpo-sim', 'gameplan', 'calc-80', 'diag-open'].forEach(k => {
+        const btn = document.getElementById(`tools-tab-${k}`);
+        const sec = document.getElementById(`tool-section-${k}`);
+        if (btn && sec) {
+          if (k === tabKey) {
+            btn.className = "btn-modern px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan transition flex items-center space-x-1.5";
+            sec.classList.remove("hidden");
+          } else {
+            btn.className = "btn-modern px-3.5 py-2 rounded-xl bg-dark-card border border-dark-border text-slate-300 hover:text-white transition flex items-center space-x-1.5";
+            sec.classList.add("hidden");
+          }
+        }
+      });
+
+      if (tabKey === 'tpo-sim') {
+        renderTPOSimulator();
+      } else if (tabKey === 'gameplan') {
+        generateGameplan();
+      } else if (tabKey === 'calc-80') {
+        calculate80Rule();
+      } else if (tabKey === 'diag-open') {
+        diagnoseOpen();
+      }
     }
 
     function calculate80Rule() {
@@ -2660,7 +3837,6 @@
     }
 
     function diagnoseOpen() {
-      const loc = document.getElementById("diag-location")?.value || 'gap';
       const beh = document.getElementById("diag-behavior")?.value || 'drive';
       const container = document.getElementById("diag-result");
       if (!container) return;
@@ -2697,15 +3873,63 @@
     }
 
     /* =====================================================================
-       DRILLS VIEW
+       DRILLS VIEW: 10 INSTITUTIONAL CASE STUDIES & SCORE TRACKER
        ===================================================================== */
     function renderDrillsView(container) {
+      let answeredCount = 0;
+      let correctCount = 0;
+      DRILLS.forEach(drill => {
+        const ans = quizAnswers[drill.id];
+        if (ans !== undefined) {
+          answeredCount++;
+          if (drill.options[ans]?.correct) {
+            correctCount++;
+          }
+        }
+      });
+      const scorePct = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+      const isQualified = answeredCount === DRILLS.length && scorePct >= 80;
+
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="border-b border-dark-border pb-4 space-y-1">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800/60">Practical Mastery</span>
-            <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">Interactive Self-Assessment Scenarios</h1>
-            <p class="text-xs sm:text-sm text-slate-400">Test your institutional execution decisions with real historical scenarios.</p>
+          <div class="border-b border-dark-border pb-4 space-y-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800/60">Practical Mastery</span>
+              <span class="text-xs text-slate-400 font-mono">10 Institutional Case Studies</span>
+            </div>
+            <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">Interactive Scenario Case Studies</h1>
+            <p class="text-xs sm:text-sm text-slate-400">Test your decision-making under genuine market profile and order flow conditions. Achieve 80%+ to unlock your Graduation Certificate.</p>
+
+            <div class="p-3.5 bg-dark-card rounded-xl border border-dark-border flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+              <div class="flex items-center space-x-3">
+                <span class="text-slate-400">Progress: <strong class="text-white">${answeredCount} / ${DRILLS.length}</strong></span>
+                <span class="text-slate-400">Score: <strong class="${scorePct >= 80 ? 'text-emerald-400 font-bold' : 'text-amber-400'}">${scorePct}%</strong> (${correctCount} Correct)</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <button onclick="resetDrills()" class="btn-modern px-3 py-1 rounded-lg bg-dark-surface border border-dark-border text-slate-400 hover:text-white text-[11px]">
+                  ↺ Reset Answers
+                </button>
+                <button onclick="openCertificateModal()" class="btn-modern px-3.5 py-1 rounded-lg ${isQualified ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold shadow-glow-amber' : 'bg-dark-surface border border-dark-border text-amber-300 hover:border-amber-500'} text-[11px] flex items-center space-x-1">
+                  <span>🎓 Certificate</span>
+                  ${isQualified ? '<span>✓ UNLOCKED</span>' : ''}
+                </button>
+              </div>
+            </div>
+
+            ${isQualified ? `
+              <div class="p-4 bg-gradient-to-r from-amber-950/40 via-dark-card to-emerald-950/40 border border-amber-600 rounded-2xl shadow-glow-amber flex flex-wrap items-center justify-between gap-3">
+                <div class="space-y-0.5">
+                  <h3 class="text-sm font-bold text-amber-300 uppercase tracking-wider font-mono flex items-center space-x-2">
+                    <span>🏆</span>
+                    <span>Institutional Mastery Achieved! (Score: ${scorePct}%)</span>
+                  </h3>
+                  <p class="text-xs text-slate-300">You have completed all 10 case studies with distinction. Claim and download your official graduation credential.</p>
+                </div>
+                <button onclick="openCertificateModal()" class="btn-modern px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-glow-amber">
+                  🎓 Claim Official Certificate
+                </button>
+              </div>
+            ` : ''}
           </div>
 
           <div class="space-y-6">
@@ -2715,10 +3939,10 @@
                 <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">${drill.title}</span>
-                    <span class="text-[11px] text-slate-400">Question ${idx + 1} of ${DRILLS.length}</span>
+                    <span class="text-[11px] text-slate-400 font-mono">Case ${idx + 1} of ${DRILLS.length}</span>
                   </div>
 
-                  <div class="p-3.5 bg-dark-surface rounded-xl border border-dark-border text-xs text-slate-300 leading-relaxed shadow-inner">
+                  <div class="p-3.5 bg-dark-surface rounded-xl border border-dark-border text-xs text-slate-300 leading-relaxed shadow-inner font-sans">
                     <strong>Context:</strong> ${drill.context}
                   </div>
 
@@ -2751,7 +3975,7 @@
 
                   ${selectedIdx !== undefined ? `
                     <div class="p-3.5 rounded-xl border text-xs leading-relaxed ${drill.options[selectedIdx].correct ? 'bg-emerald-950/30 border-emerald-800 text-emerald-200' : 'bg-rose-950/30 border-rose-800 text-rose-200'}">
-                      <strong>${drill.options[selectedIdx].correct ? '✓ Correct Decision:' : '✗ Incorrect Decision:'}</strong>
+                      <strong>${drill.options[selectedIdx].correct ? '✓ Correct Institutional Decision:' : '✗ Incorrect Decision:'}</strong>
                       ${drill.options[selectedIdx].explanation}
                     </div>
                   ` : ''}
@@ -2764,10 +3988,417 @@
     }
 
     function handleQuizAnswer(drillId, optionIdx) {
+      const drill = DRILLS.find(d => d.id === drillId);
+      if (drill) {
+        if (drill.options[optionIdx]?.correct) {
+          SoundFX.success();
+        } else {
+          SoundFX.error();
+        }
+      }
       quizAnswers[drillId] = optionIdx;
       localStorage.setItem('amt_quiz_answers', JSON.stringify(quizAnswers));
       renderDrillsView(document.getElementById("lesson-viewport"));
     }
+
+    function resetDrills() {
+      SoundFX.click();
+      if (confirm("Reset all 10 scenario answers?")) {
+        quizAnswers = {};
+        localStorage.removeItem('amt_quiz_answers');
+        renderDrillsView(document.getElementById("lesson-viewport"));
+      }
+    }
+
+    /* =====================================================================
+       3D INTERACTIVE FLASHCARDS LOGIC (ALL 28 TERMS)
+       ===================================================================== */
+    function openFlashcardsModal() {
+      SoundFX.click();
+      document.getElementById("flashcards-backdrop").classList.remove("hidden");
+      document.getElementById("flashcards-modal").classList.remove("hidden");
+      currentCardIndex = 0;
+      isCardFlipped = false;
+      applyFlashcardFilter();
+    }
+
+    function closeFlashcardsModal() {
+      SoundFX.click();
+      document.getElementById("flashcards-backdrop").classList.add("hidden");
+      document.getElementById("flashcards-modal").classList.add("hidden");
+      isCardFlipped = false;
+    }
+
+    function setFlashcardFilter(filter) {
+      SoundFX.click();
+      flashcardFilter = filter;
+      ['all', 'review', 'mastered'].forEach(f => {
+        const btn = document.getElementById(`fc-tab-${f}`);
+        if (btn) {
+          if (f === filter) {
+            btn.className = "px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-800 font-bold transition";
+          } else {
+            btn.className = "px-2.5 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border transition";
+          }
+        }
+      });
+      applyFlashcardFilter();
+    }
+
+    function applyFlashcardFilter() {
+      if (flashcardFilter === 'review') {
+        flashcardDeck = flashcardKeys.filter(k => flashcardMastery[k] === 'review');
+      } else if (flashcardFilter === 'mastered') {
+        flashcardDeck = flashcardKeys.filter(k => flashcardMastery[k] === 'mastered');
+      } else {
+        flashcardDeck = [...flashcardKeys];
+      }
+
+      currentCardIndex = 0;
+      isCardFlipped = false;
+      renderCurrentFlashcard();
+      updateFlashcardCounts();
+    }
+
+    function updateFlashcardCounts() {
+      const reviewCount = flashcardKeys.filter(k => flashcardMastery[k] === 'review').length;
+      const masteredCount = flashcardKeys.filter(k => flashcardMastery[k] === 'mastered').length;
+
+      const revEl = document.getElementById("fc-count-review");
+      const masEl = document.getElementById("fc-count-mastered");
+      if (revEl) revEl.textContent = reviewCount;
+      if (masEl) masEl.textContent = masteredCount;
+
+      const bar = document.getElementById("fc-progress-bar");
+      const txt = document.getElementById("fc-progress-text");
+      const pct = Math.round((masteredCount / flashcardKeys.length) * 100);
+      if (bar) bar.style.width = pct + "%";
+      if (txt) txt.textContent = `${masteredCount} / ${flashcardKeys.length} (${pct}%)`;
+    }
+
+    function renderCurrentFlashcard() {
+      const inner = document.getElementById("fc-card-inner");
+      if (inner) {
+        if (isCardFlipped) {
+          inner.classList.add("rotate-y-180");
+        } else {
+          inner.classList.remove("rotate-y-180");
+        }
+      }
+
+      if (flashcardDeck.length === 0) {
+        document.getElementById("fc-front-tag").textContent = "Empty";
+        document.getElementById("fc-front-counter").textContent = "0 of 0";
+        document.getElementById("fc-front-title").textContent = "No Cards in this Filter";
+        document.getElementById("fc-front-subtitle").textContent = "Select 'All (28)' or mark more cards to populate this list.";
+        return;
+      }
+
+      const termKey = flashcardDeck[currentCardIndex];
+      const item = AMT_DEEP_DIVES[termKey];
+      if (!item) return;
+
+      document.getElementById("fc-front-tag").textContent = item.tag;
+      document.getElementById("fc-front-counter").textContent = `Card ${currentCardIndex + 1} of ${flashcardDeck.length}`;
+      document.getElementById("fc-front-title").textContent = item.name;
+      document.getElementById("fc-front-subtitle").textContent = item.subtitle;
+
+      document.getElementById("fc-back-title").textContent = item.name;
+      document.getElementById("fc-back-overview").textContent = item.overview;
+      document.getElementById("fc-back-principle").textContent = item.daltonPrinciples?.[0] || item.amtRules?.[0] || "";
+      
+      const setup = item.tradeSetup;
+      if (setup) {
+        document.getElementById("fc-back-setup").innerHTML = `
+          <strong>${setup.title} (${setup.type})</strong><br>
+          <span class="text-cyan-400">Trigger:</span> ${setup.trigger}<br>
+          <span class="text-emerald-400">Entry:</span> ${setup.entry} | <span class="text-rose-400">Stop:</span> ${setup.stopLoss} | <span class="text-amber-400">Targets:</span> ${setup.target1} / ${setup.target2}
+        `;
+      } else {
+        document.getElementById("fc-back-setup").textContent = item.traps || "";
+      }
+    }
+
+    function flipFlashcard() {
+      SoundFX.flip();
+      isCardFlipped = !isCardFlipped;
+      const inner = document.getElementById("fc-card-inner");
+      if (inner) {
+        if (isCardFlipped) {
+          inner.classList.add("rotate-y-180");
+        } else {
+          inner.classList.remove("rotate-y-180");
+        }
+      }
+    }
+
+    function nextFlashcard() {
+      SoundFX.click();
+      if (flashcardDeck.length === 0) return;
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex + 1) % flashcardDeck.length;
+      renderCurrentFlashcard();
+    }
+
+    function prevFlashcard() {
+      SoundFX.click();
+      if (flashcardDeck.length === 0) return;
+      isCardFlipped = false;
+      currentCardIndex = (currentCardIndex - 1 + flashcardDeck.length) % flashcardDeck.length;
+      renderCurrentFlashcard();
+    }
+
+    function shuffleFlashcards() {
+      SoundFX.click();
+      for (let i = flashcardDeck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [flashcardDeck[i], flashcardDeck[j]] = [flashcardDeck[j], flashcardDeck[i]];
+      }
+      currentCardIndex = 0;
+      isCardFlipped = false;
+      renderCurrentFlashcard();
+    }
+
+    function markFlashcard(status) {
+      if (flashcardDeck.length === 0) return;
+      const termKey = flashcardDeck[currentCardIndex];
+      flashcardMastery[termKey] = status;
+      localStorage.setItem('amt_flashcards_mastery', JSON.stringify(flashcardMastery));
+      
+      if (status === 'mastered') {
+        SoundFX.success();
+      } else {
+        SoundFX.error();
+      }
+
+      updateFlashcardCounts();
+      nextFlashcard();
+    }
+
+    /* =====================================================================
+       CANVAS GRADUATION CERTIFICATE OF MASTERY
+       ===================================================================== */
+    function openCertificateModal() {
+      SoundFX.fanfare();
+      document.getElementById("certificate-backdrop").classList.remove("hidden");
+      document.getElementById("certificate-modal").classList.remove("hidden");
+      drawCertificate();
+    }
+
+    function closeCertificateModal() {
+      SoundFX.click();
+      document.getElementById("certificate-backdrop").classList.add("hidden");
+      document.getElementById("certificate-modal").classList.add("hidden");
+    }
+
+    function drawCertificate() {
+      const canvas = document.getElementById("certificate-canvas");
+      if (!canvas) return;
+      const studentName = document.getElementById("cert-student-name")?.value || "Institutional Trader";
+
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width; // 1600
+      const h = canvas.height; // 1100
+
+      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
+      bgGrad.addColorStop(0, '#0a101d');
+      bgGrad.addColorStop(0.5, '#0f172a');
+      bgGrad.addColorStop(1, '#050811');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      const glow = ctx.createRadialGradient(w/2, h/2, 50, w/2, h/2, 600);
+      glow.addColorStop(0, 'rgba(56, 189, 248, 0.08)');
+      glow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.save();
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.05)';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      for (let x = 200; x <= 1400; x += 10) {
+        const norm = (x - 800) / 200;
+        const y = 620 - Math.exp(-0.5 * norm * norm) * 240;
+        if (x === 200) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.restore();
+
+      ctx.strokeStyle = '#d97706';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(50, 50, w - 100, h - 100);
+
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(65, 65, w - 130, h - 130);
+
+      const cornerSize = 40;
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(40, 40 + cornerSize); ctx.lineTo(40, 40); ctx.lineTo(40 + cornerSize, 40);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(w - 40 - cornerSize, 40); ctx.lineTo(w - 40, 40); ctx.lineTo(w - 40, 40 + cornerSize);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(40, h - 40 - cornerSize); ctx.lineTo(40, h - 40); ctx.lineTo(40 + cornerSize, h - 40);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(w - 40 - cornerSize, h - 40); ctx.lineTo(w - 40, h - 40); ctx.lineTo(w - 40, h - 40 - cornerSize);
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.font = '700 17px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#38bdf8';
+      ctx.fillText('FLOWSTATE FINANCIAL • ACADEMY OF ADVANCED AUCTION DYNAMICS', w / 2, 130);
+
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 260, 150);
+      ctx.lineTo(w / 2 + 260, 150);
+      ctx.stroke();
+
+      ctx.fillStyle = '#f59e0b';
+      ctx.beginPath();
+      ctx.arc(w / 2, 150, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.font = '800 44px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText('CERTIFICATE OF INSTITUTIONAL MASTERY', w / 2, 220);
+
+      ctx.font = '700 19px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillText('AUCTION MARKET THEORY & MARKET PROFILE ANALYSIS', w / 2, 265);
+
+      ctx.font = '400 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#94a3b8';
+      ctx.fillText('THIS IS FORMALLY PRESENTED TO', w / 2, 335);
+
+      const cleanName = (studentName || 'Institutional Trader').trim().toUpperCase();
+      ctx.font = '800 50px "Plus Jakarta Sans", sans-serif';
+      const nameGrad = ctx.createLinearGradient(w / 2 - 300, 0, w / 2 + 300, 0);
+      nameGrad.addColorStop(0, '#38bdf8');
+      nameGrad.addColorStop(0.5, '#ffffff');
+      nameGrad.addColorStop(1, '#38bdf8');
+      ctx.fillStyle = nameGrad;
+      ctx.fillText(cleanName, w / 2, 410);
+
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(w / 2 - 320, 430);
+      ctx.lineTo(w / 2 + 320, 430);
+      ctx.stroke();
+
+      ctx.font = '400 19px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#cbd5e1';
+      const lines = [
+        'for demonstrating rigorous technical mastery and verified practical decision-making across all core tenets of',
+        'Auction Market Theory (AMT), Peter Steidlmayer Market Profile Structure, Time Price Opportunity (TPO) Distributions,',
+        'Volume Profile High/Low Volume Nodes, Value Area Acceptance & Rejection, and Jim Dalton Order Flow Mechanics.'
+      ];
+      let lineY = 490;
+      lines.forEach(l => {
+        ctx.fillText(l, w / 2, lineY);
+        lineY += 32;
+      });
+
+      ctx.font = '700 15px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#10b981';
+      ctx.fillText('★ VERIFIED DISTINCTION: 100% CURRICULUM & SCENARIO DRILL MASTERY ★', w / 2, 630);
+
+      const footerY = 860;
+
+      ctx.textAlign = 'left';
+      ctx.font = '600 14px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText('ISSUED DATE:', 160, footerY);
+      ctx.font = '700 16px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#f1f5f9';
+      const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      ctx.fillText(dateStr, 160, footerY + 26);
+
+      ctx.font = '600 14px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText('VERIFICATION HASH:', 160, footerY + 64);
+      ctx.font = '700 15px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#38bdf8';
+      let hashVal = 0;
+      for (let i = 0; i < cleanName.length; i++) hashVal = ((hashVal << 5) - hashVal) + cleanName.charCodeAt(i);
+      const certId = 'AMT-CERT-2026-' + Math.abs(hashVal % 90000 + 10000);
+      ctx.fillText(certId, 160, footerY + 88);
+
+      const sealX = w / 2;
+      const sealY = footerY + 40;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(sealX, sealY, 68, 0, Math.PI * 2);
+      const sealGrad = ctx.createRadialGradient(sealX - 20, sealY - 20, 10, sealX, sealY, 70);
+      sealGrad.addColorStop(0, '#fef3c7');
+      sealGrad.addColorStop(0.3, '#f59e0b');
+      sealGrad.addColorStop(0.7, '#b45309');
+      sealGrad.addColorStop(1, '#78350f');
+      ctx.fillStyle = sealGrad;
+      ctx.fill();
+      ctx.strokeStyle = '#fef08a';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(sealX, sealY, 56, 0, Math.PI * 2);
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.textAlign = 'center';
+      ctx.font = '800 22px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText('AMT', sealX, sealY - 4);
+      ctx.font = '700 9px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#fef08a';
+      ctx.fillText('INSTITUTIONAL', sealX, sealY + 14);
+      ctx.fillText('★ 2026 ★', sealX, sealY + 28);
+      ctx.restore();
+
+      ctx.textAlign = 'right';
+      ctx.strokeStyle = '#475569';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(w - 460, footerY + 30);
+      ctx.lineTo(w - 160, footerY + 30);
+      ctx.stroke();
+
+      ctx.font = 'italic 700 28px Georgia, serif';
+      ctx.fillStyle = '#7dd3fc';
+      ctx.fillText('James F. Dalton', w - 240, footerY + 16);
+
+      ctx.font = '700 15px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = '#f1f5f9';
+      ctx.fillText('Academic Director & Honorary Canon', w - 160, footerY + 54);
+
+      ctx.font = '500 13px "JetBrains Mono", monospace';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText('FlowState Financial AMT Faculty', w - 160, footerY + 76);
+    }
+
+    function downloadCertificatePNG() {
+      SoundFX.click();
+      const canvas = document.getElementById("certificate-canvas");
+      if (!canvas) return;
+      const studentName = document.getElementById("cert-student-name")?.value || "Institutional_Trader";
+      const a = document.createElement('a');
+      a.download = `AMT_Certificate_Mastery_${studentName.replace(/\s+/g, '_')}.png`;
+      a.href = canvas.toDataURL('image/png', 1.0);
+      a.click();
+    }
+
 
     /* =====================================================================
        MOBILE SIDEBAR & SHARE MODAL CONTROLS
