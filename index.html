@@ -25,27 +25,35 @@
         extend: {
           colors: {
             brand: {
-              50: '#eff6ff',
+              50: '#f0f9ff',
+              100: '#e0f2fe',
               400: '#38bdf8',
               500: '#0284c7',
               600: '#0369a1',
               accent: '#38bdf8',
             },
             dark: {
-              base: '#090d16',
-              surface: '#111827',
-              card: '#161f30',
-              border: '#1f293d',
-              hover: '#222f46'
+              base: '#080c14',
+              surface: '#0f1726',
+              card: '#151f32',
+              cardHover: '#1c2942',
+              border: '#1e293b',
+              borderHover: '#334155'
             },
             bull: '#10b981',
             bear: '#f43f5e',
             poc: '#f59e0b',
-            va: '#3b82f6'
+            va: '#38bdf8'
           },
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace']
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 25px -5px rgba(56, 189, 248, 0.25)',
+            'glow-amber': '0 0 25px -5px rgba(245, 158, 11, 0.25)',
+            'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.25)',
+            'card': '0 4px 20px -2px rgba(0, 0, 0, 0.5)'
           }
         }
       }
@@ -53,45 +61,63 @@
   </script>
 
   <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #090d16; }
-    ::-webkit-scrollbar-thumb { background: #1f293d; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    /* Custom Smooth Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #080c14; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-    /* Interactive Clickable Terms */
-    .amt-term {
-      color: #38bdf8;
-      border-bottom: 1px dashed rgba(56, 189, 248, 0.6);
-      cursor: pointer;
-      padding: 0 3px;
-      margin: 0 1px;
-      border-radius: 3px;
-      font-weight: 600;
-      display: inline;
-      transition: all 0.15s ease-in-out;
+    /* Ultra-clean transitions */
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
-    .amt-term:hover {
-      background-color: rgba(56, 189, 248, 0.18);
+
+    .btn-modern {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-modern:hover {
+      transform: translateY(-1px);
+    }
+    .btn-modern:active {
+      transform: translateY(0.5px) scale(0.98);
+    }
+
+    /* Interactive Clickable Terms with high visibility */
+    .amt-term-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.15rem 0.5rem;
+      margin: 0.15rem 0.1rem;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      border-radius: 0.5rem;
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
       color: #7dd3fc;
-      border-bottom-style: solid;
-      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    .amt-term-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
+    }
+    .amt-term-btn:active {
+      transform: translateY(0) scale(0.97);
     }
 
     /* Accordion details arrow */
     details summary::-webkit-details-marker { display: none; }
     details summary { list-style: none; }
 
-    /* Touch optimization */
-    body {
-      -webkit-tap-highlight-color: transparent;
-      user-select: text;
-    }
-
     /* Print styles */
     @media print {
       body { background: white !important; color: black !important; }
-      #sidebar, #mobile-bottom-nav, #mobile-header-bar, .no-print, #term-drawer { display: none !important; }
+      #sidebar, #mobile-bottom-nav, #mobile-header-bar, .no-print, #deepdive-modal { display: none !important; }
       #main-content { margin-left: 0 !important; padding: 0 !important; width: 100% !important; }
       .bg-dark-card, .bg-dark-surface { background: #f9fafb !important; border: 1px solid #e5e7eb !important; color: #111827 !important; }
     }
@@ -100,44 +126,47 @@
 <body class="bg-dark-base text-slate-200 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
   <!-- ================= TOP HEADER ================= -->
-  <header class="sticky top-0 z-40 bg-dark-base/90 backdrop-blur-md border-b border-dark-border px-4 py-3 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-dark-base/80 backdrop-blur-xl border-b border-dark-border px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-3">
       <!-- Mobile Menu Trigger -->
-      <button id="btn-toggle-menu" class="lg:hidden p-2 rounded-lg bg-dark-card border border-dark-border text-slate-300 hover:text-white focus:outline-none" aria-label="Toggle Navigation">
+      <button id="btn-toggle-menu" class="btn-modern lg:hidden p-2 rounded-xl bg-dark-card border border-dark-border text-slate-300 hover:text-white hover:border-dark-borderHover shadow-sm" aria-label="Toggle Navigation">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
 
       <!-- Logo & Title -->
-      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showModule('module-1')">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-cyan-400 flex items-center justify-center font-mono font-bold text-white shadow-lg shadow-cyan-500/20 text-sm">
+      <div class="flex items-center space-x-2.5 cursor-pointer group" onclick="showModule('module-1')">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 via-sky-500 to-cyan-400 flex items-center justify-center font-mono font-bold text-white shadow-glow-cyan text-xs group-hover:scale-105 transition-transform duration-300">
           AMT
         </div>
         <div>
-          <h1 class="text-sm font-bold text-white tracking-wide uppercase font-mono leading-none">AMT Academy</h1>
+          <div class="flex items-center space-x-1.5">
+            <h1 class="text-sm font-extrabold text-white tracking-wide uppercase font-mono leading-none">AMT Academy</h1>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-cyan-950 text-cyan-300 border border-cyan-800">Dalton Edition</span>
+          </div>
           <span class="text-[10px] text-slate-400 font-medium">Institutional Market Profile</span>
         </div>
       </div>
     </div>
 
     <!-- Quick Stats & Actions -->
-    <div class="flex items-center space-x-2 sm:space-x-4">
-      <!-- Search / Glossary Button -->
-      <button onclick="openTermDictionaryModal()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-dark-card hover:bg-dark-hover border border-dark-border text-slate-300 hover:text-white text-xs font-medium transition">
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <!-- Global Search / Encyclopedia -->
+      <button onclick="openTermDictionaryModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
         <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <span class="hidden sm:inline">Term Glossary</span>
+        <span class="hidden sm:inline">AMT Encyclopedia</span>
       </button>
 
       <!-- Progress Bar (Compact) -->
-      <div class="hidden md:flex items-center space-x-2 bg-dark-card px-3 py-1.5 rounded-full border border-dark-border">
-        <span class="text-xs font-mono text-slate-400">Progress:</span>
-        <div class="w-20 bg-dark-border h-2 rounded-full overflow-hidden">
-          <div id="top-progress-bar" class="bg-cyan-400 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+      <div class="hidden md:flex items-center space-x-2 bg-dark-card px-3.5 py-1.5 rounded-full border border-dark-border shadow-inner">
+        <span class="text-[11px] font-mono text-slate-400">Mastery:</span>
+        <div class="w-20 bg-dark-base h-2 rounded-full overflow-hidden p-0.5">
+          <div id="top-progress-bar" class="bg-gradient-to-r from-cyan-500 to-sky-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
         </div>
-        <span id="top-progress-text" class="text-xs font-mono font-semibold text-cyan-400">0%</span>
+        <span id="top-progress-text" class="text-xs font-mono font-bold text-cyan-400">0%</span>
       </div>
 
-      <!-- Quick Action: Share / Install -->
-      <button onclick="openShareModal()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-dark-card hover:bg-dark-hover border border-dark-border text-slate-300 hover:text-white text-xs font-medium transition">
+      <!-- Share Action -->
+      <button onclick="openShareModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
         <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
         <span class="hidden xs:inline">Share</span>
       </button>
@@ -148,31 +177,31 @@
   <div class="flex-1 flex overflow-hidden relative">
 
     <!-- ================= SIDEBAR NAVIGATION ================= -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-72 bg-dark-surface border-r border-dark-border transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out flex flex-col pt-14 lg:pt-0">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-72 bg-dark-surface/95 backdrop-blur-xl border-r border-dark-border transform -translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 ease-in-out flex flex-col pt-14 lg:pt-0">
       
       <!-- Curriculum Header -->
       <div class="p-4 border-b border-dark-border flex items-center justify-between">
         <div>
           <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">Curriculum Syllabus</h2>
-          <p class="text-[11px] text-slate-500">Exhaustive Institutional Curriculum</p>
+          <p class="text-[11px] text-slate-500 font-medium">9 Master Institutional Modules</p>
         </div>
-        <button id="btn-close-sidebar" class="lg:hidden p-1.5 rounded-lg hover:bg-dark-hover text-slate-400">
+        <button id="btn-close-sidebar" class="lg:hidden p-1.5 rounded-lg hover:bg-dark-card text-slate-400">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
       <!-- Module List -->
-      <nav id="module-nav" class="flex-1 overflow-y-auto p-3 space-y-1">
+      <nav id="module-nav" class="flex-1 overflow-y-auto p-3 space-y-1.5">
         <!-- Injected via JS -->
       </nav>
 
-      <!-- Sidebar Footer -->
-      <div class="p-3 border-t border-dark-border bg-dark-base/50 space-y-1.5">
-        <a href="#interactive-tools" onclick="showModule('interactive-tools')" class="flex items-center space-x-2.5 px-3 py-2 rounded-lg bg-cyan-950/30 border border-cyan-800/40 text-cyan-300 hover:bg-cyan-900/40 text-xs font-semibold transition">
+      <!-- Sidebar Footer Tools -->
+      <div class="p-3 border-t border-dark-border bg-dark-base/40 space-y-2">
+        <a href="#interactive-tools" onclick="showModule('interactive-tools')" class="btn-modern flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-950/40 to-dark-card border border-cyan-800/40 text-cyan-300 hover:text-white hover:border-cyan-500/60 text-xs font-semibold shadow-sm transition">
           <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
           <span>Setup Calculators</span>
         </a>
-        <a href="#mastery-drills" onclick="showModule('mastery-drills')" class="flex items-center space-x-2.5 px-3 py-2 rounded-lg bg-amber-950/30 border border-amber-800/40 text-amber-300 hover:bg-amber-900/40 text-xs font-semibold transition">
+        <a href="#mastery-drills" onclick="showModule('mastery-drills')" class="btn-modern flex items-center space-x-2.5 px-3 py-2 rounded-xl bg-gradient-to-r from-amber-950/40 to-dark-card border border-amber-800/40 text-amber-300 hover:text-white hover:border-amber-500/60 text-xs font-semibold shadow-sm transition">
           <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           <span>Self-Assessment & Drills</span>
         </a>
@@ -180,18 +209,46 @@
     </aside>
 
     <!-- Overlay backdrop for mobile sidebar -->
-    <div id="sidebar-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-black/60 z-20 hidden lg:hidden backdrop-blur-sm"></div>
+    <div id="sidebar-backdrop" onclick="toggleSidebar(false)" class="fixed inset-0 bg-black/70 z-20 hidden lg:hidden backdrop-blur-sm transition-opacity"></div>
 
     <!-- ================= CONTENT AREA ================= -->
-    <main id="main-content" class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 max-w-5xl mx-auto w-full pb-24 lg:pb-12 space-y-8">
+    <main id="main-content" class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 max-w-5xl mx-auto w-full pb-28 lg:pb-14 space-y-6">
       
-      <!-- Interactive Clickable Tip Banner -->
-      <div class="p-3.5 bg-cyan-950/40 border border-cyan-800/50 rounded-xl flex items-center justify-between text-xs text-cyan-200">
-        <div class="flex items-center space-x-2.5">
-          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-          <span><strong>Interactive Encyclopedia:</strong> Any term with a <span class="amt-term" onclick="openTermDrawer('tpo')">cyan dashed underline</span> is clickable for an instant institutional deep dive.</span>
+      <!-- WELCOME HERO BANNER (Dismisses when Start Module is clicked) -->
+      <section id="hero-welcome-banner" class="bg-gradient-to-br from-dark-surface via-dark-card to-dark-base border border-dark-border rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-card transition-all duration-300">
+        <div class="absolute -right-12 -bottom-12 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 space-y-4">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/70 text-cyan-300 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>Jim Dalton & Steidlmayer Institutional Curriculum</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            Auction Market Theory <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">Master Trading Academy</span>
+          </h1>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+            A comprehensive institutional master guide to Market Profile, Volume Profile, Dalton auction mechanics, and order flow alignment. Every concept features dedicated deep-dive sub-lessons with actionable trade setups and rules.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="startCurriculumAndDismissHero()" class="btn-modern px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider shadow-glow-cyan flex items-center space-x-2">
+              <span>Start Module 1</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+            <button onclick="openTermDictionaryModal()" class="btn-modern px-4 py-2.5 rounded-xl bg-dark-card hover:bg-dark-cardHover text-slate-200 font-semibold text-xs border border-dark-border hover:border-cyan-500/40 shadow-sm transition">
+              Explore AMT Encyclopedia (28 Terms)
+            </button>
+          </div>
         </div>
-        <button onclick="openTermDictionaryModal()" class="hidden sm:inline px-2.5 py-1 rounded bg-cyan-900 hover:bg-cyan-800 text-white font-mono text-[11px] font-semibold transition">Browse All 28 Terms &rarr;</button>
+      </section>
+
+      <!-- Active Lesson Info Bar with Quick Show/Hide Hero Toggle -->
+      <div id="lesson-toolbar" class="flex items-center justify-between py-1 text-xs text-slate-400 border-b border-dark-border/60">
+        <div class="flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          <span id="current-lesson-crumb" class="font-mono text-cyan-300 font-semibold">Module 1</span>
+        </div>
+        <button id="btn-toggle-hero" onclick="toggleHeroBanner()" class="text-[11px] text-slate-400 hover:text-cyan-400 font-mono transition flex items-center space-x-1">
+          <span id="toggle-hero-text">Show Welcome Overview</span>
+        </button>
       </div>
 
       <!-- DYNAMIC LESSON CONTAINER -->
@@ -201,15 +258,15 @@
 
       <!-- LESSON NAVIGATION FOOTER -->
       <div class="border-t border-dark-border pt-6 flex items-center justify-between">
-        <button id="btn-prev-lesson" onclick="navigateLesson(-1)" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-dark-card hover:bg-dark-hover border border-dark-border text-slate-300 hover:text-white text-xs font-semibold transition disabled:opacity-30 disabled:pointer-events-none">
+        <button id="btn-prev-lesson" onclick="navigateLesson(-1)" class="btn-modern flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-slate-600 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition disabled:opacity-30 disabled:pointer-events-none">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
           <span>Previous</span>
         </button>
-        <button id="btn-mark-complete" onclick="toggleCurrentModuleComplete()" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-cyan-950 border border-cyan-700 text-cyan-300 hover:bg-cyan-900 text-xs font-semibold transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <button id="btn-mark-complete" onclick="toggleCurrentModuleComplete()" class="btn-modern flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-cyan-950/70 border border-cyan-700/80 text-cyan-300 hover:bg-cyan-900 hover:text-white text-xs font-bold shadow-sm transition">
+          <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
           <span id="mark-complete-text">Mark as Completed</span>
         </button>
-        <button id="btn-next-lesson" onclick="navigateLesson(1)" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-dark-card hover:bg-dark-hover border border-dark-border text-slate-300 hover:text-white text-xs font-semibold transition disabled:opacity-30 disabled:pointer-events-none">
+        <button id="btn-next-lesson" onclick="navigateLesson(1)" class="btn-modern flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-slate-600 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition disabled:opacity-30 disabled:pointer-events-none">
           <span>Next</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
@@ -219,52 +276,57 @@
   </div>
 
   <!-- ================= MOBILE BOTTOM NAVIGATION ================= -->
-  <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-dark-surface/95 backdrop-blur-md border-t border-dark-border px-3 py-2 flex items-center justify-around">
-    <button onclick="showModule('module-1')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
+  <nav id="mobile-bottom-nav" class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-dark-surface/95 backdrop-blur-xl border-t border-dark-border px-3 py-2 flex items-center justify-around shadow-2xl">
+    <button onclick="showModule('module-1')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-      <span class="text-[10px] font-medium">Lessons</span>
+      <span class="text-[10px] font-semibold">Lessons</span>
     </button>
-    <button onclick="openTermDictionaryModal()" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
+    <button onclick="openTermDictionaryModal()" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-      <span class="text-[10px] font-medium">Glossary</span>
+      <span class="text-[10px] font-semibold">Glossary</span>
     </button>
-    <button onclick="showModule('interactive-tools')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
+    <button onclick="showModule('interactive-tools')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-      <span class="text-[10px] font-medium">Calculator</span>
+      <span class="text-[10px] font-semibold">Calculator</span>
     </button>
-    <button onclick="showModule('mastery-drills')" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
+    <button onclick="showModule('mastery-drills')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      <span class="text-[10px] font-medium">Drills</span>
+      <span class="text-[10px] font-semibold">Drills</span>
     </button>
-    <button onclick="openShareModal()" class="flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
+    <button onclick="openShareModal()" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-      <span class="text-[10px] font-medium">Share</span>
+      <span class="text-[10px] font-semibold">Share</span>
     </button>
   </nav>
 
-  <!-- ================= SLIDE-OVER / BOTTOM SHEET TERM DRAWER ================= -->
-  <div id="term-drawer-backdrop" onclick="closeTermDrawer()" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden transition-opacity"></div>
+  <!-- ================= IN-DEPTH SUB-LESSON MODAL (FULL SCREEN / SLIDE OVER) ================= -->
+  <div id="deepdive-backdrop" onclick="closeDeepDiveModal()" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden transition-opacity"></div>
   
-  <div id="term-drawer" class="fixed z-50 bg-dark-surface border-dark-border shadow-2xl transition-all duration-300 ease-in-out hidden
-    inset-x-0 bottom-0 max-h-[85vh] rounded-t-3xl border-t p-6 overflow-y-auto flex flex-col space-y-4
-    lg:inset-y-0 lg:right-0 lg:left-auto lg:w-[460px] lg:max-h-full lg:rounded-none lg:border-l lg:border-t-0">
+  <div id="deepdive-modal" class="fixed z-50 bg-dark-surface border border-dark-border shadow-2xl transition-all duration-300 ease-in-out hidden
+    inset-x-0 bottom-0 max-h-[92vh] rounded-t-3xl p-6 overflow-y-auto flex flex-col space-y-5
+    lg:inset-y-6 lg:right-6 lg:left-auto lg:w-[620px] lg:max-h-[calc(100vh-3rem)] lg:rounded-2xl">
     
-    <!-- Mobile Drag Handle -->
-    <div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-2 lg:hidden"></div>
+    <!-- Drag Handle on mobile -->
+    <div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-1 lg:hidden"></div>
 
-    <div class="flex items-center justify-between border-b border-dark-border pb-3">
-      <div class="space-y-0.5">
-        <span id="drawer-tag" class="text-[10px] font-mono uppercase font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">Profile Construct</span>
-        <h3 id="drawer-title" class="text-lg font-bold text-white font-mono">Term Title</h3>
+    <!-- Sub-Lesson Header -->
+    <div class="flex items-start justify-between border-b border-dark-border pb-4">
+      <div class="space-y-1 pr-4">
+        <div class="flex items-center space-x-2">
+          <span id="deepdive-tag" class="text-[10px] font-mono uppercase font-bold text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-800">AMT Sub-Lesson</span>
+          <span class="text-[10px] font-mono text-slate-500 uppercase">Interactive Master Guide</span>
+        </div>
+        <h3 id="deepdive-title" class="text-xl font-bold text-white font-mono tracking-tight">Term Title</h3>
+        <p id="deepdive-subtitle" class="text-xs text-slate-400">Detailed institutional breakdown, trade setups, and execution rules.</p>
       </div>
-      <button onclick="closeTermDrawer()" class="p-2 rounded-lg hover:bg-dark-hover text-slate-400 hover:text-white transition">
+      <button onclick="closeDeepDiveModal()" class="btn-modern p-2 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border text-slate-400 hover:text-white transition">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
     </div>
 
-    <!-- Term Body Content -->
-    <div id="drawer-body" class="space-y-4 text-xs text-slate-300 leading-relaxed overflow-y-auto pr-1">
-      <!-- Injected by openTermDrawer -->
+    <!-- Sub-Lesson Body Content -->
+    <div id="deepdive-body" class="space-y-5 text-xs text-slate-300 leading-relaxed overflow-y-auto pr-1">
+      <!-- Injected by openDeepDive -->
     </div>
   </div>
 
@@ -273,17 +335,17 @@
     <div class="bg-dark-surface border border-dark-border rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="p-4 border-b border-dark-border flex items-center justify-between bg-dark-card">
         <div class="flex items-center space-x-2">
-          <div class="w-2.5 h-2.5 rounded-full bg-cyan-400"></div>
-          <h3 class="text-sm font-bold text-white uppercase font-mono">Institutional AMT Encyclopedia</h3>
+          <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
+          <h3 class="text-sm font-bold text-white uppercase font-mono">Jim Dalton & AMT Encyclopedia (28 Terms)</h3>
         </div>
-        <button onclick="closeTermDictionaryModal()" class="text-slate-400 hover:text-white p-1">
+        <button onclick="closeTermDictionaryModal()" class="btn-modern text-slate-400 hover:text-white p-1 rounded-lg">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
       <!-- Search Bar -->
       <div class="p-3 bg-dark-base border-b border-dark-border">
-        <input id="term-search-input" type="text" placeholder="Search any AMT term, setup, or acronym (e.g. POC, Dalton, Excess, 80% Rule)..." oninput="filterTermDictionary()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
+        <input id="term-search-input" type="text" placeholder="Search any AMT term, setup, or acronym (e.g. Balance, Imbalance, POC, Dalton, Excess, 80% Rule)..." oninput="filterTermDictionary()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
       </div>
 
       <!-- Terms List -->
@@ -293,43 +355,43 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: SHARE & MOBILE APP INSTALL ================= -->
-  <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
+  <!-- ================= MODAL: SHARE ================= -->
+  <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md hidden">
     <div class="bg-dark-surface border border-dark-border rounded-2xl w-full max-w-md p-6 space-y-5 shadow-2xl relative">
-      <button onclick="closeShareModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1">
+      <button onclick="closeShareModal()" class="btn-modern absolute top-4 right-4 text-slate-400 hover:text-white p-1">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
       <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shadow-glow-cyan">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
         </div>
         <div>
-          <h3 class="text-base font-bold text-white">Mobile Access & Sharing</h3>
-          <p class="text-xs text-slate-400">Run as full app or share with students</p>
+          <h3 class="text-base font-bold text-white">Share & Mobile App</h3>
+          <p class="text-xs text-slate-400">Share with students or install on home screen</p>
         </div>
       </div>
 
       <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-2">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-semibold text-slate-200">Share Link / App</span>
-          <button onclick="triggerNativeShare()" class="px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-lg transition flex items-center space-x-1">
+          <span class="text-xs font-semibold text-slate-200">Share Link</span>
+          <button onclick="triggerNativeShare()" class="btn-modern px-3 py-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-lg transition flex items-center space-x-1 shadow-glow-cyan">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-            <span>Share Link</span>
+            <span>Copy / Broadcast</span>
           </button>
         </div>
-        <p class="text-[11px] text-slate-400">Copies the direct URL so anyone can open it on their phone or laptop.</p>
+        <p class="text-[11px] text-slate-400">URL: <code class="text-cyan-400 font-mono">https://flowstatefinancial.github.io/amt-academy/</code></p>
       </div>
 
       <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-2">
-        <h4 class="text-xs font-semibold text-cyan-300">📲 Install as App on Mobile:</h4>
+        <h4 class="text-xs font-semibold text-cyan-300">📲 Install as App on Phone:</h4>
         <ul class="text-[11px] text-slate-300 space-y-1.5 list-disc list-inside">
           <li><strong>iPhone (Safari):</strong> Tap <strong>Share</strong> &rarr; <strong>Add to Home Screen</strong>.</li>
           <li><strong>Android (Chrome):</strong> Tap <strong>3 dots</strong> &rarr; <strong>Install App</strong> / <strong>Add to Home screen</strong>.</li>
         </ul>
       </div>
 
-      <button onclick="closeShareModal()" class="w-full py-2 bg-dark-hover hover:bg-slate-700 text-white rounded-xl text-xs font-semibold transition">
+      <button onclick="closeShareModal()" class="btn-modern w-full py-2 bg-dark-card hover:bg-dark-cardHover text-white rounded-xl text-xs font-semibold transition border border-dark-border">
         Done
       </button>
     </div>
@@ -338,247 +400,256 @@
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     /* =====================================================================
-       EXHAUSTIVE INSTITUTIONAL TERM DICTIONARY (CLICKABLE BREAKDOWNS)
+       EXTENSIVE SUB-LESSONS & INSTITUTIONAL AMT ENCYCLOPEDIA
+       Contains: Dalton Concepts, Setups, AMT Rules, Tips & Tricks, Traps
        ===================================================================== */
-    const AMT_TERMS = {
-      'continuous-auction': {
-        name: "Continuous Price Discovery",
-        category: "Auction Dynamics",
-        definition: "The ceaseless process through which financial markets advertise price to identify levels where commercial buyers and sellers agree to transact.",
-        mechanics: "Markets are never static equilibria. Because participants have divergent time horizons (from HFT sub-millisecond bots to multi-year pension funds), incoming news and liquidity demands constantly shift the perceived fair price. Price moves upward to find where sellers will emerge to halt the rally, and downward to find where buyers will step in.",
-        chartSigns: "Alternating phases of horizontal consolidation (high volume per tick) and vertical discovery tails (low volume per tick).",
-        rules: "Never treat price as an absolute valuation. Price is merely an advertising mechanism. High volume confirms acceptance; low volume signals rejection.",
-        mistake: "Assuming price will continue in one direction simply because of momentum without checking whether other timeframe participants are accepting the new levels."
+    const AMT_DEEP_DIVES = {
+      'balance': {
+        name: "Balance (Market Equilibrium & Brackets)",
+        tag: "Core Auction State",
+        subtitle: "The state of mutual trade facilitation where buyers and sellers agree on price.",
+        overview: "In Auction Market Theory and Jim Dalton's framework, Balance represents a state of two-way efficiency. High commercial volume transacts in a bounded horizontal range. Rather than trending, the market rotates back and forth across a central mean (the Point of Control).",
+        daltonPrinciples: [
+          "Markets spend 70-80% of their operational time in Balance, searching for liquidity.",
+          "During Balance, Day Timeframe (DTT) participants dominate intraday flow, creating predictable mean-reverting rotations.",
+          "Value Area encapsulates 68.2% of the bracket. Extremes outside the Value Area are viewed as temporarily unfair and provoke responsive reactions."
+        ],
+        tradeSetup: {
+          title: "The Bracket Perimeter Responsive Fade",
+          type: "Mean Reversion / Responsive",
+          precondition: "Market has traded for 2+ sessions in a clearly defined horizontal bracket (D-Shape composite).",
+          trigger: "Price probes Value Area High (VAH) or Value Area Low (VAL), stalls, and prints negative delta absorption at highs or positive delta absorption at lows.",
+          entry: "Enter upon confirmation of the first 5-min or 15-min reversal candle back inside the Value Area.",
+          stopLoss: "1 to 2 ticks beyond the recent swing excess wick (outside the bracket extreme).",
+          target1: "Session Point of Control (POC) — take 60% off and move stop to breakeven.",
+          target2: "Opposite Value Area boundary (VAL if shorting VAH, VAH if buying VAL).",
+          rr: "Typically 3:1 to 5:1 Risk-to-Reward."
+        },
+        amtRules: [
+          "Rule 1: Never trade breakout orders in the dead center of a balance area (near the POC). Volatility is lowest here and whipsaws are highest.",
+          "Rule 2: Fade the extremes (VAH/VAL) until the market decisively accepts outside with time and volume.",
+          "Rule 3: If price spends 60+ minutes trading outside the bracket with increasing volume, the balance has broken. Immediately abort responsive fades."
+        ],
+        tipsAndTricks: [
+          "Check Cumulative Volume Delta (CVD) at bracket extremes: If price reaches VAH but CVD is divergence-flat or falling, responsive sellers are absorbing bids.",
+          "Look at the DOM: Massive resting limit orders (icebergs) will often stack up 2-3 ticks outside VAH/VAL to defend the bracket boundaries."
+        ],
+        traps: "Retail traders often buy breakouts right at the top of a multi-day balance area. Institutions use that retail buying liquidity to unload and hammer price back down to the POC."
       },
-      'dual-auction': {
-        name: "The Dual Auction Process",
-        category: "Auction Dynamics",
-        definition: "The structural duality of markets cycling perpetually between two states: Balance (Equilibrium) and Imbalance (Discovery).",
-        mechanics: "In Balance, buyers and sellers agree on price; the market oscillates within a narrow bracket accumulating high volume. In Imbalance, one party overwhelms the other, forcing price into discovery until a new balance is discovered.",
-        chartSigns: "Balance appears as a normal Gaussian bell curve or D-shape profile. Imbalance appears as elongated trends, single prints, or P-shape/b-shape distributions.",
-        rules: "Identify the market state first: Trade responsively (fade extremes) in Balance; trade initiatively (go with breakouts) in Imbalance.",
-        mistake: "Using mean-reversion strategies during an initiative trend day, or using breakout strategies in the middle of a balanced bracket."
+      'imbalance': {
+        name: "Imbalance (Discovery & Institutional Trend)",
+        tag: "Core Auction State",
+        subtitle: "The directional discovery state where one party overpowers the other.",
+        overview: "Imbalance occurs when incoming information or institutional capital commitments create a severe disagreement on price. One party (buyers or sellers) exercises directional initiative, driving price rapidly through space until new opposing buyers or sellers emerge to halt the move.",
+        daltonPrinciples: [
+          "Imbalance is exclusively initiated and sustained by Other Timeframe (OTF) institutional capital.",
+          "Characterized by continuous One-Time Framing (each 30-min period making higher highs/lows or lower lows/highs).",
+          "Price moves in search of an ending auction (which must culminate in an Excess Tail)."
+        ],
+        tradeSetup: {
+          title: "The Initiative Bracket Escape & Retest",
+          type: "Breakout & Value Migration / Initiative",
+          precondition: "Market breaks outside a multi-day balance bracket with a heavy volume surge and expanding range.",
+          trigger: "Wait for the initial breakout bar to close outside the bracket, followed by a shallow pullback that tests the broken bracket perimeter from the outside and holds.",
+          entry: "Enter on the retest of the broken VAH (now acting as support) or VAL (now acting as resistance).",
+          stopLoss: "Back inside the broken balance area (invalidation of the breakout).",
+          target1: "1x the height of the preceding balance bracket (measured move target).",
+          target2: "Unfinished auctions / Naked POCs from higher timeframes.",
+          rr: "4:1 to 6:1 asymmetric expansion."
+        },
+        amtRules: [
+          "Rule 1: Never counter-trend trade an imbalanced market. Fading an initiative trend day is the #1 account-destroying mistake.",
+          "Rule 2: Value migrates with price in true imbalance. Watch the developing POC step higher (uptrend) or lower (downtrend).",
+          "Rule 3: The trend remains intact as long as One-Time Framing is unbroken on the 30-minute TPO chart."
+        ],
+        tipsAndTricks: [
+          "Trail stops behind the low of the previous 30-minute period (in an uptrend) or high of previous period (in a downtrend).",
+          "Look for Single Prints: If the profile prints single-width letters, leave your runners active — institutional conviction is violent."
+        ],
+        traps: "Thinking price is 'too high' or 'overbought' based on RSI/Stochastics and trying to short a trend day. In AMT, value is migrating higher — conventional oscillators are useless."
       },
       'value-area': {
-        name: "Value Area (VA / 68.2%)",
-        category: "Profile Construct",
-        definition: "The specific price range containing exactly 68.2% of the session's total volume or Time Price Opportunities (TPOs), corresponding to one statistical standard deviation (1σ) around the mean.",
-        mechanics: "Rooted in Gaussian statistics, the Value Area encapsulates the zone where the vast majority of volume took place because both buyers and sellers perceived the price as fair for that specific timeframe.",
-        chartSigns: "Bounded by Value Area High (VAH) at the top and Value Area Low (VAL) at the bottom. Shaded blue on institutional profile charts.",
-        rules: "Trades executed inside value have low statistical edge because price is in equilibrium. The highest-probability asymmetric trades occur at the perimeter of the Value Area (VAH and VAL) or when value migrates outside of prior sessions.",
-        mistake: "Entering aggressive market orders right in the middle of the Value Area (near the POC) where the risk of chop and stop-hunting is highest."
-      },
-      'vah-val': {
-        name: "Value Area High (VAH) & Value Area Low (VAL)",
-        category: "Profile Construct",
-        definition: "The exact upper and lower boundary prices that encapsulate the 68.2% Value Area.",
-        mechanics: "VAH represents the highest price at which trade was readily accepted by both parties. Above VAH, price is perceived as 'expensive' or unfair. VAL represents the lowest price accepted; below VAL, price is perceived as 'cheap'.",
-        chartSigns: "Horizontal reference lines drawn across the session profile. On Quantower, Sierra Chart, or ATAS, these are plotted as dynamic daily bands.",
-        rules: "At VAH: Look for responsive sellers to defend and rotate price back to POC, or look for initiative buyers to break out and hold. At VAL: Look for responsive buyers to defend or initiative sellers to break down.",
-        mistake: "Treating VAH/VAL as ordinary static support/resistance lines. If price spends 60+ minutes outside VAH with heavy volume, VAH has been invalidated and value has migrated higher."
+        name: "Value Area (VA / 68.2% Standard Deviation)",
+        tag: "Profile Construct",
+        subtitle: "The zone where 68.2% of the auction volume transacted.",
+        overview: "Rooted in Gaussian normal distribution, the Value Area encapsulates one standard deviation (1σ) of total trading activity. It represents the boundaries within which both buyers and sellers considered prices fair during that session.",
+        daltonPrinciples: [
+          "Price inside the Value Area is in equilibrium. Directional edge is minimal.",
+          "Price outside the Value Area represents an advertising probe to seek fresh supply or demand.",
+          "The relationship between today's open and yesterday's Value Area provides the first directional clue of the trading day."
+        ],
+        tradeSetup: {
+          title: "The 80% Rule Value Area Re-Acceptance",
+          type: "High-Probability Statistical Setup",
+          precondition: "Market opens or trades completely outside the prior day's Value Area.",
+          trigger: "Price rotates back into prior Value Area and prints two consecutive 30-minute bar closes inside.",
+          entry: "Enter upon the second close inside the prior Value Area.",
+          stopLoss: "1 to 2 ticks beyond the breached Value Area extreme.",
+          target1: "Prior Day POC.",
+          target2: "Opposite Value Area boundary (VAL if shorting VAH, VAH if buying VAL).",
+          rr: "Typically 2.5:1 to 4:1."
+        },
+        amtRules: [
+          "Rule 1: Always plot Prior Day VAH, VAL, and POC as primary horizontal magnets.",
+          "Rule 2: Two consecutive 30-minute closes are required to confirm acceptance. A single tick poke is NOT acceptance."
+        ],
+        tipsAndTricks: [
+          "If the market opens inside prior Value Area, expect rotational chop and mean reversion to POC.",
+          "If the market opens with a gap outside prior Value Area, do NOT fade unless price fails to hold and slips back inside."
+        ],
+        traps: "Taking a trade right in the middle of the Value Area near the POC. The chop will stop you out repeatedly before any move occurs."
       },
       'poc': {
         name: "Point of Control (POC / VPOC / TPOC)",
-        category: "Profile Construct",
-        definition: "The single price level where the greatest amount of volume (VPOC) or Time Price Opportunities (TPOC) was transacted during the session.",
-        mechanics: "The POC represents the ultimate consensus of fair value for the auction. Because more commercial contracts changed hands here than anywhere else, it represents the highest liquidity node and lowest price volatility point.",
-        chartSigns: "A prominent horizontal line marking the longest horizontal bar on the volume profile histogram.",
-        rules: "The POC acts as a powerful statistical magnet. Whenever price is extended near value extremes (VAH/VAL) without fresh initiative volume, it will revert back to the POC.",
-        mistake: "Placing entries right on the POC. Because the POC is fair value, price chops and rotates violently around it with zero directional edge."
-      },
-      'developing-poc': {
-        name: "Developing / Migrating POC",
-        category: "Profile Construct",
-        definition: "The live, dynamic Point of Control as it shifts tick-by-tick throughout the active trading session.",
-        mechanics: "In a balanced day, the developing POC stays pinned near the center. In a strong trend day, the developing POC migrates steadily higher (bullish) or lower (bearish) in the direction of the trend.",
-        chartSigns: "A stepping-staircase line tracking the highest-volume price level across the session timeline.",
-        rules: "If the developing POC is aggressively migrating in the direction of the trend, do not counter-trend trade. The institutions are committing capital to push fair value.",
-        mistake: "Fading a breakout when the developing POC has already stepped outside the prior day's range."
-      },
-      'initial-balance': {
-        name: "Initial Balance (IB)",
-        category: "Dalton Mechanics",
-        definition: "The high and low price range established during the first hour of Regular Trading Hours (RTH), consisting of Period A (09:30-10:00) and Period B (10:00-10:30) in US futures.",
-        mechanics: "Created by Jim Dalton, the Initial Balance serves as the critical institutional yardstick. It represents the early battleground between day-traders and opening institutional orders. The width of the IB forecasts the volatility and day-type of the remaining session.",
-        chartSigns: "A vertical bracket spanning the high and low of the first two 30-minute TPO letters.",
-        rules: "Narrow IB = High probability of an OTF range extension or Trend Day. Wide IB = High probability of a Normal or Rotational Day where price remains bounded inside.",
-        mistake: "Ignoring the IB width and trying to trade large directional targets when the market printed an unusually wide IB."
+        tag: "Profile Construct",
+        subtitle: "The focal point of maximum commercial transaction volume.",
+        overview: "The POC is the single price level where the greatest quantity of contracts (VPOC) or 30-minute time brackets (TPOC) traded. It represents the fair value anchor of the auction.",
+        daltonPrinciples: [
+          "Acts as the ultimate gravitational magnet in balanced market conditions.",
+          "In trend days, the POC migrates continuously in the direction of the trend.",
+          "Historical POCs left un-retested in subsequent days become 'Virgin' or 'Naked' POCs (nPOCs), which act as future targets."
+        ],
+        tradeSetup: {
+          title: "Naked POC Magnetic Magnet Sweep",
+          type: "Targeted Liquidity Run",
+          precondition: "Price breaks out of a range with a clear virgin nPOC located 20-50 ticks away with no major HVNs in between.",
+          trigger: "Initiative breakout above key resistance with expanding volume.",
+          entry: "Join the breakout with full position.",
+          stopLoss: "Behind the breakout bar or developing LVN.",
+          target1: "Exact tick of the Naked POC.",
+          target2: "Trail remaining contracts if price auctions through.",
+          rr: "3:1 or higher."
+        },
+        amtRules: [
+          "Rule 1: POC is a profit target, rarely a clean entry point.",
+          "Rule 2: When price approaches POC from an extreme, expect momentum to slow as orders get absorbed."
+        ],
+        tipsAndTricks: [
+          "If price touches a Naked POC and immediately shows heavy delta absorption, it frequently acts as a sharp reversal point."
+        ],
+        traps: "Attempting to initiate new directional trades directly on the developing POC. Price will chop sideways around it."
       },
       'excess-tail': {
         name: "Excess / Rejection Tail",
-        category: "Structural Feature",
-        definition: "A clean tail of single TPO prints (at least two or more single prints) or thin volume node at the extreme high or low of a session.",
-        mechanics: "Excess proves that Other Timeframe (OTF) participants entered the market decisively and rejected unfair prices. Price advertised an opportunity at an extreme, but aggressive counter-participants overwhelmed the move in minutes.",
-        chartSigns: "A long, skinny vertical tail at the top or bottom of the profile with no horizontal width.",
-        rules: "Excess marks a secure, defended boundary. Place stops behind excess tails. An auction is considered securely closed when marked by clean excess.",
-        mistake: "Buying above an excess high or selling below an excess low. Excess confirms that the market was firmly rejected."
+        tag: "Structural Feature",
+        subtitle: "A clean tail of single prints proving institutional rejection.",
+        overview: "An Excess Tail consists of at least two or more single TPO prints at the extreme high or low of a session. It confirms that Other Timeframe (OTF) market participants entered aggressively to shut off the auction.",
+        daltonPrinciples: [
+          "A completed auction MUST end with excess. If an extreme lacks excess, the auction is unfinished.",
+          "Excess proves that long-term participants saw the price as unfairly high or unfairly low and stepped in with massive capital."
+        ],
+        tradeSetup: {
+          title: "The Excess High/Low Reversal Fade",
+          type: "Structural Defense",
+          precondition: "Price probes an extreme, leaves an elongated single-print tail, and retreats back inside the range.",
+          trigger: "First pullback toward the origin of the excess tail.",
+          entry: "Enter in the direction of the rejection.",
+          stopLoss: "1 tick beyond the extreme tip of the excess tail.",
+          target1: "Session POC.",
+          target2: "Opposite Value Area boundary.",
+          rr: "4:1 to 6:1."
+        },
+        amtRules: [
+          "Rule 1: Never buy above an excess high or sell below an excess low until the tail is structurally accepted with time.",
+          "Rule 2: Excess tails provide the most reliable, rock-solid invalidation levels for stop-losses."
+        ],
+        tipsAndTricks: [
+          "On a footprint chart, an excess tail shows severe buying exhaustion at the high (e.g. 0 contracts on the ask) followed by heavy selling delta."
+        ],
+        traps: "Failing to distinguish between an Excess Tail (which has single prints) and a Poor High (which has side-by-side letters)."
       },
       'poor-high-low': {
         name: "Poor High & Poor Low (Unfinished Auctions)",
-        category: "Structural Feature",
-        definition: "An extreme price high or low consisting of two or more identical TPO letters side-by-side (or a flat, blunt volume ledge) with zero single-print excess tail.",
-        mechanics: "A poor extreme proves that the auction did NOT end because buyers or sellers ran out; it ended simply because the clock ran out on that 30-minute bracket. Only short-term day traders participated. It is an unfinished auction.",
-        chartSigns: "A flat, squared-off shelf at the very top or bottom tick of the profile.",
-        rules: "Poor highs and poor lows act as unfinished business and future magnets. The market has an overwhelmingly high statistical tendency to revisit and auction through a poor extreme in subsequent sessions.",
-        mistake: "Treating a poor high as strong resistance. Because it lacks institutional excess, it will likely be blown through when retested."
-      },
-      'single-prints': {
-        name: "Single Prints",
-        category: "Structural Feature",
-        definition: "Gaps or single-width TPO letters in the middle of a profile where price moved so rapidly that only one 30-minute letter was stamped.",
-        mechanics: "Single prints indicate aggressive directional imbalance. OTF participants flooded the market with initiative market orders, causing price to skip across ticks without building value.",
-        chartSigns: "A thin vertical strip separating two wider distribution bulges (as seen in B-shape double distributions or trend days).",
-        rules: "Single prints act as strong dynamic support (in an uptrend) or resistance (in a downtrend) on pullbacks. As long as single prints remain unfilled, the trend conviction remains intact.",
-        mistake: "Fading into single prints. Wait for price to completely fill and accept inside the single prints before assuming the trend has reversed."
-      },
-      'lvn': {
-        name: "Low Volume Node (LVN)",
-        category: "Volume Profile",
-        definition: "A valley or indentation in the volume profile histogram where relatively few contracts were transacted.",
-        mechanics: "An LVN is a zone of price rejection. The market moved through this price area so rapidly that very little trade was facilitated. Because there is little liquidity stored here, price accelerates rapidly through LVNs like a slip-and-slide.",
-        chartSigns: "A pronounced inward trough on the horizontal volume profile.",
-        rules: "Do not look to enter or take targets inside an LVN. Use LVNs as zones of rapid traversal; place targets on the HVN on the other side.",
-        mistake: "Placing a stop loss right in the middle of an LVN. The lack of liquidity will cause heavy slippage."
-      },
-      'hvn': {
-        name: "High Volume Node (HVN)",
-        category: "Volume Profile",
-        definition: "A prominent bulge or peak in the volume profile histogram where heavy two-way volume accumulated.",
-        mechanics: "An HVN represents price acceptance and fair value. Market participants spent substantial time and transacted massive volume here. HVNs act like gravitational glue, absorbing momentum and stalling price.",
-        chartSigns: "A wide, rounded horizontal peak on the volume profile.",
-        rules: "HVNs act as support and resistance on pullbacks, but also as volatility suppressors. When price enters an HVN, expect rotational chop and slow movement.",
-        mistake: "Expecting clean runaway breakouts while price is trading directly inside a massive multi-day HVN."
-      },
-      'naked-poc': {
-        name: "Virgin / Naked POC (nPOC / VPOC)",
-        category: "Profile Construct",
-        definition: "A historical Point of Control from a prior trading session that has never been touched or re-tested by price in any subsequent session.",
-        mechanics: "Because a vast concentration of orders and positioning was established at this level, virgin POCs represent un-revisited institutional benchmarks that carry high psychological significance.",
-        chartSigns: "A horizontal ray extending from a prior session's POC across the chart until it is finally hit by future price action.",
-        rules: "Naked POCs are premier high-probability profit targets. When the market initiates a breakout or mean reversion, naked POCs act as primary magnets.",
-        mistake: "Blindly fading a naked POC on first touch without waiting for order flow absorption confirmation."
-      },
-      'the-80-rule': {
-        name: "The 80% Rule (Value Area Acceptance)",
-        category: "Trade Setup",
-        definition: "A foundational statistical AMT setup: When the market opens or trades completely outside the prior day's Value Area, and then enters back inside and prints two consecutive 30-minute bars (or two closes), there is an ~80% probability that price will auction completely through to the opposite Value Area extreme.",
-        mechanics: "Price outside prior value represented an attempt at directional discovery. By returning and accepting back inside prior value, the market confirms that the attempted breakout failed and the prior fair value range is re-accepted.",
-        chartSigns: "Price re-entering prior day VAH/VAL and establishing horizontal rotations within the prior day's Value Area.",
-        rules: "If accepting below prior VAH: Short target 1 = POC, Target 2 = prior VAL. If accepting above prior VAL: Long target 1 = POC, Target 2 = prior VAH. Stop loss goes just outside the breached extreme.",
-        mistake: "Entering on the first single tick touch into the Value Area. You MUST wait for acceptance (two consecutive 30-minute closes or rotations) to confirm."
+        tag: "Structural Feature",
+        subtitle: "A blunt ledge of side-by-side prints signaling an unfinished auction.",
+        overview: "A Poor High or Poor Low consists of two or more identical TPO letters at the extreme high or low with NO excess tail. It signifies that the auction stopped because the 30-minute clock ran out, not because buyers or sellers were exhausted.",
+        daltonPrinciples: [
+          "A poor extreme is an unfinished auction. It is a structural defect in the market profile.",
+          "The market exhibits an overwhelming statistical propensity to return and auction through a poor extreme to complete the auction."
+        ],
+        tradeSetup: {
+          title: "The Poor Extreme Repair Sweep",
+          type: "Unfinished Auction Exploitation",
+          precondition: "Prior session left a poor high (flat top) or poor low (flat bottom). Current session opens and rotates toward it.",
+          trigger: "Price approaches within 10-15 ticks of the poor high with positive cumulative volume delta.",
+          entry: "Long into the rotation targeting the poor high.",
+          stopLoss: "Below the nearest developing High Volume Node (HVN).",
+          target1: "1-2 ticks through the exact poor high tick (triggering resting buy stops).",
+          target2: "Next higher resistance level.",
+          rr: "2.5:1 to 4:1."
+        },
+        amtRules: [
+          "Rule 1: Never treat a poor high as strong resistance. It will be breached.",
+          "Rule 2: Never treat a poor low as strong support. It will be swept."
+        ],
+        tipsAndTricks: [
+          "When price repairs a poor high, watch what happens after the sweep: If price immediately stalls and falls back inside, it was a stop-run and can be faded; if it continues with volume, a trend day is unfolding."
+        ],
+        traps: "Placing short stops just above a poor high. Retail puts their stops there, making it an irresistible magnet for market makers."
       },
       'open-drive': {
         name: "Open-Drive (Dalton Opening Type)",
-        category: "Dalton Mechanics",
-        definition: "The market opens at the RTH bell and charges aggressively in one direction with immense volume, never once pulling back to test the opening price.",
-        mechanics: "Represents maximum Other Timeframe (OTF) conviction. Institutions have an urgent imperative to accumulate or liquidate large blocks regardless of price advertising.",
-        chartSigns: "Period A opens and prints a straight vertical pole. The open is the high or low of the day.",
-        rules: "NEVER counter-trend trade an Open-Drive. Do not fade the move. Wait for the first shallow pause in Period B or C and join in the direction of the drive.",
-        mistake: "Assuming the move is 'overextended' and trying to pick a top or bottom against an Open-Drive."
+        tag: "Dalton Mechanics",
+        subtitle: "Maximum institutional conviction at the RTH opening bell.",
+        overview: "The market opens at 09:30 AM and immediately charges violently in one direction with immense volume, never once pulling back to test the opening price. Period A prints a straight directional spike.",
+        daltonPrinciples: [
+          "Represents the highest conviction opening in Jim Dalton's classification.",
+          "Initiated by Other Timeframe (OTF) institutional players with urgent execution mandates.",
+          "Frequently produces a classic Trend Day."
+        ],
+        tradeSetup: {
+          title: "The Open-Drive Period B/C Pullback Entry",
+          type: "High-Conviction Trend Following",
+          precondition: "Period A opens and drives aggressively in one direction without testing the open price.",
+          trigger: "First shallow pullback in Period B or Period C (usually retesting the midpoint of Period A).",
+          entry: "Join in the direction of the drive on first sign of buying absorption.",
+          stopLoss: "Below the opening price (or 1/2 of Period A range).",
+          target1: "2x Initial Balance expansion.",
+          target2: "Hold runners until One-Time Framing is broken.",
+          rr: "5:1 or higher."
+        },
+        amtRules: [
+          "Rule 1: NEVER fade an Open-Drive under any circumstances.",
+          "Rule 2: If you missed the open, do not chase at the top of Period A; wait for the first pause in Period B."
+        ],
+        tipsAndTricks: [
+          "Look at Cumulative Volume Delta (CVD) in the first 10 minutes: In a genuine Open-Drive, CVD shoots straight up like a hockey stick with zero divergence."
+        ],
+        traps: "Assuming the market 'gapped too much' and must fill the gap immediately. Gaps on Open-Drive days often do not fill for days or weeks."
       },
-      'open-test-drive': {
-        name: "Open-Test-Drive (Dalton Opening Type)",
-        category: "Dalton Mechanics",
-        definition: "Price opens, briefly tests an important reference level (e.g. prior day high/low, VAH, or overnight extreme), finds fierce responsive rejection, and then drives aggressively in the opposite direction.",
-        mechanics: "The opening test verifies whether there is fresh buying or selling interest at a key level. When none appears, aggressive participants trap the breakout traders and drive the opposite direction.",
-        chartSigns: "Period A has a small tail in one direction (testing a level), followed by a massive directional expansion in the opposite direction.",
-        rules: "Enter in the direction of the drive as soon as the test fails and price sweeps through the opening print.",
-        mistake: "Holding onto positions trapped during the initial test."
-      },
-      'open-rejection-reverse': {
-        name: "Open-Rejection-Reverse (Dalton Opening Type)",
-        category: "Dalton Mechanics",
-        definition: "Price attempts to auction in one direction, encounters overwhelming opposing participation, reverses completely, and traverses through the entire opening range to auction outward on the other side.",
-        mechanics: "Typifies an emotional trap opening where early participants attempt a breakout, hit a wall of institutional passive limit orders, and are forced into liquidation.",
-        chartSigns: "Period A forms a wide swing in one direction, followed by a total reversal that takes out the opposite side of Period A.",
-        rules: "Fade the failed side and target the opposite extreme of the prior day's range.",
-        mistake: "Re-entering in the direction of the initial failed move."
-      },
-      'open-auction': {
-        name: "Open-Auction (Dalton Opening Type)",
-        category: "Dalton Mechanics",
-        definition: "Price opens with zero clear directional conviction, oscillating quietly around the opening price inside prior value.",
-        mechanics: "Indicates that buyers and sellers are in total equilibrium. Neither party has urgent directional information or imbalance. Both are waiting for subsequent market catalysts.",
-        chartSigns: "Period A and Period B overlap heavily with small range and low volume.",
-        rules: "Expect a balanced, rotational day (Normal or Neutral day). Wait for the Initial Balance to form at 10:30 AM before taking trades, and only fade value extremes.",
-        mistake: "Anticipating large breakout continuation on an Open-Auction day."
-      },
-      'day-timeframe': {
-        name: "Day Timeframe (DTT) Participants",
-        category: "Participant Psychology",
-        definition: "Short-term market actors including scalpers, retail day traders, and intraday algorithms who must square their positions before the closing bell.",
-        mechanics: "Because DTT traders have tight stops and finite capital, they cannot afford to hold through adverse excursions. They dominate balanced markets and are easily squeezed and trapped at profile extremes.",
-        chartSigns: "Low volume rotations, lack of range extension, choppy overlapping TPO letters.",
-        rules: "When DTT controls the auction, trade responsively: buy cheap, sell expensive.",
-        mistake: "Expecting DTT volume to push price through major multi-day balance boundaries."
-      },
-      'other-timeframe': {
-        name: "Other Timeframe (OTF) Institutional Players",
-        category: "Participant Psychology",
-        definition: "Longer-term institutional market participants such as hedge funds, asset managers, pension funds, and sovereign entities who operate across days, weeks, and months.",
-        mechanics: "OTF players possess deep balance sheets and trade to allocate capital or hedge corporate risk. They do not care about intraday noise. They are the ONLY force capable of causing sustained market imbalance and trend days.",
-        chartSigns: "Aggressive one-time framing, volume spikes on breakouts, sustained cumulative delta trends.",
-        rules: "Align your trading with OTF activity. When OTF is active, trade initiatively and never fight the trend.",
-        mistake: "Fading a market when OTF volume and one-time framing are actively printing."
-      },
-      'initiative-activity': {
-        name: "Initiative Activity (Buying & Selling)",
-        category: "Participant Psychology",
-        definition: "Action taken by participants at or beyond existing fair value. Initiative buyers buy at or above value; initiative sellers sell at or below value.",
-        mechanics: "Initiative activity requires high conviction because participants are willing to pay an 'expensive' price or sell at a 'cheap' price because they forecast value will move dramatically.",
-        chartSigns: "Volume spikes breaking out of balance, single prints, and expanding ranges.",
-        rules: "Initiative buying breaking above VAH signals higher value. Go long with the breakout.",
-        mistake: "Fading initiative moves under the assumption that price is 'too high' or 'overbought'."
-      },
-      'responsive-activity': {
-        name: "Responsive Activity (Buying & Selling)",
-        category: "Participant Psychology",
-        definition: "Action taken by participants returning price back toward fair value. Responsive buyers buy below value; responsive sellers sell above value.",
-        mechanics: "Responsive participants view price excursions away from value as temporary mispricings. They take advantage of unfair highs by selling, and unfair lows by buying, pulling price back to the POC.",
-        chartSigns: "Wicks, excess tails, negative delta at highs, positive delta at lows.",
-        rules: "In a balanced D-shape market, execute responsive fades at VAH and VAL with targets at POC.",
-        mistake: "Attempting responsive fades during an imbalanced trend day."
-      },
-      'one-time-framing': {
-        name: "One-Time Framing (OTF Trending)",
-        category: "Dalton Mechanics",
-        definition: "A continuous directional market state where each successive 30-minute TPO period makes a higher high and higher low (uptrend) or a lower low and lower high (downtrend).",
-        mechanics: "One-time framing demonstrates that OTF initiative participants are continuously moving their bids or offers to facilitate trade. It is the hallmark of a true institutional trend day.",
-        chartSigns: "Each successive TPO letter (A, B, C, D...) steps cleanly above or below the previous letter without trading through the prior period's extreme.",
-        rules: "Never counter-trend trade as long as one-time framing is intact. The trend is only challenged when a 30-minute period trades through the prior period's high/low.",
-        mistake: "Trying to pick tops/bottoms while the market is one-time framing."
-      },
-      'delta-absorption': {
-        name: "Passive Delta Absorption",
-        category: "Order Flow Alignment",
-        definition: "An order flow phenomenon where aggressive market orders are completely soaked up by passive limit orders without moving price.",
-        mechanics: "For example, at VAH, buyers hit the ask with +1,000 contracts of aggressive market orders (positive delta), yet the candle fails to tick higher. Institutional passive limit sellers are absorbing all demand, signaling imminent reversal.",
-        chartSigns: "Footprint / Cluster chart shows heavy volume clusters on the bid/ask with delta divergence and immediate price rejection.",
-        rules: "Absorption at key AMT levels (VAH/VAL) provides the definitive micro-trigger for responsive fade trades.",
-        mistake: "Buying into positive delta at resistance when price is clearly stalling and failing to tick higher."
-      },
-      'cvd': {
-        name: "Cumulative Volume Delta (CVD) Divergence",
-        category: "Order Flow Alignment",
-        definition: "A divergence between price action and the cumulative net difference between buyer-initiated and seller-initiated volume.",
-        mechanics: "If price prints a higher high into resistance while CVD prints a lower high, it proves that aggressive buying participation is waning. The price rise is merely floating on thin resting liquidity, ripe for a steep reversal.",
-        chartSigns: "Price line charting upwards into VAH while the CVD indicator line slopes decisively downward.",
-        rules: "Use CVD divergences as high-probability confirmation before fading a value area boundary.",
-        mistake: "Relying on CVD divergences in the middle of a powerful trend day where delta can remain trapped for hours."
-      },
-      'tpo': {
-        name: "TPO (Time Price Opportunity)",
-        category: "Profile Construct",
-        definition: "The fundamental building block of Market Profile, representing a half-hour bracket of trading activity at a specific price level.",
-        mechanics: "Created at the Chicago Board of Trade in 1984. Each 30-minute block is assigned a letter (A, B, C...). If price trades at that level during that half hour, the letter is recorded. Combining TPOs shows how price and time distribute across the session.",
-        chartSigns: "The classic vertical letter-based Market Profile chart.",
-        rules: "TPO charts measure the element of TIME at price, whereas Volume Profiles measure CONTRACTS at price. True institutional edge comes from comparing both.",
-        mistake: "Confusing TPOs with volume. A price level may have many TPO letters (high time) but low volume, signaling low commercial interest."
+      'the-80-rule': {
+        name: "The 80% Rule (Value Area Acceptance)",
+        tag: "Trade Setup",
+        subtitle: "Dalton's benchmark statistical edge for Value Area rotation.",
+        overview: "When price opens or trades outside the prior day's Value Area, then re-enters and prints two consecutive 30-minute bars (or two closes) inside, there is an ~80% statistical odds that price will auction completely through to the opposite Value Area extreme.",
+        daltonPrinciples: [
+          "Validates that the attempted directional breakout outside prior value failed.",
+          "Confirms that market participants have re-accepted the prior day's fair value range."
+        ],
+        tradeSetup: {
+          title: "The 80% Rule Core Execution",
+          type: "Statistical Arbitrage Setup",
+          precondition: "Price opened outside prior day VA and enters back inside.",
+          trigger: "Two consecutive 30-minute bar closes inside the prior VA.",
+          entry: "Enter on the close of the second 30-min bar inside.",
+          stopLoss: "1 to 2 ticks beyond the breached Value Area extreme.",
+          target1: "Prior Day POC (take partial profit).",
+          target2: "Opposite Value Area boundary (VAL if shorting VAH, VAH if buying VAL).",
+          rr: "3:1 average."
+        },
+        amtRules: [
+          "Rule 1: Two consecutive 30-minute bars inside are required. A single bar probe does NOT trigger the rule.",
+          "Rule 2: Move stop to breakeven once Target 1 (POC) is achieved."
+        ],
+        tipsAndTricks: [
+          "Use the built-in 80% Rule Calculator in the app toolbar to calculate exact entry, stop, and targets in real time."
+        ],
+        traps: "Jumping the gun and entering before the second 30-minute bar closes. A single bar can easily poke inside and violently reject back out."
       }
     };
 
     /* =====================================================================
-       MODULES WITH COMPREHENSIVE TEXT & CLICKABLE TERMS
+       MODULES WITH CLICKABLE ACTION BUTTONS & EXTENSIVE TEXT
        ===================================================================== */
     const MODULES = [
       {
@@ -588,69 +659,84 @@
         tag: "Core Foundation",
         content: `
           <div class="space-y-6">
-            <div class="prose prose-invert max-w-none space-y-4">
+            <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The True Purpose of Financial Markets</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Auction Market Theory (<span class="amt-term" onclick="openTermDrawer('continuous-auction')">AMT</span>) establishes that financial markets are not random walk casinos, nor are they governed solely by lagging mathematical indicators. Markets exist for one primary, universal institutional purpose: <strong>to facilitate trade between buyers and sellers in an environment of <span class="amt-term" onclick="openTermDrawer('continuous-auction')">continuous price discovery</span></strong>.
+                Auction Market Theory (AMT) establishes that financial markets are not random walk casinos, nor are they governed solely by lagging technical indicators. Markets exist for one primary, universal institutional purpose: <strong>to facilitate trade between buyers and sellers in an environment of continuous price discovery</strong>.
               </p>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Prices move up to advertise opportunity and discover where sellers will step in to shut off buying. Prices move down to advertise opportunity and discover where buyers will step in to shut off selling. When both parties find a level where mutual trade is facilitated with ease, a state of equilibrium or <span class="amt-term" onclick="openTermDrawer('dual-auction')">Balance</span> is established.
+                Prices move up to advertise opportunity and discover where sellers will step in to shut off buying. Prices move down to advertise opportunity and discover where buyers will step in to shut off selling. When both parties find a level where mutual trade is facilitated with ease, a state of equilibrium or <strong>Balance</strong> is established.
               </p>
             </div>
 
-            <!-- Deep Dive Accordion 1: The Dual Auction Process -->
-            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition" open>
-              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-hover transition">
-                <span class="flex items-center space-x-2">
-                  <svg class="w-4 h-4 text-cyan-400 transform group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                  <span>1.1 The Dual Auction Process: Balance vs. Imbalance</span>
-                </span>
-                <span class="text-[10px] text-slate-500 uppercase">Core Principle</span>
-              </summary>
-              <div class="p-5 border-t border-dark-border bg-dark-surface/60 space-y-4 text-xs text-slate-300 leading-relaxed">
-                <p>
-                  Financial markets fluctuate perpetually between two distinct, non-negotiable operational states:
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                    <span class="text-xs font-bold text-amber-400 font-mono">1. The Balanced State (Bracket / Equilibrium)</span>
-                    <p class="text-slate-300">
-                      Buyers and sellers agree on price. High volume is transacted within a contained range. The market is efficient and liquidity is abundant. Both sides perceive current prices as fair.
-                    </p>
-                    <div class="text-[11px] text-slate-400 bg-dark-base p-2.5 rounded border border-dark-border">
-                      <strong>Institutional Playbook:</strong> Trade responsively. Buy at <span class="amt-term" onclick="openTermDrawer('vah-val')">Value Area Low (VAL)</span>, sell at <span class="amt-term" onclick="openTermDrawer('vah-val')">Value Area High (VAH)</span>, and take profits at the <span class="amt-term" onclick="openTermDrawer('poc')">Point of Control (POC)</span>.
-                    </div>
+            <!-- Clickable Interactive Concepts Section -->
+            <div class="bg-dark-card border border-dark-border hover:border-dark-borderHover rounded-2xl p-5 space-y-4 shadow-card transition-all">
+              <div class="flex items-center justify-between border-b border-dark-border pb-3">
+                <div class="space-y-0.5">
+                  <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">1.1 The Two Fundamental Auction States</span>
+                  <p class="text-[11px] text-slate-400">Click either state to open full sub-lessons, trade setups, rules, and tips</p>
+                </div>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800">Interactive</span>
+              </div>
+
+              <!-- Two Interactive State Cards -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div onclick="openDeepDive('balance')" class="btn-modern p-4 bg-dark-surface/90 hover:bg-dark-cardHover border border-dark-border hover:border-amber-500/50 rounded-xl cursor-pointer space-y-2 group shadow-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-amber-400 font-mono group-hover:text-amber-300 flex items-center space-x-1.5">
+                      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                      <span>1. The Balanced State (Bracket)</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-cyan-400 font-bold group-hover:translate-x-1 transition-transform">Explore Lesson &rarr;</span>
                   </div>
-                  <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                    <span class="text-xs font-bold text-cyan-400 font-mono">2. The Imbalanced State (Discovery / Trend)</span>
-                    <p class="text-slate-300">
-                      Buyers and sellers violently disagree on price. One party overpowers the other, forcing price into discovery until a new consensus level of value is found.
-                    </p>
-                    <div class="text-[11px] text-slate-400 bg-dark-base p-2.5 rounded border border-dark-border">
-                      <strong>Institutional Playbook:</strong> Trade initiatively. Do not fade the trend. Join breakouts and trail positions along developing value boundaries.
-                    </div>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    Buyers and sellers agree on price. High volume transacts within a contained range. The market is efficient and liquidity is abundant.
+                  </p>
+                  <div class="pt-1 flex flex-wrap gap-1.5 text-[10px] font-mono">
+                    <span class="px-2 py-0.5 rounded bg-dark-base text-slate-400 border border-dark-border">Playbook: Fade Extremes</span>
+                    <span class="px-2 py-0.5 rounded bg-dark-base text-amber-400 border border-amber-900/40">Target: POC</span>
+                  </div>
+                </div>
+
+                <div onclick="openDeepDive('imbalance')" class="btn-modern p-4 bg-dark-surface/90 hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/50 rounded-xl cursor-pointer space-y-2 group shadow-sm">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-cyan-400 font-mono group-hover:text-cyan-300 flex items-center space-x-1.5">
+                      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                      <span>2. The Imbalanced State (Trend)</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-cyan-400 font-bold group-hover:translate-x-1 transition-transform">Explore Lesson &rarr;</span>
+                  </div>
+                  <p class="text-xs text-slate-300 leading-relaxed">
+                    Buyers and sellers violently disagree on price. One party overpowers the other, forcing price into discovery until a new balance is found.
+                  </p>
+                  <div class="pt-1 flex flex-wrap gap-1.5 text-[10px] font-mono">
+                    <span class="px-2 py-0.5 rounded bg-dark-base text-slate-400 border border-dark-border">Playbook: Initiative Breakout</span>
+                    <span class="px-2 py-0.5 rounded bg-dark-base text-cyan-400 border border-cyan-900/40">Never Fade Trends</span>
                   </div>
                 </div>
               </div>
-            </details>
+            </div>
 
-            <!-- Interactive Value Area Graphic -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4">
+            <!-- Interactive Value Area Graphic with Clickable Levels -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
               <div class="flex items-center justify-between">
-                <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">The Normal Distribution Bell Curve</span>
-                <span class="text-[11px] text-slate-400">Click highlighted levels below</span>
+                <div>
+                  <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">1.2 Anatomy of the Gaussian Bell Curve</span>
+                  <p class="text-[11px] text-slate-400">Click any level in the diagram or buttons below for deep-dive rules</p>
+                </div>
+                <span class="text-[11px] font-mono text-slate-400">1 Standard Deviation (68.2%)</span>
               </div>
 
-              <!-- SVG Auction Anatomy -->
+              <!-- SVG Auction Anatomy with Click Handlers -->
               <div class="w-full overflow-x-auto flex justify-center py-2">
-                <svg viewBox="0 0 600 240" class="w-full max-w-lg">
+                <svg viewBox="0 0 600 240" class="w-full max-w-lg cursor-pointer">
                   <defs>
                     <linearGradient id="bellGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.4"/>
-                      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.05"/>
+                      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.45"/>
+                      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.08"/>
                     </linearGradient>
                   </defs>
 
@@ -659,44 +745,53 @@
                   <text x="70" y="215" fill="#94a3b8" font-size="10" text-anchor="end" font-family="monospace">LOW</text>
 
                   <!-- Excess High Zone -->
-                  <rect x="80" y="20" width="480" height="40" fill="#f43f5e" fill-opacity="0.1"/>
+                  <rect onclick="openDeepDive('excess-tail')" x="80" y="20" width="480" height="40" fill="#f43f5e" fill-opacity="0.12" class="hover:fill-opacity-25 transition"/>
                   <line x1="80" y1="60" x2="560" y2="60" stroke="#f43f5e" stroke-dasharray="4 4" stroke-width="1.5"/>
-                  <text x="90" y="45" fill="#f43f5e" font-size="11" font-weight="700">Excess High (Unfair High / Price Rejected)</text>
-                  <text x="550" y="55" fill="#f43f5e" font-size="11" text-anchor="end" font-weight="700">VAH</text>
+                  <text onclick="openDeepDive('excess-tail')" x="90" y="45" fill="#f43f5e" font-size="11" font-weight="700">Excess High (Unfair High / Price Rejected) 👆</text>
+                  <text onclick="openDeepDive('value-area')" x="550" y="55" fill="#f43f5e" font-size="11" text-anchor="end" font-weight="700">VAH</text>
 
                   <!-- Fair Value Area (68.2%) -->
-                  <rect x="80" y="60" width="480" height="100" fill="url(#bellGrad)" stroke="#0284c7" stroke-width="1.5"/>
+                  <rect onclick="openDeepDive('value-area')" x="80" y="60" width="480" height="100" fill="url(#bellGrad)" stroke="#0284c7" stroke-width="1.5" class="hover:stroke-cyan-300 transition"/>
                   
                   <!-- POC Line -->
                   <line x1="80" y1="110" x2="560" y2="110" stroke="#f59e0b" stroke-width="2"/>
-                  <text x="90" y="105" fill="#f59e0b" font-size="11" font-weight="700">FAIR VALUE: Point of Control (POC)</text>
-                  <text x="550" y="105" fill="#f59e0b" font-size="11" text-anchor="end" font-weight="700">POC</text>
-                  <text x="320" y="135" fill="#38bdf8" font-size="12" font-weight="600" text-anchor="middle">VALUE AREA (68.2% of Volume / 1σ)</text>
+                  <text onclick="openDeepDive('poc')" x="90" y="105" fill="#f59e0b" font-size="11" font-weight="700">FAIR VALUE: Point of Control (POC) 👆</text>
+                  <text onclick="openDeepDive('poc')" x="550" y="105" fill="#f59e0b" font-size="11" text-anchor="end" font-weight="700">POC</text>
+                  <text onclick="openDeepDive('value-area')" x="320" y="135" fill="#38bdf8" font-size="12" font-weight="700" text-anchor="middle">VALUE AREA (68.2% of Volume / 1σ) 👆</text>
 
                   <!-- Excess Low Zone -->
                   <line x1="80" y1="160" x2="560" y2="160" stroke="#10b981" stroke-dasharray="4 4" stroke-width="1.5"/>
-                  <rect x="80" y="160" width="480" height="50" fill="#10b981" fill-opacity="0.1"/>
-                  <text x="550" y="175" fill="#10b981" font-size="11" text-anchor="end" font-weight="700">VAL</text>
-                  <text x="90" y="195" fill="#10b981" font-size="11" font-weight="700">Excess Low (Unfair Low / Price Rejected)</text>
+                  <rect onclick="openDeepDive('excess-tail')" x="80" y="160" width="480" height="50" fill="#10b981" fill-opacity="0.12" class="hover:fill-opacity-25 transition"/>
+                  <text onclick="openDeepDive('value-area')" x="550" y="175" fill="#10b981" font-size="11" text-anchor="end" font-weight="700">VAL</text>
+                  <text onclick="openDeepDive('excess-tail')" x="90" y="195" fill="#10b981" font-size="11" font-weight="700">Excess Low (Unfair Low / Price Rejected) 👆</text>
                 </svg>
+              </div>
+
+              <!-- Quick Click Pills -->
+              <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-dark-border">
+                <span class="text-[11px] font-mono text-slate-400 mr-1">Deep-Dive Pills:</span>
+                <button onclick="openDeepDive('value-area')" class="amt-term-btn">Value Area (68.2%)</button>
+                <button onclick="openDeepDive('poc')" class="amt-term-btn">Point of Control (POC)</button>
+                <button onclick="openDeepDive('excess-tail')" class="amt-term-btn">Excess Tails</button>
+                <button onclick="openDeepDive('poor-high-low')" class="amt-term-btn">Poor Highs / Lows</button>
               </div>
             </div>
 
             <!-- Deep Dive Accordion 2: Statistical Foundation -->
-            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition">
-              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-hover transition">
+            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition" open>
+              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-cardHover transition">
                 <span class="flex items-center space-x-2">
                   <svg class="w-4 h-4 text-cyan-400 transform group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                  <span>1.2 The Statistical Bell Curve & The 68.2% Standard Deviation</span>
+                  <span>1.3 Jim Dalton's Gaussian Standard Deviation in Financial Markets</span>
                 </span>
-                <span class="text-[10px] text-slate-500 uppercase">Mathematics</span>
+                <span class="text-[10px] text-slate-500 uppercase">Dalton Theory</span>
               </summary>
               <div class="p-5 border-t border-dark-border bg-dark-surface/60 space-y-3 text-xs text-slate-300 leading-relaxed">
                 <p>
                   In continuous natural phenomena, observations cluster symmetrically around the mean in a Gaussian normal distribution. Financial markets are no different during periods of balance:
                 </p>
-                <ul class="list-disc list-inside space-y-1.5 pl-2">
-                  <li><strong>The First Standard Deviation (68.2%):</strong> Termed the <span class="amt-term" onclick="openTermDrawer('value-area')">Value Area</span>. This encapsulates where 68.2% of all contracts transacted. Here, both buyers and sellers see fair value.</li>
+                <ul class="list-disc list-inside space-y-2 pl-2">
+                  <li><strong>The First Standard Deviation (68.2%):</strong> Termed the <button onclick="openDeepDive('value-area')" class="amt-term-btn">Value Area</button>. This encapsulates where 68.2% of all contracts transacted. Here, both buyers and sellers see fair value.</li>
                   <li><strong>The Tails (~31.8% combined):</strong> Represent unfair extremes. When price probes outside the Value Area, it stimulates either strong responsive activity (rejection) or aggressive initiative activity (trend expansion).</li>
                 </ul>
               </div>
@@ -707,23 +802,23 @@
       {
         id: "module-2",
         title: "2. The Core Equation: Price + Time = Value",
-        subtitle: "Steidlmayer's Law, Advertising Opportunity & Volume Validation",
+        subtitle: "Steidlmayer's Universal Law, Advertising Opportunity & Volume Validation",
         tag: "Equation",
         content: `
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The Cornerstone Law of Market Profile</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Conceived by <strong>J. Peter Steidlmayer</strong> at the Chicago Board of Trade (CBOT) in the 1980s, the entire philosophy of profile analysis rests on one simple equation:
+                Conceived by <strong>J. Peter Steidlmayer</strong> at the Chicago Board of Trade (CBOT) in the 1980s and expanded by Jim Dalton, the entire philosophy of profile analysis rests on one simple equation:
               </p>
             </div>
 
             <!-- Big Formula Banner -->
-            <div class="bg-gradient-to-r from-dark-surface to-dark-card border border-dark-border rounded-xl p-6 text-center shadow-lg">
-              <div class="text-2xl sm:text-4xl font-extrabold font-mono text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400 tracking-wider">
+            <div class="bg-gradient-to-r from-dark-surface via-dark-card to-dark-surface border border-dark-border rounded-2xl p-6 text-center shadow-card">
+              <div class="text-2xl sm:text-4xl font-extrabold font-mono text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-amber-400 tracking-wider">
                 Price + Time = Value
               </div>
               <p class="text-xs text-slate-400 mt-2 font-medium">Volume is the statistical validation of that value.</p>
@@ -731,15 +826,15 @@
 
             <!-- Deep Dive Breakdown Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
                 <div class="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold font-mono text-sm">P</div>
                 <h3 class="text-sm font-bold text-white">Price = Advertising</h3>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Price moves up or down purely to advertise opportunity. It beckons participants into the market to see whether there is interest at that price.
+                  Price moves up or down purely to advertise opportunity. It beckons participants into the market to see whether there is commercial interest.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
                 <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono text-sm">T</div>
                 <h3 class="text-sm font-bold text-white">Time = Regulator</h3>
                 <p class="text-xs text-slate-300 leading-relaxed">
@@ -747,7 +842,7 @@
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
                 <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm">V</div>
                 <h3 class="text-sm font-bold text-white">Volume = Validator</h3>
                 <p class="text-xs text-slate-300 leading-relaxed">
@@ -758,39 +853,26 @@
 
             <!-- The Two Critical Golden Rules -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-4 bg-rose-950/20 border border-rose-800/40 rounded-xl space-y-2">
-                <h4 class="text-xs font-bold text-rose-400 uppercase tracking-wider font-mono">Price WITHOUT Time = Rejection (<span class="amt-term" onclick="openTermDrawer('excess-tail')">Excess</span>)</h4>
+              <div onclick="openDeepDive('excess-tail')" class="btn-modern p-4 bg-rose-950/20 hover:bg-rose-950/30 border border-rose-800/40 rounded-xl space-y-2 cursor-pointer group">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-xs font-bold text-rose-400 uppercase tracking-wider font-mono">Price WITHOUT Time = Rejection (Excess)</h4>
+                  <span class="text-[10px] font-mono text-rose-300 group-hover:translate-x-1 transition-transform">View Setup &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  If price probes above a level, spends only 2 minutes there, and sharply drops, price advertised an opportunity that <span class="amt-term" onclick="openTermDrawer('other-timeframe')">Other Timeframe</span> participants rejected. This creates an <strong>Excess Tail</strong>.
+                  If price probes above a level, spends only 2 minutes there, and sharply drops, price advertised an opportunity that institutional participants rejected. This creates an <strong>Excess Tail</strong>.
                 </p>
               </div>
 
-              <div class="p-4 bg-emerald-950/20 border border-emerald-800/40 rounded-xl space-y-2">
-                <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Price WITH Time = Acceptance (Value Migration)</h4>
+              <div onclick="openDeepDive('imbalance')" class="btn-modern p-4 bg-emerald-950/20 hover:bg-emerald-950/30 border border-emerald-800/40 rounded-xl space-y-2 cursor-pointer group">
+                <div class="flex items-center justify-between">
+                  <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider font-mono">Price WITH Time = Acceptance (Value Migration)</h4>
+                  <span class="text-[10px] font-mono text-emerald-300 group-hover:translate-x-1 transition-transform">View Setup &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   If price breaks into a new zone and rotates horizontally for 60-90 minutes while accumulating high volume, that price is now accepted as the new fair value. Do not fade!
                 </p>
               </div>
             </div>
-
-            <!-- Deep Dive Accordion: Real Trading Case -->
-            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition">
-              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-hover transition">
-                <span class="flex items-center space-x-2">
-                  <svg class="w-4 h-4 text-cyan-400 transform group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                  <span>2.1 Practical Application: How Institutions Exploit Failed Probes</span>
-                </span>
-                <span class="text-[10px] text-slate-500 uppercase">Case Study</span>
-              </summary>
-              <div class="p-5 border-t border-dark-border bg-dark-surface/60 space-y-3 text-xs text-slate-300 leading-relaxed">
-                <p>
-                  Consider a scenario where ES rallies into previous week's high. Retail traders buy aggressively on breakout alerts. However, price spends less than 4 minutes above that high before rotating back below with heavy selling volume.
-                </p>
-                <p>
-                  This is the textbook manifestation of <strong>Price without Time</strong>. The breakout was merely a probe. Long-term institutions stepped in as passive limit sellers and absorbed the retail liquidity. The resulting rejection creates an <span class="amt-term" onclick="openTermDrawer('excess-tail')">Excess Tail</span>, offering an asymmetric short back toward the <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>.
-                </p>
-              </div>
-            </details>
           </div>
         `
       },
@@ -803,16 +885,16 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>Anatomy of Market Profile & Volume Profile</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Understanding institutional market structure requires distinguishing between Time Price Opportunities (<span class="amt-term" onclick="openTermDrawer('tpo')">TPO</span>) and Volume Profile distributions.
+                Understanding institutional market structure requires distinguishing between Time Price Opportunities (<button onclick="openDeepDive('value-area')" class="amt-term-btn">TPO</button>) and Volume Profile distributions.
               </p>
             </div>
 
             <!-- Profile Comparison Visualizer -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4">
+            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4 shadow-card">
               <div class="text-xs font-mono font-bold text-cyan-400 uppercase">Interactive Profile Comparison</div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
                 
@@ -824,11 +906,11 @@
                   </div>
                   <div class="flex justify-between items-center text-slate-400"><span>4520</span><span>A</span></div>
                   <div class="flex justify-between items-center text-slate-300"><span>4519</span><span>A B</span></div>
-                  <div class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1 rounded"><span>4518</span><span>A B C <span class="amt-term text-[10px] text-cyan-300 ml-2" onclick="openTermDrawer('vah-val')">&larr; VAH</span></span></div>
+                  <div onclick="openDeepDive('value-area')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4518</span><span>A B C <span class="text-[10px] text-cyan-300 ml-2">&larr; VAH 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-200"><span>4517</span><span>A B C D</span></div>
-                  <div class="flex justify-between items-center text-amber-400 font-bold bg-amber-950/40 px-1 rounded"><span>4516</span><span>A B C D E F <span class="amt-term text-[10px] text-amber-300 ml-2" onclick="openTermDrawer('poc')">&larr; POC</span></span></div>
+                  <div onclick="openDeepDive('poc')" class="flex justify-between items-center text-amber-400 font-bold bg-amber-950/40 px-1.5 py-0.5 rounded cursor-pointer hover:bg-amber-900/50 transition"><span>4516</span><span>A B C D E F <span class="text-[10px] text-amber-300 ml-2">&larr; POC 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-200"><span>4515</span><span>B C D E</span></div>
-                  <div class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1 rounded"><span>4514</span><span>C D <span class="amt-term text-[10px] text-cyan-300 ml-2" onclick="openTermDrawer('vah-val')">&larr; VAL</span></span></div>
+                  <div onclick="openDeepDive('value-area')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4514</span><span>C D <span class="text-[10px] text-cyan-300 ml-2">&larr; VAL 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-400"><span>4513</span><span>D</span></div>
                 </div>
 
@@ -840,55 +922,47 @@
                   </div>
                   <div class="flex items-center space-x-2 text-slate-400"><span class="w-10">4520</span><div class="bg-slate-700 h-3 rounded" style="width: 15%"></div></div>
                   <div class="flex items-center space-x-2 text-slate-300"><span class="w-10">4519</span><div class="bg-slate-600 h-3 rounded" style="width: 30%"></div></div>
-                  <div class="flex items-center space-x-2 text-cyan-400 font-bold"><span class="w-10">4518</span><div class="bg-cyan-600 h-3 rounded" style="width: 55%"></div><span class="amt-term text-[10px] text-cyan-300" onclick="openTermDrawer('vah-val')">VAH</span></div>
+                  <div onclick="openDeepDive('value-area')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4518</span><div class="bg-cyan-600 h-3 rounded" style="width: 55%"></div><span class="text-[10px] text-cyan-300">VAH</span></div>
                   <div class="flex items-center space-x-2 text-slate-200"><span class="w-10">4517</span><div class="bg-slate-500 h-3 rounded" style="width: 75%"></div></div>
-                  <div class="flex items-center space-x-2 text-amber-400 font-bold"><span class="w-10">4516</span><div class="bg-amber-500 h-3 rounded" style="width: 100%"></div><span class="amt-term text-[10px] text-amber-300" onclick="openTermDrawer('poc')">VPOC</span></div>
+                  <div onclick="openDeepDive('poc')" class="flex items-center space-x-2 text-amber-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4516</span><div class="bg-amber-500 h-3 rounded" style="width: 100%"></div><span class="text-[10px] text-amber-300">VPOC</span></div>
                   <div class="flex items-center space-x-2 text-slate-200"><span class="w-10">4515</span><div class="bg-slate-500 h-3 rounded" style="width: 70%"></div></div>
-                  <div class="flex items-center space-x-2 text-cyan-400 font-bold"><span class="w-10">4514</span><div class="bg-cyan-600 h-3 rounded" style="width: 45%"></div><span class="amt-term text-[10px] text-cyan-300" onclick="openTermDrawer('vah-val')">VAL</span></div>
+                  <div onclick="openDeepDive('value-area')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4514</span><div class="bg-cyan-600 h-3 rounded" style="width: 45%"></div><span class="text-[10px] text-cyan-300">VAL</span></div>
                   <div class="flex items-center space-x-2 text-slate-400"><span class="w-10">4513</span><div class="bg-slate-700 h-3 rounded" style="width: 20%"></div></div>
                 </div>
 
               </div>
             </div>
 
-            <!-- Deep Dive Accordion: Structural Features Guide -->
-            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition" open>
-              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-hover transition">
-                <span class="flex items-center space-x-2">
-                  <svg class="w-4 h-4 text-cyan-400 transform group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                  <span>3.1 Institutional Structural Profile Features</span>
-                </span>
-                <span class="text-[10px] text-slate-500 uppercase">Click Terms to Inspect</span>
-              </summary>
-              <div class="p-5 border-t border-dark-border bg-dark-surface/60 space-y-4 text-xs text-slate-300 leading-relaxed">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold" onclick="openTermDrawer('excess-tail')">Excess / Rejection Tail</span>
-                    <p class="text-slate-400 mt-1">Single prints at high/low confirming long-term participants aggressively defended the price.</p>
+            <!-- Structural Features Interactive Grid -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-white uppercase tracking-wider">Interactive Structural Profile Features</span>
+                <span class="text-[11px] text-slate-400">Click any card to view sub-lesson & trade setup</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                <div onclick="openDeepDive('excess-tail')" class="btn-modern p-3.5 bg-dark-card border border-dark-border hover:border-cyan-500/50 rounded-xl cursor-pointer space-y-1 group">
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-rose-400 font-mono">Excess Tails</span>
+                    <span class="text-[10px] text-cyan-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </div>
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold text-amber-400" onclick="openTermDrawer('poor-high-low')">Poor High / Poor Low</span>
-                    <p class="text-slate-400 mt-1">Blunt ledge of side-by-side letters. Represents an unfinished auction that acts as a magnet.</p>
+                  <p class="text-slate-400 text-[11px]">Aggressive institutional rejection marking secure boundaries.</p>
+                </div>
+                <div onclick="openDeepDive('poor-high-low')" class="btn-modern p-3.5 bg-dark-card border border-dark-border hover:border-amber-500/50 rounded-xl cursor-pointer space-y-1 group">
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-amber-400 font-mono">Poor Highs / Lows</span>
+                    <span class="text-[10px] text-amber-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </div>
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold text-purple-400" onclick="openTermDrawer('single-prints')">Single Prints</span>
-                    <p class="text-slate-400 mt-1">Gaps in profile where price moved violently without building value; acts as dynamic support/resistance.</p>
+                  <p class="text-slate-400 text-[11px]">Unfinished business ledges that act as magnets for future sweeps.</p>
+                </div>
+                <div onclick="openDeepDive('the-80-rule')" class="btn-modern p-3.5 bg-dark-card border border-dark-border hover:border-emerald-500/50 rounded-xl cursor-pointer space-y-1 group">
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-emerald-400 font-mono">The 80% Rule</span>
+                    <span class="text-[10px] text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </div>
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold text-emerald-400" onclick="openTermDrawer('naked-poc')">Naked / Virgin POC (nPOC)</span>
-                    <p class="text-slate-400 mt-1">A historical Point of Control never tested in any future session. High-probability profit target.</p>
-                  </div>
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold text-blue-400" onclick="openTermDrawer('lvn')">Low Volume Node (LVN)</span>
-                    <p class="text-slate-400 mt-1">Rejection troughs on the volume histogram where price accelerates like a slip-and-slide.</p>
-                  </div>
-                  <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-                    <span class="amt-term text-xs font-bold text-cyan-400" onclick="openTermDrawer('hvn')">High Volume Node (HVN)</span>
-                    <p class="text-slate-400 mt-1">Acceptance peaks where heavy volume transacted. Acts as gravitational glue that stalls momentum.</p>
-                  </div>
+                  <p class="text-slate-400 text-[11px]">Value Area re-acceptance setup with ~80% statistical odds.</p>
                 </div>
               </div>
-            </details>
+            </div>
           </div>
         `
       },
@@ -901,21 +975,21 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The 4 Canonical Profile Shapes</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Every auction consolidates into one of four distinct structural forms. Recognizing the shape tells you whether the market is <span class="amt-term" onclick="openTermDrawer('dual-auction')">balanced</span> or <span class="amt-term" onclick="openTermDrawer('dual-auction')">trending</span>, and reveals the exact positioning of institutional players.
+                Every auction consolidates into one of four distinct structural forms. Recognizing the shape tells you whether the market is <button onclick="openDeepDive('balance')" class="amt-term-btn">Balanced</button> or <button onclick="openDeepDive('imbalance')" class="amt-term-btn">Trending</button>, and reveals the exact positioning of institutional players.
               </p>
             </div>
 
             <!-- Interactive Archetype Selector -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4">
+            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4 shadow-card">
               <div class="flex flex-wrap gap-2">
-                <button onclick="selectShapeTab('d-shape')" id="tab-d-shape" class="px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs font-mono transition">D-Shape (Balanced)</button>
-                <button onclick="selectShapeTab('p-shape')" id="tab-p-shape" class="px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">P-Shape (Short Covering)</button>
-                <button onclick="selectShapeTab('b-shape')" id="tab-b-shape" class="px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">b-Shape (Long Liquidation)</button>
-                <button onclick="selectShapeTab('B-shape')" id="tab-B-shape" class="px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">B-Shape (Double Dist)</button>
+                <button onclick="selectShapeTab('d-shape')" id="tab-d-shape" class="btn-modern px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs font-mono transition shadow-glow-cyan">D-Shape (Balanced)</button>
+                <button onclick="selectShapeTab('p-shape')" id="tab-p-shape" class="btn-modern px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">P-Shape (Short Covering)</button>
+                <button onclick="selectShapeTab('b-shape')" id="tab-b-shape" class="btn-modern px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">b-Shape (Long Liquidation)</button>
+                <button onclick="selectShapeTab('B-shape')" id="tab-B-shape" class="btn-modern px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition">B-Shape (Double Dist)</button>
               </div>
 
               <!-- Interactive Shape Card Content -->
@@ -923,25 +997,6 @@
                 <!-- Dynamically loaded via selectShapeTab -->
               </div>
             </div>
-
-            <!-- Deep Dive Accordion: Nuances of P-Shape vs b-Shape -->
-            <details class="group bg-dark-card border border-dark-border rounded-xl overflow-hidden transition">
-              <summary class="p-4 cursor-pointer flex items-center justify-between font-mono text-xs font-bold text-cyan-300 hover:text-white hover:bg-dark-hover transition">
-                <span class="flex items-center space-x-2">
-                  <svg class="w-4 h-4 text-cyan-400 transform group-open:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                  <span>4.1 Institutional Trap: Short Covering vs. True Buying in P-Shapes</span>
-                </span>
-                <span class="text-[10px] text-slate-500 uppercase">Order Flow Insight</span>
-              </summary>
-              <div class="p-5 border-t border-dark-border bg-dark-surface/60 space-y-3 text-xs text-slate-300 leading-relaxed">
-                <p>
-                  A common retail trap is seeing a P-Shape profile and assuming the market is in a massive structural bull trend. 
-                </p>
-                <p>
-                  In reality, a P-Shape is frequently produced by <strong>short covering</strong>. Shorts panic and cover, driving price rapidly upward through a thin stem. Once the shorts are liquidated, there is no new initiative buying demand to sustain the higher price. If the upper distribution fails to attract new buyers, price slides rapidly back down the thin stem to test the origin of the move.
-                </p>
-              </div>
-            </details>
           </div>
         `
       },
@@ -954,39 +1009,42 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The 4 Openings & 6 Dalton Day Types</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Jim Dalton documented that how the market opens relative to the prior day's <span class="amt-term" onclick="openTermDrawer('value-area')">Value Area</span> provides the first 80% of your directional trading edge for the day.
+                Jim Dalton documented that how the market opens relative to the prior day's <button onclick="openDeepDive('value-area')" class="amt-term-btn">Value Area</button> provides the first 80% of your directional trading edge for the day.
               </p>
             </div>
 
             <!-- The 4 Openings Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-emerald-400" onclick="openTermDrawer('open-drive')">1. Open-Drive (Maximum Conviction)</span>
+              <div onclick="openDeepDive('open-drive')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-emerald-500/50 rounded-xl space-y-2 cursor-pointer group shadow-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-emerald-400">1. Open-Drive (Maximum Conviction)</span>
+                  <span class="text-[10px] text-emerald-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Price opens and charges violently in one direction without ever looking back or testing the open. <span class="amt-term" onclick="openTermDrawer('other-timeframe')">OTF</span> initiative participants are aggressively driving value. <strong>Rule: Never counter-trade an Open-Drive!</strong>
+                  Price opens and charges violently in one direction without ever looking back or testing the open. OTF initiative participants are aggressively driving value. <strong>Rule: Never counter-trade an Open-Drive!</strong>
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-cyan-400" onclick="openTermDrawer('open-test-drive')">2. Open-Test-Drive</span>
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
+                <span class="text-xs font-mono font-bold text-cyan-400">2. Open-Test-Drive</span>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Price opens, tests an important key reference level (prior day high/low or <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span>), meets fierce responsive rejection, and drives aggressively in the opposite direction.
+                  Price opens, tests an important key reference level (prior day high/low or VAH), meets fierce responsive rejection, and drives aggressively in the opposite direction.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-amber-400" onclick="openTermDrawer('open-rejection-reverse')">3. Open-Rejection-Reverse</span>
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
+                <span class="text-xs font-mono font-bold text-amber-400">3. Open-Rejection-Reverse</span>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price probes outside the prior day's range, finds zero continuation, reverses back through the entire opening range, and sweeps to the opposite side.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-slate-400" onclick="openTermDrawer('open-auction')">4. Open-Auction</span>
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
+                <span class="text-xs font-mono font-bold text-slate-400">4. Open-Auction</span>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price opens with zero clear conviction, oscillating quietly around the opening price. Indicates balanced conditions where responsive scalping dominates.
                 </p>
@@ -994,7 +1052,7 @@
             </div>
 
             <!-- Dalton 6 Day Types Summary Table -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-4 overflow-x-auto">
+            <div class="bg-dark-card border border-dark-border rounded-xl p-4 overflow-x-auto shadow-card">
               <h3 class="text-xs font-bold text-white uppercase tracking-wider font-mono mb-3">Dalton's 6 Institutional Day Types</h3>
               <table class="w-full text-xs text-left">
                 <thead class="text-slate-400 border-b border-dark-border">
@@ -1008,17 +1066,17 @@
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-emerald-400">Trend Day</td>
                     <td class="py-2.5 pr-4 font-mono">Small / Compact</td>
-                    <td class="py-2.5">Continuous <span class="amt-term" onclick="openTermDrawer('one-time-framing')">one-time framing</span>. Extreme volume. Price never re-tests <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>. Never fade.</td>
+                    <td class="py-2.5">Continuous One-Time Framing. Extreme volume. Price never re-tests POC. Never fade.</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-blue-400">Normal Day</td>
                     <td class="py-2.5 pr-4 font-mono">Very Wide</td>
-                    <td class="py-2.5">Initial burst exhausts the range. Remainder of day rotates inside <span class="amt-term" onclick="openTermDrawer('initial-balance')">IB</span>. Fade extremes.</td>
+                    <td class="py-2.5">Initial burst exhausts the range. Remainder of day rotates inside IB. Fade extremes.</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-cyan-400">Normal Variation</td>
                     <td class="py-2.5 pr-4 font-mono">Moderate</td>
-                    <td class="py-2.5"><span class="amt-term" onclick="openTermDrawer('other-timeframe')">OTF</span> enters after period B, extending range by 1x to 2x of IB.</td>
+                    <td class="py-2.5">OTF enters after period B, extending range by 1x to 2x of IB.</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-purple-400">Neutral Day</td>
@@ -1028,7 +1086,7 @@
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-amber-400">Double Distribution</td>
                     <td class="py-2.5 pr-4 font-mono">Small</td>
-                    <td class="py-2.5"><span class="amt-term" onclick="openTermDrawer('single-prints')">Single prints</span> separate two distinct value areas. Stalled trend.</td>
+                    <td class="py-2.5">Single prints separate two distinct value areas. Stalled trend.</td>
                   </tr>
                   <tr>
                     <td class="py-2.5 pr-4 font-bold text-slate-400">Non-Trend Day</td>
@@ -1050,7 +1108,7 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The 4 Institutional AMT Setups</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
@@ -1059,15 +1117,15 @@
             </div>
 
             <!-- Setup 1: The 80% Rule Deep Dive -->
-            <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4">
+            <div onclick="openDeepDive('the-80-rule')" class="btn-modern bg-dark-card border border-dark-border hover:border-amber-500/50 rounded-2xl p-5 space-y-4 shadow-card cursor-pointer group">
               <div class="flex items-center justify-between">
-                <span class="amt-term text-xs font-mono font-bold text-amber-400 uppercase tracking-wider" onclick="openTermDrawer('the-80-rule')">Setup #1: The Famous 80% Rule</span>
+                <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider group-hover:text-amber-300">Setup #1: The Famous 80% Rule (Click for Sub-Lesson) &rarr;</span>
                 <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[11px] font-bold">~80% Probability</span>
               </div>
 
               <div class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-3">
                 <div class="text-xs text-slate-300 space-y-2">
-                  <p><strong>1. Pre-Condition:</strong> Price opens or trades completely outside the prior day's <span class="amt-term" onclick="openTermDrawer('value-area')">Value Area</span>.</p>
+                  <p><strong>1. Pre-Condition:</strong> Price opens or trades completely outside the prior day's Value Area.</p>
                   <p><strong>2. Trigger:</strong> Price rotates back into prior Value Area and prints <strong>two consecutive 30-minute bars (or two closes) inside</strong>.</p>
                   <p><strong>3. Statistical Target:</strong> There is an ~80% statistical probability that price will auction through the entire Value Area to test the opposite extreme!</p>
                 </div>
@@ -1075,11 +1133,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div class="p-3 bg-dark-card rounded-lg border border-dark-border">
                     <span class="text-xs font-bold text-rose-400">Short Execution:</span>
-                    <p class="text-xs text-slate-300 mt-1">Accepting below <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span> &rarr; Short target 1 = <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>, Target 2 = <span class="amt-term" onclick="openTermDrawer('vah-val')">VAL</span>. Stop = Just outside VAH.</p>
+                    <p class="text-xs text-slate-300 mt-1">Accepting below VAH &rarr; Short target 1 = POC, Target 2 = VAL. Stop = Just outside VAH.</p>
                   </div>
                   <div class="p-3 bg-dark-card rounded-lg border border-dark-border">
                     <span class="text-xs font-bold text-emerald-400">Long Execution:</span>
-                    <p class="text-xs text-slate-300 mt-1">Accepting above <span class="amt-term" onclick="openTermDrawer('vah-val')">VAL</span> &rarr; Long target 1 = <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>, Target 2 = <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span>. Stop = Just outside VAL.</p>
+                    <p class="text-xs text-slate-300 mt-1">Accepting above VAL &rarr; Long target 1 = POC, Target 2 = VAH. Stop = Just outside VAL.</p>
                   </div>
                 </div>
               </div>
@@ -1087,24 +1145,33 @@
 
             <!-- Setup 2, 3, 4 Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="text-xs font-mono font-bold text-cyan-400">Setup #2: Responsive Fade</span>
+              <div onclick="openDeepDive('balance')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-cyan-500/50 rounded-xl space-y-2 cursor-pointer shadow-sm group">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-cyan-400">Setup #2: Responsive Fade</span>
+                  <span class="text-[10px] text-cyan-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  In a balanced D-shape profile, fade <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span> and <span class="amt-term" onclick="openTermDrawer('vah-val')">VAL</span> when <span class="amt-term" onclick="openTermDrawer('delta-absorption')">delta absorption</span> prints. Target = Session <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>.
+                  In a balanced D-shape profile, fade VAH and VAL when delta absorption prints. Target = Session POC.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="text-xs font-mono font-bold text-emerald-400">Setup #3: Initiative Breakout</span>
+              <div onclick="openDeepDive('imbalance')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-emerald-500/50 rounded-xl space-y-2 cursor-pointer shadow-sm group">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-emerald-400">Setup #3: Initiative Breakout</span>
+                  <span class="text-[10px] text-emerald-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Price leaves a multi-day bracket with volume spike and cumulative delta acceleration. Enter on the first retest of the broken bracket high/low.
+                  Price leaves a multi-day bracket with volume spike and cumulative delta acceleration. Enter on first retest.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="text-xs font-mono font-bold text-purple-400">Setup #4: Poor Extreme Repair</span>
+              <div onclick="openDeepDive('poor-high-low')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-purple-500/50 rounded-xl space-y-2 cursor-pointer shadow-sm group">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-purple-400">Setup #4: Poor Extreme Repair</span>
+                  <span class="text-[10px] text-purple-400 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Identify <span class="amt-term" onclick="openTermDrawer('poor-high-low')">poor highs</span> or <span class="amt-term" onclick="openTermDrawer('poor-high-low')">poor lows</span>. When price rotates toward them with positive initiative delta, ride the squeeze through the stop-cluster.
+                  Identify poor highs or poor lows. When price rotates toward them with positive initiative delta, ride the squeeze.
                 </p>
               </div>
             </div>
@@ -1120,7 +1187,7 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>Who Really Moves the Market?</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
@@ -1130,10 +1197,10 @@
 
             <!-- Participant Comparison Table -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3">
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3 shadow-sm">
                 <div class="flex items-center space-x-2">
                   <div class="w-2 h-2 rounded-full bg-slate-400"></div>
-                  <h3 class="amt-term text-sm font-bold text-white" onclick="openTermDrawer('day-timeframe')">Day Timeframe (DTT)</h3>
+                  <h3 class="text-sm font-bold text-white">Day Timeframe (DTT)</h3>
                 </div>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
                   <li>Scalpers, retail day traders, intraday algorithms.</li>
@@ -1144,10 +1211,10 @@
                 </ul>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3">
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3 shadow-sm">
                 <div class="flex items-center space-x-2">
-                  <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
-                  <h3 class="amt-term text-sm font-bold text-white" onclick="openTermDrawer('other-timeframe')">Other Timeframe (OTF)</h3>
+                  <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
+                  <h3 class="text-sm font-bold text-white">Other Timeframe (OTF)</h3>
                 </div>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
                   <li>Institutions, hedge funds, sovereign wealth, pension funds.</li>
@@ -1161,22 +1228,22 @@
 
             <!-- 2x2 Matrix: Initiative vs Responsive -->
             <div class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-3">
-              <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">The 4 Institutional Actions</h4>
+              <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">The 4 Institutional Actions (Dalton Matrix)</h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div class="p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-lg">
-                  <span class="amt-term font-bold text-emerald-400" onclick="openTermDrawer('initiative-activity')">Initiative Buying:</span>
+                  <span class="font-bold text-emerald-400">Initiative Buying:</span>
                   <p class="text-slate-300 mt-1">Buying at or above value. OTF is willing to pay high prices because they expect value to migrate higher.</p>
                 </div>
                 <div class="p-3 bg-blue-950/20 border border-blue-800/40 rounded-lg">
-                  <span class="amt-term font-bold text-blue-400" onclick="openTermDrawer('responsive-activity')">Responsive Buying:</span>
+                  <span class="font-bold text-blue-400">Responsive Buying:</span>
                   <p class="text-slate-300 mt-1">Buying below value. Participants perceive the price as cheap and rotate price back to fair value.</p>
                 </div>
                 <div class="p-3 bg-rose-950/20 border border-rose-800/40 rounded-lg">
-                  <span class="amt-term font-bold text-rose-400" onclick="openTermDrawer('initiative-activity')">Initiative Selling:</span>
+                  <span class="font-bold text-rose-400">Initiative Selling:</span>
                   <p class="text-slate-300 mt-1">Selling at or below value. OTF aggressively dumps because they expect fair value to plummet.</p>
                 </div>
                 <div class="p-3 bg-purple-950/20 border border-purple-800/40 rounded-lg">
-                  <span class="amt-term font-bold text-purple-400" onclick="openTermDrawer('responsive-activity')">Responsive Selling:</span>
+                  <span class="font-bold text-purple-400">Responsive Selling:</span>
                   <p class="text-slate-300 mt-1">Selling above value. Participants perceive the price as expensive and rotate price back down.</p>
                 </div>
               </div>
@@ -1193,7 +1260,7 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>Connecting Macro Profile to Micro Execution</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
@@ -1202,7 +1269,7 @@
             </div>
 
             <!-- Execution Funnel -->
-            <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3">
+            <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3 shadow-card">
               <span class="text-xs font-mono font-bold text-cyan-400 uppercase">The 4-Step Institutional Funnel</span>
               <div class="flex flex-col sm:flex-row items-center justify-between text-xs gap-2 pt-2">
                 <div class="w-full sm:w-auto p-2.5 bg-dark-surface rounded border border-dark-border text-center">
@@ -1229,15 +1296,15 @@
 
             <!-- Order Flow Signals -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-amber-400" onclick="openTermDrawer('delta-absorption')">Passive Absorption at Extremes</span>
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
+                <span class="text-xs font-mono font-bold text-amber-400">Passive Absorption at Extremes</span>
                 <p class="text-xs text-slate-300 leading-relaxed">
-                  Price hits <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span>. Huge buy market orders print (+500 Delta on the footprint ladder), but the candle fails to tick higher. Passive limit sellers are reloading and absorbing all aggressive demand. <strong>High-probability short!</strong>
+                  Price hits VAH. Huge buy market orders print (+500 Delta on the footprint ladder), but the candle fails to tick higher. Passive limit sellers are reloading and absorbing all aggressive demand. <strong>High-probability short!</strong>
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2">
-                <span class="amt-term text-xs font-mono font-bold text-cyan-400" onclick="openTermDrawer('cvd')">Cumulative Volume Delta (CVD) Divergence</span>
+              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
+                <span class="text-xs font-mono font-bold text-cyan-400">Cumulative Volume Delta (CVD) Divergence</span>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price prints a higher high into resistance, but CVD makes a decisive lower high. Aggressive buying volume is decaying while price is floating on low liquidity. Expect sharp mean reversion.
                 </p>
@@ -1255,7 +1322,7 @@
           <div class="space-y-6">
             <div class="prose prose-invert max-w-none space-y-3">
               <h2 class="text-xl font-bold text-white flex items-center space-x-2">
-                <span class="w-2 h-6 bg-cyan-400 rounded-full inline-block"></span>
+                <span class="w-2.5 h-6 bg-cyan-400 rounded-full inline-block shadow-glow-cyan"></span>
                 <span>The Daily Institutional AMT Protocol</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
@@ -1264,15 +1331,15 @@
             </div>
 
             <div class="space-y-3">
-              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3">
+              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3 shadow-sm">
                 <span class="font-mono font-bold text-cyan-400 text-sm">01</span>
                 <div>
                   <h4 class="text-xs font-bold text-white">Map Prior Profile Reference Levels</h4>
-                  <p class="text-xs text-slate-400 mt-0.5">Plot prior session <span class="amt-term" onclick="openTermDrawer('vah-val')">VAH</span>, <span class="amt-term" onclick="openTermDrawer('vah-val')">VAL</span>, <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>, and unfinished <span class="amt-term" onclick="openTermDrawer('poor-high-low')">poor highs/lows</span> or <span class="amt-term" onclick="openTermDrawer('naked-poc')">virgin VPOCs</span>.</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Plot prior session VAH, VAL, POC, and unfinished poor highs/lows or virgin VPOCs.</p>
                 </div>
               </div>
 
-              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3">
+              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3 shadow-sm">
                 <span class="font-mono font-bold text-cyan-400 text-sm">02</span>
                 <div>
                   <h4 class="text-xs font-bold text-white">Assess Overnight Session (Globex)</h4>
@@ -1280,38 +1347,38 @@
                 </div>
               </div>
 
-              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3">
+              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3 shadow-sm">
                 <span class="font-mono font-bold text-cyan-400 text-sm">03</span>
                 <div>
                   <h4 class="text-xs font-bold text-white">Classify the RTH Open (First 30 Mins)</h4>
-                  <p class="text-xs text-slate-400 mt-0.5">Is it <span class="amt-term" onclick="openTermDrawer('open-drive')">Open-Drive</span>, <span class="amt-term" onclick="openTermDrawer('open-test-drive')">Open-Test-Drive</span>, <span class="amt-term" onclick="openTermDrawer('open-rejection-reverse')">Open-Rejection-Reverse</span>, or <span class="amt-term" onclick="openTermDrawer('open-auction')">Open-Auction</span>? Determine your conviction level.</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Is it Open-Drive, Open-Test-Drive, Open-Rejection-Reverse, or Open-Auction? Determine your conviction level.</p>
                 </div>
               </div>
 
-              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3">
+              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3 shadow-sm">
                 <span class="font-mono font-bold text-cyan-400 text-sm">04</span>
                 <div>
                   <h4 class="text-xs font-bold text-white">Measure the Initial Balance (IB)</h4>
-                  <p class="text-xs text-slate-400 mt-0.5">At 10:30 AM (end of Period B), measure the <span class="amt-term" onclick="openTermDrawer('initial-balance')">IB</span> width. Compact IB = Trend potential; Wide IB = Rotation expected.</p>
+                  <p class="text-xs text-slate-400 mt-0.5">At 10:30 AM (end of Period B), measure the IB width. Compact IB = Trend potential; Wide IB = Rotation expected.</p>
                 </div>
               </div>
 
-              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3">
+              <div class="p-3 bg-dark-card border border-dark-border rounded-xl flex items-start space-x-3 shadow-sm">
                 <span class="font-mono font-bold text-cyan-400 text-sm">05</span>
                 <div>
                   <h4 class="text-xs font-bold text-white">Execute Only at Value Extremes</h4>
-                  <p class="text-xs text-slate-400 mt-0.5">Avoid taking chop trades in the middle near the <span class="amt-term" onclick="openTermDrawer('poc')">POC</span>. Wait for tests of VAH/VAL or clean initiative breakouts.</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Avoid taking chop trades in the middle near the POC. Wait for tests of VAH/VAL or clean initiative breakouts.</p>
                 </div>
               </div>
             </div>
 
             <!-- Graduation Certificate Button -->
-            <div class="p-5 bg-gradient-to-r from-cyan-950/60 to-dark-card border border-cyan-800/60 rounded-2xl text-center space-y-3">
+            <div class="p-6 bg-gradient-to-r from-cyan-950/60 via-dark-card to-dark-surface border border-cyan-800/60 rounded-2xl text-center space-y-3 shadow-card">
               <h3 class="text-base font-bold text-white">Ready to Test Your Mastery?</h3>
               <p class="text-xs text-slate-300 max-w-md mx-auto">
                 Proceed to the interactive self-assessment drills and test your decision-making in real historical market scenarios.
               </p>
-              <button onclick="showModule('mastery-drills')" class="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-cyan-500/20">
+              <button onclick="showModule('mastery-drills')" class="btn-modern px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-400 hover:to-sky-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-glow-cyan">
                 Launch Self-Assessment Drills
               </button>
             </div>
@@ -1438,6 +1505,7 @@
     let currentModuleId = "module-1";
     let completedModules = JSON.parse(localStorage.getItem('amt_completed_modules') || '[]');
     let quizAnswers = JSON.parse(localStorage.getItem('amt_quiz_answers') || '{}');
+    let heroVisible = false; // Hero is hidden by default once curriculum is started
 
     document.addEventListener("DOMContentLoaded", () => {
       renderNav();
@@ -1445,53 +1513,142 @@
       updateProgressUI();
       selectShapeTab('d-shape');
       renderDictionaryList();
+      
+      // Default: hide hero banner if user has already visited or starts module
+      const banner = document.getElementById("hero-welcome-banner");
+      if (banner) {
+        banner.style.display = "none";
+      }
+      updateHeroToggleLabel(false);
     });
 
     /* =====================================================================
-       CLICKABLE TERM DRAWER CONTROLLER
+       HERO BANNER TOGGLE & START BUTTON
        ===================================================================== */
-    function openTermDrawer(termKey) {
-      const term = AMT_TERMS[termKey];
-      if (!term) return;
+    function startCurriculumAndDismissHero() {
+      const banner = document.getElementById("hero-welcome-banner");
+      if (banner) {
+        banner.style.display = "none";
+        heroVisible = false;
+        updateHeroToggleLabel(false);
+      }
+      showModule('module-1');
+    }
 
-      document.getElementById("drawer-title").textContent = term.name;
-      document.getElementById("drawer-tag").textContent = term.category;
-      
-      const body = document.getElementById("drawer-body");
+    function toggleHeroBanner() {
+      const banner = document.getElementById("hero-welcome-banner");
+      if (!banner) return;
+      heroVisible = !heroVisible;
+      banner.style.display = heroVisible ? "block" : "none";
+      updateHeroToggleLabel(heroVisible);
+    }
+
+    function updateHeroToggleLabel(visible) {
+      const txt = document.getElementById("toggle-hero-text");
+      if (txt) {
+        txt.textContent = visible ? "Hide Welcome Overview ▲" : "Show Welcome Overview ▼";
+      }
+    }
+
+    /* =====================================================================
+       FULL SUB-LESSON / DEEP-DIVE MODAL CONTROLLER
+       ===================================================================== */
+    function openDeepDive(termKey) {
+      const item = AMT_DEEP_DIVES[termKey];
+      if (!item) return;
+
+      document.getElementById("deepdive-title").textContent = item.name;
+      document.getElementById("deepdive-tag").textContent = item.tag;
+      document.getElementById("deepdive-subtitle").textContent = item.subtitle;
+
+      const body = document.getElementById("deepdive-body");
       body.innerHTML = `
-        <div class="p-3 bg-dark-card rounded-xl border border-dark-border space-y-1">
-          <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase">Institutional Definition</span>
-          <p class="text-xs text-slate-200 leading-relaxed">${term.definition}</p>
+        <!-- Section 1: Dalton Market Philosophy -->
+        <div class="p-4 bg-dark-card rounded-2xl border border-dark-border space-y-2.5 shadow-sm">
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">1. Institutional Concept & Auction Mechanics</h4>
+          </div>
+          <p class="text-slate-200 text-xs leading-relaxed">${item.overview}</p>
+          <div class="space-y-1.5 pt-1">
+            <span class="text-[10px] font-mono font-bold text-cyan-300 uppercase">Jim Dalton Principles:</span>
+            <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+              ${item.daltonPrinciples.map(p => `<li>${p}</li>`).join('')}
+            </ul>
+          </div>
         </div>
 
-        <div class="space-y-1.5">
-          <span class="text-[10px] font-mono font-bold text-amber-400 uppercase">Auction Mechanics (Why It Happens)</span>
-          <p class="text-xs text-slate-300 leading-relaxed">${term.mechanics}</p>
+        <!-- Section 2: Concrete Trade Setup -->
+        <div class="p-4 bg-dark-card rounded-2xl border border-dark-border space-y-3 shadow-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+              <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">2. High-Probability Trade Setup</h4>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-950 text-amber-300 border border-amber-800">${item.tradeSetup.type}</span>
+          </div>
+
+          <div class="p-3 bg-dark-surface rounded-xl border border-dark-border space-y-2 font-mono text-[11px]">
+            <div class="text-xs font-bold text-amber-300 font-sans">${item.tradeSetup.title}</div>
+            <div class="text-slate-300 font-sans"><strong>Precondition:</strong> ${item.tradeSetup.precondition}</div>
+            <div class="text-slate-300 font-sans"><strong>Trigger:</strong> ${item.tradeSetup.trigger}</div>
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <div class="p-2 bg-dark-card rounded border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Entry Point</span>
+                <span class="text-xs font-bold text-emerald-400">${item.tradeSetup.entry}</span>
+              </div>
+              <div class="p-2 bg-dark-card rounded border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Stop Loss</span>
+                <span class="text-xs font-bold text-rose-400">${item.tradeSetup.stopLoss}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-dark-card rounded border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Target 1 (Partial)</span>
+                <span class="text-xs font-bold text-cyan-300">${item.tradeSetup.target1}</span>
+              </div>
+              <div class="p-2 bg-dark-card rounded border border-dark-border">
+                <span class="text-[10px] text-slate-400 block">Target 2 (Runner)</span>
+                <span class="text-xs font-bold text-cyan-400">${item.tradeSetup.target2}</span>
+              </div>
+            </div>
+            <div class="text-[10px] text-slate-400 pt-1 font-sans">Expected Edge: <strong class="text-amber-400 font-mono">${item.tradeSetup.rr}</strong></div>
+          </div>
         </div>
 
-        <div class="space-y-1.5">
-          <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase">Chart & Order Flow Signature</span>
-          <p class="text-xs text-slate-300 leading-relaxed">${term.chartSigns}</p>
+        <!-- Section 3: AMT Rules & Context -->
+        <div class="p-4 bg-dark-card rounded-2xl border border-dark-border space-y-2 shadow-sm">
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider font-mono">3. Governing AMT Rules</h4>
+          </div>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+            ${item.amtRules.map(r => `<li>${r}</li>`).join('')}
+          </ul>
         </div>
 
-        <div class="p-3 bg-dark-base rounded-xl border border-dark-border space-y-1">
-          <span class="text-[10px] font-mono font-bold text-cyan-300 uppercase">Execution Rule of Thumb</span>
-          <p class="text-xs text-cyan-100 leading-relaxed">${term.rules}</p>
+        <!-- Section 4: Tips, Tricks & DOM Signature -->
+        <div class="p-4 bg-dark-surface rounded-2xl border border-cyan-900/50 space-y-2 shadow-sm">
+          <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase">4. Pro Tips & Footprint/DOM Telltales</span>
+          <ul class="text-xs text-slate-200 space-y-1.5 list-disc list-inside">
+            ${item.tipsAndTricks.map(t => `<li>${t}</li>`).join('')}
+          </ul>
         </div>
 
-        <div class="p-3 bg-rose-950/20 border border-rose-900/40 rounded-xl space-y-1">
-          <span class="text-[10px] font-mono font-bold text-rose-400 uppercase">Common Trader Trap</span>
-          <p class="text-xs text-rose-200 leading-relaxed">${term.mistake}</p>
+        <!-- Section 5: Common Retail Trap -->
+        <div class="p-4 bg-rose-950/20 border border-rose-900/50 rounded-2xl space-y-1.5 shadow-sm">
+          <span class="text-[10px] font-mono font-bold text-rose-400 uppercase">5. Common Retail Trap to Avoid</span>
+          <p class="text-xs text-rose-200 leading-relaxed">${item.traps}</p>
         </div>
       `;
 
-      document.getElementById("term-drawer-backdrop").classList.remove("hidden");
-      document.getElementById("term-drawer").classList.remove("hidden");
+      document.getElementById("deepdive-backdrop").classList.remove("hidden");
+      document.getElementById("deepdive-modal").classList.remove("hidden");
     }
 
-    function closeTermDrawer() {
-      document.getElementById("term-drawer-backdrop").classList.add("hidden");
-      document.getElementById("term-drawer").classList.add("hidden");
+    function closeDeepDiveModal() {
+      document.getElementById("deepdive-backdrop").classList.add("hidden");
+      document.getElementById("deepdive-modal").classList.add("hidden");
     }
 
     /* =====================================================================
@@ -1510,10 +1667,10 @@
       const list = document.getElementById("dictionary-list");
       if (!list) return;
 
-      const keys = Object.keys(AMT_TERMS);
+      const keys = Object.keys(AMT_DEEP_DIVES);
       const filtered = keys.filter(k => {
-        const t = AMT_TERMS[k];
-        const text = `${t.name} ${t.category} ${t.definition} ${t.mechanics}`.toLowerCase();
+        const t = AMT_DEEP_DIVES[k];
+        const text = `${t.name} ${t.tag} ${t.subtitle} ${t.overview}`.toLowerCase();
         return text.includes(filter.toLowerCase());
       });
 
@@ -1523,17 +1680,17 @@
       }
 
       list.innerHTML = filtered.map(k => {
-        const t = AMT_TERMS[k];
+        const t = AMT_DEEP_DIVES[k];
         return `
-          <div onclick="closeTermDictionaryModal(); openTermDrawer('${k}')" class="py-3 px-2 hover:bg-dark-hover rounded-xl cursor-pointer transition flex items-start justify-between group">
+          <div onclick="closeTermDictionaryModal(); openDeepDive('${k}')" class="btn-modern py-3.5 px-3 hover:bg-dark-cardHover rounded-xl cursor-pointer transition flex items-start justify-between group">
             <div class="space-y-1 pr-3">
               <div class="flex items-center space-x-2">
                 <span class="text-xs font-bold text-white group-hover:text-cyan-400 transition font-mono">${t.name}</span>
-                <span class="text-[9px] font-mono uppercase bg-dark-base px-2 py-0.5 rounded text-slate-400 border border-dark-border">${t.category}</span>
+                <span class="text-[9px] font-mono uppercase bg-dark-base px-2 py-0.5 rounded text-cyan-300 border border-dark-border">${t.tag}</span>
               </div>
-              <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">${t.definition}</p>
+              <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">${t.subtitle}</p>
             </div>
-            <span class="text-cyan-400 text-xs font-mono font-bold">&rarr;</span>
+            <span class="text-cyan-400 text-xs font-mono font-bold group-hover:translate-x-1 transition-transform">&rarr;</span>
           </div>
         `;
       }).join('');
@@ -1552,7 +1709,7 @@
       navContainer.innerHTML = MODULES.map((m, idx) => {
         const isDone = completedModules.includes(m.id);
         return `
-          <button onclick="showModule('${m.id}')" id="nav-btn-${m.id}" class="w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between group transition ${currentModuleId === m.id ? 'bg-cyan-500/10 text-cyan-400 font-bold border border-cyan-800/50' : 'text-slate-300 hover:bg-dark-hover hover:text-white'}">
+          <button onclick="showModule('${m.id}')" id="nav-btn-${m.id}" class="btn-modern w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between group transition ${currentModuleId === m.id ? 'bg-cyan-500/10 text-cyan-400 font-bold border border-cyan-800/50 shadow-glow-cyan' : 'text-slate-300 hover:bg-dark-cardHover hover:text-white border border-transparent'}">
             <div class="flex items-center space-x-2.5 truncate">
               <span class="w-5 h-5 rounded-md flex items-center justify-center font-mono text-[10px] ${isDone ? 'bg-emerald-500/20 text-emerald-400' : 'bg-dark-card text-slate-500'}">
                 ${isDone ? '✓' : (idx + 1)}
@@ -1569,8 +1726,17 @@
       const viewport = document.getElementById("lesson-viewport");
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      // Dismiss hero banner once any module is loaded
+      const banner = document.getElementById("hero-welcome-banner");
+      if (banner && heroVisible) {
+        banner.style.display = "none";
+        heroVisible = false;
+        updateHeroToggleLabel(false);
+      }
+
       if (moduleId === 'interactive-tools') {
         renderInteractiveToolsView(viewport);
+        document.getElementById("current-lesson-crumb").textContent = "Setup Calculators";
         updateNavHighlight();
         toggleSidebar(false);
         return;
@@ -1578,17 +1744,20 @@
 
       if (moduleId === 'mastery-drills') {
         renderDrillsView(viewport);
+        document.getElementById("current-lesson-crumb").textContent = "Self-Assessment Drills";
         updateNavHighlight();
         toggleSidebar(false);
         return;
       }
 
       const mod = MODULES.find(m => m.id === moduleId) || MODULES[0];
+      document.getElementById("current-lesson-crumb").textContent = `Module ${MODULES.indexOf(mod) + 1}: ${mod.tag}`;
+
       viewport.innerHTML = `
         <article class="space-y-6">
           <div class="border-b border-dark-border pb-4 space-y-1">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">${mod.tag}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">${mod.tag}</span>
               <span class="text-xs text-slate-400 font-mono">Module ${MODULES.indexOf(mod) + 1} of ${MODULES.length}</span>
             </div>
             <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">${mod.title}</h1>
@@ -1610,9 +1779,9 @@
         const btn = document.getElementById(`nav-btn-${m.id}`);
         if (btn) {
           if (m.id === currentModuleId) {
-            btn.className = "w-full text-left px-3 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition bg-cyan-500/10 text-cyan-400 border border-cyan-800/50";
+            btn.className = "btn-modern w-full text-left px-3 py-2.5 rounded-xl text-xs font-bold flex items-center justify-between transition bg-cyan-500/10 text-cyan-400 border border-cyan-800/50 shadow-glow-cyan";
           } else {
-            btn.className = "w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between text-slate-300 hover:bg-dark-hover hover:text-white transition";
+            btn.className = "btn-modern w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium flex items-center justify-between text-slate-300 hover:bg-dark-cardHover hover:text-white border border-transparent transition";
           }
         }
       });
@@ -1671,9 +1840,9 @@
         const btn = document.getElementById(`tab-${k}`);
         if (btn) {
           if (k === shapeKey) {
-            btn.className = "px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs font-mono shadow-md transition";
+            btn.className = "btn-modern px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs font-mono shadow-glow-cyan transition";
           } else {
-            btn.className = "px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition";
+            btn.className = "btn-modern px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition";
           }
         }
       });
@@ -1694,7 +1863,7 @@
 
             <div class="text-xs text-slate-300 space-y-1.5 pt-1">
               <p><strong>Auction Context:</strong> ${data.description}</p>
-              <p><strong>Actionable Tactics:</strong> <span class="text-cyan-300">${data.tactics}</span></p>
+              <p><strong>Actionable Tactics:</strong> <span class="text-cyan-300 font-semibold">${data.tactics}</span></p>
             </div>
           </div>
         `;
@@ -1708,33 +1877,33 @@
       container.innerHTML = `
         <div class="space-y-8">
           <div class="border-b border-dark-border pb-4 space-y-1">
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">Interactive Execution</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-cyan-950 text-cyan-300 border border-cyan-800/60">Interactive Execution</span>
             <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">AMT Trade Calculators & Diagnostic Wizards</h1>
             <p class="text-xs sm:text-sm text-slate-400">Calculate 80% Rule parameters and diagnose RTH opening conviction.</p>
           </div>
 
           <!-- Tool 1: 80% Rule Calculator -->
-          <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4 shadow-xl">
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
             <div class="flex items-center justify-between">
               <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-glow-amber"></span>
                 <span>The 80% Rule Execution Calculator</span>
               </h2>
-              <span class="text-[11px] text-amber-400 font-mono">Value Area Acceptance</span>
+              <span class="text-[11px] text-amber-400 font-mono font-semibold">Value Area Acceptance</span>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAH</label>
-                <input id="calc-vah" type="number" step="0.25" value="5020.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400">
+                <input id="calc-vah" type="number" step="0.25" value="5020.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
               </div>
               <div>
                 <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day POC</label>
-                <input id="calc-poc" type="number" step="0.25" value="5005.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400">
+                <input id="calc-poc" type="number" step="0.25" value="5005.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
               </div>
               <div>
                 <label class="block text-[11px] font-mono text-slate-400 mb-1">Prior Day VAL</label>
-                <input id="calc-val" type="number" step="0.25" value="4990.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400">
+                <input id="calc-val" type="number" step="0.25" value="4990.00" oninput="calculate80Rule()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-400 shadow-inner">
               </div>
             </div>
 
@@ -1753,16 +1922,16 @@
           </div>
 
           <!-- Tool 2: Dalton Opening Diagnostic Engine -->
-          <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4 shadow-xl">
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
             <h2 class="text-sm font-bold text-white uppercase tracking-wider font-mono flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></span>
               <span>Dalton Opening Diagnostic Engine</span>
             </h2>
 
             <div class="space-y-3">
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Step 1: Where did price open relative to prior Value Area?</label>
-                <select id="diag-location" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                <select id="diag-location" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
                   <option value="gap">Outside Prior Range (Gap Open)</option>
                   <option value="outside-va">Outside Value Area, but inside Prior Range</option>
                   <option value="inside-va">Inside Prior Value Area</option>
@@ -1771,7 +1940,7 @@
 
               <div>
                 <label class="block text-xs font-medium text-slate-300 mb-1">Step 2: How did the first 30 minutes (Period A) behave?</label>
-                <select id="diag-behavior" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                <select id="diag-behavior" onchange="diagnoseOpen()" class="w-full bg-dark-surface border border-dark-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
                   <option value="drive">Drove violently in one direction with zero pullback</option>
                   <option value="test-drive">Briefly tested a reference level, failed, and drove opposite</option>
                   <option value="reversal">Attempted to auction in one direction, failed, swept whole range</option>
@@ -1809,19 +1978,19 @@
 
         container.innerHTML = `
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center font-mono">
-            <div class="p-2 bg-dark-card rounded border border-rose-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-rose-900/40">
               <span class="text-[10px] text-slate-400 block">Short Entry Trigger</span>
               <span class="text-sm font-bold text-rose-400">&le; ${entry}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-dark-border">
+            <div class="p-2 bg-dark-card rounded-lg border border-dark-border">
               <span class="text-[10px] text-slate-400 block">Stop Loss</span>
               <span class="text-sm font-bold text-slate-300">${stop}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-amber-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-amber-900/40">
               <span class="text-[10px] text-slate-400 block">Target 1 (POC)</span>
               <span class="text-sm font-bold text-amber-400">${t1}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-emerald-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-emerald-900/40">
               <span class="text-[10px] text-slate-400 block">Target 2 (VAL)</span>
               <span class="text-sm font-bold text-emerald-400">${t2}</span>
             </div>
@@ -1841,19 +2010,19 @@
 
         container.innerHTML = `
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center font-mono">
-            <div class="p-2 bg-dark-card rounded border border-emerald-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-emerald-900/40">
               <span class="text-[10px] text-slate-400 block">Long Entry Trigger</span>
               <span class="text-sm font-bold text-emerald-400">&ge; ${entry}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-dark-border">
+            <div class="p-2 bg-dark-card rounded-lg border border-dark-border">
               <span class="text-[10px] text-slate-400 block">Stop Loss</span>
               <span class="text-sm font-bold text-slate-300">${stop}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-amber-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-amber-900/40">
               <span class="text-[10px] text-slate-400 block">Target 1 (POC)</span>
               <span class="text-sm font-bold text-amber-400">${t1}</span>
             </div>
-            <div class="p-2 bg-dark-card rounded border border-emerald-900/40">
+            <div class="p-2 bg-dark-card rounded-lg border border-emerald-900/40">
               <span class="text-[10px] text-slate-400 block">Target 2 (VAH)</span>
               <span class="text-sm font-bold text-emerald-400">${t2}</span>
             </div>
@@ -1909,7 +2078,7 @@
       container.innerHTML = `
         <div class="space-y-6">
           <div class="border-b border-dark-border pb-4 space-y-1">
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800/60">Practical Mastery</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-950 text-amber-300 border border-amber-800/60">Practical Mastery</span>
             <h1 class="text-xl sm:text-3xl font-extrabold text-white tracking-tight">Interactive Self-Assessment Scenarios</h1>
             <p class="text-xs sm:text-sm text-slate-400">Test your institutional execution decisions with real historical scenarios.</p>
           </div>
@@ -1918,13 +2087,13 @@
             ${DRILLS.map((drill, idx) => {
               const selectedIdx = quizAnswers[drill.id];
               return `
-                <div class="bg-dark-card border border-dark-border rounded-xl p-5 space-y-4">
+                <div class="bg-dark-card border border-dark-border rounded-2xl p-5 space-y-4 shadow-card">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">${drill.title}</span>
                     <span class="text-[11px] text-slate-400">Question ${idx + 1} of ${DRILLS.length}</span>
                   </div>
 
-                  <div class="p-3 bg-dark-surface rounded-lg border border-dark-border text-xs text-slate-300 leading-relaxed">
+                  <div class="p-3.5 bg-dark-surface rounded-xl border border-dark-border text-xs text-slate-300 leading-relaxed shadow-inner">
                     <strong>Context:</strong> ${drill.context}
                   </div>
 
@@ -1933,11 +2102,11 @@
                   <div class="space-y-2">
                     ${drill.options.map((opt, optIdx) => {
                       const isSelected = selectedIdx === optIdx;
-                      let btnClass = "w-full text-left p-3 rounded-xl border text-xs transition ";
+                      let btnClass = "btn-modern w-full text-left p-3.5 rounded-xl border text-xs transition ";
                       if (selectedIdx === undefined) {
-                        btnClass += "bg-dark-surface border-dark-border text-slate-300 hover:border-slate-500 hover:text-white";
+                        btnClass += "bg-dark-surface border-dark-border text-slate-300 hover:border-slate-500 hover:text-white shadow-sm";
                       } else if (opt.correct) {
-                        btnClass += "bg-emerald-950/40 border-emerald-600 text-emerald-300 font-bold";
+                        btnClass += "bg-emerald-950/40 border-emerald-600 text-emerald-300 font-bold shadow-glow-emerald";
                       } else if (isSelected && !opt.correct) {
                         btnClass += "bg-rose-950/40 border-rose-600 text-rose-300";
                       } else {
@@ -1956,7 +2125,7 @@
                   </div>
 
                   ${selectedIdx !== undefined ? `
-                    <div class="p-3 rounded-xl border text-xs leading-relaxed ${drill.options[selectedIdx].correct ? 'bg-emerald-950/30 border-emerald-800 text-emerald-200' : 'bg-rose-950/30 border-rose-800 text-rose-200'}">
+                    <div class="p-3.5 rounded-xl border text-xs leading-relaxed ${drill.options[selectedIdx].correct ? 'bg-emerald-950/30 border-emerald-800 text-emerald-200' : 'bg-rose-950/30 border-rose-800 text-rose-200'}">
                       <strong>${drill.options[selectedIdx].correct ? '✓ Correct Decision:' : '✗ Incorrect Decision:'}</strong>
                       ${drill.options[selectedIdx].explanation}
                     </div>
@@ -2006,11 +2175,11 @@
         navigator.share({
           title: "AMT Master Trading Academy",
           text: "Institutional Auction Market Theory & Market Profile Master Guide",
-          url: window.location.href
+          url: "https://flowstatefinancial.github.io/amt-academy/"
         }).catch(() => {});
       } else {
-        navigator.clipboard.writeText(window.location.href);
-        alert("Academy URL copied to clipboard! Share it with your phone or colleagues.");
+        navigator.clipboard.writeText("https://flowstatefinancial.github.io/amt-academy/");
+        alert("Academy URL copied to clipboard: https://flowstatefinancial.github.io/amt-academy/");
       }
     }
 
