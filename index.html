@@ -6,7 +6,7 @@
   <title>AMT Master Academy | Institutional Auction Market Theory</title>
   
   <!-- PWA & Mobile Meta Tags -->
-  <meta name="theme-color" content="#090d16">
+  <meta name="theme-color" content="#080c14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="AMT Academy">
@@ -141,7 +141,7 @@
         <div>
           <div class="flex items-center space-x-1.5">
             <h1 class="text-sm font-extrabold text-white tracking-wide uppercase font-mono leading-none">AMT Academy</h1>
-            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-cyan-950 text-cyan-300 border border-cyan-800">Dalton Edition</span>
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-cyan-950 text-cyan-300 border border-cyan-800">Dalton Canon</span>
           </div>
           <span class="text-[10px] text-slate-400 font-medium">Institutional Market Profile</span>
         </div>
@@ -153,7 +153,7 @@
       <!-- Global Search / Encyclopedia -->
       <button onclick="openTermDictionaryModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-dark-card hover:bg-dark-cardHover border border-dark-border hover:border-cyan-500/40 text-slate-300 hover:text-white text-xs font-semibold shadow-sm transition">
         <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <span class="hidden sm:inline">AMT Encyclopedia</span>
+        <span class="hidden sm:inline">AMT Encyclopedia (28 Terms)</span>
       </button>
 
       <!-- Progress Bar (Compact) -->
@@ -214,7 +214,7 @@
     <!-- ================= CONTENT AREA ================= -->
     <main id="main-content" class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 max-w-5xl mx-auto w-full pb-28 lg:pb-14 space-y-6">
       
-      <!-- WELCOME HERO BANNER (Dismisses when Start Module is clicked) -->
+      <!-- WELCOME HERO BANNER (Dismissed when Start Module is clicked) -->
       <section id="hero-welcome-banner" class="bg-gradient-to-br from-dark-surface via-dark-card to-dark-base border border-dark-border rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-card transition-all duration-300">
         <div class="absolute -right-12 -bottom-12 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 space-y-4">
@@ -282,7 +282,7 @@
       <span class="text-[10px] font-semibold">Lessons</span>
     </button>
     <button onclick="openTermDictionaryModal()" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
       <span class="text-[10px] font-semibold">Glossary</span>
     </button>
     <button onclick="showModule('interactive-tools')" class="btn-modern flex flex-col items-center space-y-1 text-slate-400 hover:text-cyan-400">
@@ -314,7 +314,7 @@
       <div class="space-y-1 pr-4">
         <div class="flex items-center space-x-2">
           <span id="deepdive-tag" class="text-[10px] font-mono uppercase font-bold text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-800">AMT Sub-Lesson</span>
-          <span class="text-[10px] font-mono text-slate-500 uppercase">Interactive Master Guide</span>
+          <span class="text-[10px] font-mono text-slate-500 uppercase">Dalton Master Guide</span>
         </div>
         <h3 id="deepdive-title" class="text-xl font-bold text-white font-mono tracking-tight">Term Title</h3>
         <p id="deepdive-subtitle" class="text-xs text-slate-400">Detailed institutional breakdown, trade setups, and execution rules.</p>
@@ -356,7 +356,7 @@
   </div>
 
   <!-- ================= MODAL: SHARE ================= -->
-  <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md hidden">
+  <div id="share-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden">
     <div class="bg-dark-surface border border-dark-border rounded-2xl w-full max-w-md p-6 space-y-5 shadow-2xl relative">
       <button onclick="closeShareModal()" class="btn-modern absolute top-4 right-4 text-slate-400 hover:text-white p-1">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -400,8 +400,7 @@
   <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
     /* =====================================================================
-       EXTENSIVE SUB-LESSONS & INSTITUTIONAL AMT ENCYCLOPEDIA
-       Contains: Dalton Concepts, Setups, AMT Rules, Tips & Tricks, Traps
+       COMPLETE 28-TERM INSTITUTIONAL ENCYCLOPEDIA & SUB-LESSONS
        ===================================================================== */
     const AMT_DEEP_DIVES = {
       'balance': {
@@ -499,6 +498,35 @@
         ],
         traps: "Taking a trade right in the middle of the Value Area near the POC. The chop will stop you out repeatedly before any move occurs."
       },
+      'vah-val': {
+        name: "VAH & VAL (Value Area Boundaries)",
+        tag: "Profile Construct",
+        subtitle: "The outer edges of fair value that delineate accepted from unfair prices.",
+        overview: "Value Area High (VAH) is the upper boundary of the 68.2% distribution, above which prices were considered expensive. Value Area Low (VAL) is the lower boundary, below which prices were considered cheap.",
+        daltonPrinciples: [
+          "Serve as key inflection levels separating balance from imbalance.",
+          "Responsive traders defend VAH/VAL; initiative traders break through them to build new value."
+        ],
+        tradeSetup: {
+          title: "VA Boundary Order Flow Absorption Defense",
+          type: "Perimeter Reaction",
+          precondition: "Price approaches VAH or VAL in a balanced market session.",
+          trigger: "Tape shows high volume printing into the level but zero price advancement (passive absorption).",
+          entry: "Enter in direction of the bounce.",
+          stopLoss: "2-3 ticks beyond the extreme wick.",
+          target1: "Session POC.",
+          target2: "Opposite boundary.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: Price accepting outside VAH/VAL with 2x 30m closes invalidates the level as resistance/support.",
+          "Rule 2: Volume must validate any break of VAH/VAL."
+        ],
+        tipsAndTricks: [
+          "Mark prior day VAH/VAL on your charts every morning before the RTH opening bell."
+        ],
+        traps: "Treating VAH/VAL as static lines instead of dynamic zones."
+      },
       'poc': {
         name: "Point of Control (POC / VPOC / TPOC)",
         tag: "Profile Construct",
@@ -510,7 +538,7 @@
           "Historical POCs left un-retested in subsequent days become 'Virgin' or 'Naked' POCs (nPOCs), which act as future targets."
         ],
         tradeSetup: {
-          title: "Naked POC Magnetic Magnet Sweep",
+          title: "Naked POC Magnetic Sweep",
           type: "Targeted Liquidity Run",
           precondition: "Price breaks out of a range with a clear virgin nPOC located 20-50 ticks away with no major HVNs in between.",
           trigger: "Initiative breakout above key resistance with expanding volume.",
@@ -528,6 +556,64 @@
           "If price touches a Naked POC and immediately shows heavy delta absorption, it frequently acts as a sharp reversal point."
         ],
         traps: "Attempting to initiate new directional trades directly on the developing POC. Price will chop sideways around it."
+      },
+      'developing-poc': {
+        name: "Developing POC (Migrating Fair Value)",
+        tag: "Profile Construct",
+        subtitle: "The dynamic, real-time focal point of volume across the live session.",
+        overview: "As the trading day evolves, the POC shifts to reflect new volume accumulations. Tracking how and where the developing POC migrates reveals whether the institutions are building value higher, lower, or maintaining balance.",
+        daltonPrinciples: [
+          "A migrating POC is the definitive proof of a Trend Day.",
+          "A stationary POC signals a Normal or Neutral day."
+        ],
+        tradeSetup: {
+          title: "Developing POC Staircase Continuation",
+          type: "Trend Following",
+          precondition: "Developing POC steps higher 2+ times during periods B, C, and D.",
+          trigger: "Pullback to the developing POC with positive delta absorption.",
+          entry: "Long at developing POC.",
+          stopLoss: "Below the prior TPO period low.",
+          target1: "New daily high.",
+          target2: "Initial Balance 2x extension.",
+          rr: "3.5:1."
+        },
+        amtRules: [
+          "Rule 1: Never short when developing POC is migrating higher.",
+          "Rule 2: Never long when developing POC is migrating lower."
+        ],
+        tipsAndTricks: [
+          "Quantower and Sierra Chart can plot developing POC as a stepping line across your intraday chart."
+        ],
+        traps: "Assuming a high-volume spike is permanent before the 30-minute period closes."
+      },
+      'initial-balance': {
+        name: "Initial Balance (IB - Periods A & B)",
+        tag: "Dalton Mechanics",
+        subtitle: "The first hour of RTH trading that sets the daily institutional benchmark.",
+        overview: "The Initial Balance comprises the high and low established during the first hour of regular trading hours (09:30 to 10:30 AM EST). It represents the initial boundary established by day timeframe traders and opening institutional flow.",
+        daltonPrinciples: [
+          "The width of the IB forecasts the day type and volatility potential.",
+          "A narrow IB has high odds of an initiative range extension; a wide IB often holds for the entire day."
+        ],
+        tradeSetup: {
+          title: "Initial Balance Range Extension Breakout",
+          type: "Momentum Extension",
+          precondition: "Initial Balance range is narrower than 5-day average IB width.",
+          trigger: "Period C or D breaks above IB High with volume surge.",
+          entry: "Enter in direction of the break.",
+          stopLoss: "Back inside the IB range (midpoint of IB).",
+          target1: "100% IB extension (1x IB range added to IB high).",
+          target2: "200% IB extension.",
+          rr: "3:1 to 4:1."
+        },
+        amtRules: [
+          "Rule 1: Do not execute large directional breakout trades before the IB completes at 10:30 AM.",
+          "Rule 2: A wide IB in Period A/B signals responsive trading for the remainder of the session."
+        ],
+        tipsAndTricks: [
+          "Measure IB width against 10-day ATR to quantify relative compression."
+        ],
+        traps: "Overtrading the chop inside the IB during periods A and B."
       },
       'excess-tail': {
         name: "Excess / Rejection Tail",
@@ -587,6 +673,180 @@
         ],
         traps: "Placing short stops just above a poor high. Retail puts their stops there, making it an irresistible magnet for market makers."
       },
+      'single-prints': {
+        name: "Single Prints (Dynamic Trend S/R)",
+        tag: "Structural Feature",
+        subtitle: "Isolated single TPO letters in the profile body indicating violent directional speed.",
+        overview: "Single prints appear as a thin single-letter column in the interior of a profile. They demonstrate aggressive Other Timeframe initiative volume that traversed ticks without allowing two-way trade to establish value.",
+        daltonPrinciples: [
+          "Single prints confirm institutional trend conviction.",
+          "They act as formidable dynamic support on pullbacks in uptrends, and resistance in downtrends."
+        ],
+        tradeSetup: {
+          title: "Single Print Retest & Bounce",
+          type: "Trend Pullback",
+          precondition: "Market printed single prints during an early directional burst.",
+          trigger: "First pullback touches the top of the single print zone and absorbs selling orders.",
+          entry: "Enter in trend direction on first green candle.",
+          stopLoss: "Below the bottom of the single print zone.",
+          target1: "Session high.",
+          target2: "Runner target.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: If single prints are completely filled and accepted, the trend is officially invalidated.",
+          "Rule 2: Do not fade into single prints."
+        ],
+        tipsAndTricks: [
+          "Mark the exact high and low price of the single print gap on your chart as a key institutional zone."
+        ],
+        traps: "Trying to short into single prints on a Trend Day."
+      },
+      'lvn': {
+        name: "Low Volume Node (LVN / Slippage Zone)",
+        tag: "Volume Profile",
+        subtitle: "A price trough of low participation where price accelerates rapidly.",
+        overview: "An LVN is an indentation in the volume profile where minimal volume traded. It represents a zone of rejection where participants refused to trade, causing price to slide through rapidly like a slip-and-slide.",
+        daltonPrinciples: [
+          "Price moves rapidly through LVNs and slowly through HVNs.",
+          "LVNs delineate separate balance areas."
+        ],
+        tradeSetup: {
+          title: "LVN Vacuum Squeeze",
+          type: "Momentum Squeeze",
+          precondition: "Price approaches an LVN between two high-volume distributions.",
+          trigger: "Break into the LVN with volume spike.",
+          entry: "Enter momentum trade through the LVN.",
+          stopLoss: "Back on the entry HVN edge.",
+          target1: "The HVN on the other side of the LVN.",
+          target2: "Opposite extreme.",
+          rr: "2.5:1."
+        },
+        amtRules: [
+          "Rule 1: Never place a stop loss directly in the center of an LVN due to slippage.",
+          "Rule 2: Use LVNs as zones of traversal, not profit targets."
+        ],
+        tipsAndTricks: [
+          "Watch for rapid tape acceleration when price enters an LVN."
+        ],
+        traps: "Expecting support/resistance inside an LVN."
+      },
+      'hvn': {
+        name: "High Volume Node (HVN / Gravitational Glue)",
+        tag: "Volume Profile",
+        subtitle: "A prominent peak where massive volume accumulated and price accepted.",
+        overview: "An HVN is a wide bulge in the volume profile where substantial two-way trade occurred. It acts as gravitational glue that slows momentum, absorbs market orders, and creates rotational consolidation.",
+        daltonPrinciples: [
+          "HVNs represent established fair value.",
+          "Price tends to stall and rotate when it encounters historical HVNs."
+        ],
+        tradeSetup: {
+          title: "HVN Pullback Defense",
+          type: "Trend Value Retest",
+          precondition: "Price broke out from an HVN and returns to test it.",
+          trigger: "Price enters the HVN and absorbs selling pressure.",
+          entry: "Enter in direction of original breakout.",
+          stopLoss: "Below the HVN node peak.",
+          target1: "Prior swing extreme.",
+          target2: "Measured move.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: Expect volatility to decrease and chop to increase when price enters an HVN.",
+          "Rule 2: Breakouts from HVNs require heavy volume confirmation."
+        ],
+        tipsAndTricks: [
+          "Take partial profits when entering large multi-day HVNs."
+        ],
+        traps: "Expecting rapid trend moves while price is pinned inside a giant HVN."
+      },
+      'naked-poc': {
+        name: "Virgin / Naked POC (nPOC)",
+        tag: "Profile Construct",
+        subtitle: "An un-revisited Point of Control from a prior session.",
+        overview: "A Naked POC is a Point of Control from a previous day that has never been touched by price in any subsequent session. Because large commercial positioning was established there, it serves as a high-probability institutional magnet.",
+        daltonPrinciples: [
+          "Act as premier targets during trend corrections or range expansions.",
+          "The longer a naked POC remains untouched, the more significant its reaction when retested."
+        ],
+        tradeSetup: {
+          title: "Naked POC Magnetic Retest",
+          type: "Target Sweep",
+          precondition: "Unfinished nPOC located within the expected daily ATR range.",
+          trigger: "Break of prior day high/low in direction of the nPOC.",
+          entry: "Ride the momentum toward the nPOC.",
+          stopLoss: "Behind the session IB midpoint.",
+          target1: "Exact tick of the Naked POC.",
+          target2: "Next key reference level.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: Always keep a running list of active Naked POCs on your trading platform.",
+          "Rule 2: Don't blindly fade an nPOC on first touch without order flow exhaustion."
+        ],
+        tipsAndTricks: [
+          "Combine Naked POC with higher timeframe fibonacci or VWAP levels for confluence."
+        ],
+        traps: "Assuming every nPOC must be hit immediately. Some nPOCs can remain untouched for months in strong bull runs."
+      },
+      'anomalies': {
+        name: "Profile Anomalies (Structural Weaknesses)",
+        tag: "Structural Feature",
+        subtitle: "Asymmetrical indentations or ledges indicating emotional, rushed trading.",
+        overview: "Anomalies are irregular gaps, flat edges, or missing volume nodes in what should otherwise be a smooth profile distribution. They demonstrate hurried, emotional execution by market participants.",
+        daltonPrinciples: [
+          "Anomalies represent poor structural foundation in the market.",
+          "Markets frequently rotate back to 'clean up' and repair anomalies before continuing."
+        ],
+        tradeSetup: {
+          title: "Profile Anomaly Repair Fade",
+          type: "Mean Reversion",
+          precondition: "Current day rallied rapidly leaving a jagged anomaly in the middle of the profile.",
+          trigger: "Price stalls at highs and breaks below developing POC.",
+          entry: "Short targeting the anomaly fill.",
+          stopLoss: "Above session high.",
+          target1: "Exact price of the anomaly notch.",
+          target2: "VAL.",
+          rr: "2.5:1."
+        },
+        amtRules: [
+          "Rule 1: Profiles built with multiple anomalies are structurally fragile and prone to sharp liquidation breaks.",
+          "Rule 2: A solid trend builds smooth, healthy volume distribution."
+        ],
+        tipsAndTricks: [
+          "Look for anomalies on high-impact news days like CPI or FOMC."
+        ],
+        traps: "Trusting a breakout that left multiple severe anomalies behind."
+      },
+      'one-time-framing': {
+        name: "One-Time Framing (Dalton Trend Hallmark)",
+        tag: "Dalton Mechanics",
+        subtitle: "Successive 30-min periods making continuous higher highs or lower lows.",
+        overview: "One-Time Framing occurs when each successive 30-minute TPO period (A, B, C, D...) makes a higher high and higher low (uptrend) or lower low and lower high (downtrend). It is the single most important diagnostic of an institutional Trend Day.",
+        daltonPrinciples: [
+          "Never trade counter to One-Time Framing.",
+          "The trend is only officially challenged when a 30-minute period trades through the prior period's extreme."
+        ],
+        tradeSetup: {
+          title: "One-Time Framing Bar Low Trail",
+          type: "Trend Management",
+          precondition: "Market is one-time framing for 3+ consecutive TPO periods.",
+          trigger: "Each new 30-min period opens and extends the trend.",
+          entry: "Join on shallow 5-min pullbacks.",
+          stopLoss: "Trail stop 1 tick below the low of the preceding 30-min period.",
+          target1: "Hold runners until one-time framing is officially broken.",
+          target2: "Closing bell exit.",
+          rr: "5:1 or higher."
+        },
+        amtRules: [
+          "Rule 1: Do NOT take counter-trend scalp trades while One-Time Framing is active.",
+          "Rule 2: A break of one-time framing usually leads to a balance period or consolidation, not an immediate violent reversal."
+        ],
+        tipsAndTricks: [
+          "Set an audio alert on your platform whenever the low/high of the previous 30-min period is violated."
+        ],
+        traps: "Fading higher highs simply because 'it feels like it has gone up too much'."
+      },
       'open-drive': {
         name: "Open-Drive (Dalton Opening Type)",
         tag: "Dalton Mechanics",
@@ -617,6 +877,93 @@
         ],
         traps: "Assuming the market 'gapped too much' and must fill the gap immediately. Gaps on Open-Drive days often do not fill for days or weeks."
       },
+      'open-test-drive': {
+        name: "Open-Test-Drive (Dalton Opening Type)",
+        tag: "Dalton Mechanics",
+        subtitle: "Opening test of key level followed by violent opposite drive.",
+        overview: "Price opens, briefly probes an important prior reference level (e.g. prior day high/low, VAH, or overnight extreme), finds fierce responsive rejection, and then drives aggressively in the opposite direction.",
+        daltonPrinciples: [
+          "Demonstrates high conviction after testing and rejecting a key reference point.",
+          "Traps early breakout traders on the wrong side."
+        ],
+        tradeSetup: {
+          title: "Open-Test-Drive Trap Reversal",
+          type: "Trap & Drive",
+          precondition: "Market tests prior day high at the bell, instantly rejects, and drives through open price.",
+          trigger: "Price breaks below the opening print with heavy selling delta.",
+          entry: "Short upon break below opening price.",
+          stopLoss: "1 tick above the failed test high.",
+          target1: "Prior day POC.",
+          target2: "Prior day VAL.",
+          rr: "4:1."
+        },
+        amtRules: [
+          "Rule 1: Enter in direction of the drive once the test has decisively failed.",
+          "Rule 2: Target the opposite side of the prior day's range."
+        ],
+        tipsAndTricks: [
+          "Watch for negative delta absorption right at the test high."
+        ],
+        traps: "Holding onto positions in the direction of the initial failed test."
+      },
+      'open-rejection-reverse': {
+        name: "Open-Rejection-Reverse (Dalton Opening Type)",
+        tag: "Dalton Mechanics",
+        subtitle: "Probing in one direction, meeting opposing institutional force, and reversing.",
+        overview: "Price attempts to auction in one direction, encounters overwhelming opposing participation, reverses completely, and traverses through the entire opening range to auction outward on the other side.",
+        daltonPrinciples: [
+          "Indicates responsive participants overpowered the early initiative attempt.",
+          "Often forms a Neutral Day or wide Normal Variation Day."
+        ],
+        tradeSetup: {
+          title: "Rejection-Reverse Full Range Sweep",
+          type: "Range Traversal",
+          precondition: "Period A attempts breakout, fails, and reverses back through the open print.",
+          trigger: "Break of Period A opposite extreme.",
+          entry: "Join the reversal.",
+          stopLoss: "Midpoint of the opening range.",
+          target1: "Opposite side of prior day Value Area.",
+          target2: "Prior day extreme.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: Wait for price to cross the opening print before confirming the reversal.",
+          "Rule 2: Don't chase until opposing volume confirms."
+        ],
+        tipsAndTricks: [
+          "Look for trapped traders on footprint ladders at the failed extreme."
+        ],
+        traps: "Re-entering in the direction of the initial failed move."
+      },
+      'open-auction': {
+        name: "Open-Auction (Dalton Opening Type)",
+        tag: "Dalton Mechanics",
+        subtitle: "Low conviction opening with quiet rotation overlapping the open price.",
+        overview: "Price opens with zero clear directional conviction, oscillating quietly around the opening price inside prior value. Buyers and sellers are in total equilibrium.",
+        daltonPrinciples: [
+          "Signals a balanced, rotational day (Normal or Neutral day).",
+          "Participants are awaiting fresh information before committing capital."
+        ],
+        tradeSetup: {
+          title: "Open-Auction IB Extremes Scalp",
+          type: "Rotational Scalp",
+          precondition: "Period A and B rotate quietly within prior Value Area.",
+          trigger: "Price touches IB High or IB Low at 10:30 AM without volume breakout.",
+          entry: "Fade back toward the open price.",
+          stopLoss: "2-3 ticks outside IB.",
+          target1: "Opening price / POC.",
+          target2: "Opposite IB boundary.",
+          rr: "2:1."
+        },
+        amtRules: [
+          "Rule 1: Avoid aggressive breakout trades on Open-Auction days.",
+          "Rule 2: Wait for Initial Balance to form before committing capital."
+        ],
+        tipsAndTricks: [
+          "Ideal day for mean-reversion order flow scalping."
+        ],
+        traps: "Expecting a runaway trend day when the open displays zero conviction."
+      },
       'the-80-rule': {
         name: "The 80% Rule (Value Area Acceptance)",
         tag: "Trade Setup",
@@ -645,6 +992,240 @@
           "Use the built-in 80% Rule Calculator in the app toolbar to calculate exact entry, stop, and targets in real time."
         ],
         traps: "Jumping the gun and entering before the second 30-minute bar closes. A single bar can easily poke inside and violently reject back out."
+      },
+      'responsive-activity': {
+        name: "Responsive Activity (Fading Unfair Extremes)",
+        tag: "Participant Psychology",
+        subtitle: "Buying below value or selling above value to restore equilibrium.",
+        overview: "Responsive participants view price excursions away from value as temporary mispricings. They take advantage of unfair highs by selling, and unfair lows by buying, pulling price back toward the Point of Control.",
+        daltonPrinciples: [
+          "Responsive activity stabilizes markets and forms balance brackets.",
+          "Responsive buying occurs strictly BELOW value; responsive selling occurs strictly ABOVE value."
+        ],
+        tradeSetup: {
+          title: "Responsive Value Extreme Reversion",
+          type: "Responsive Fade",
+          precondition: "Market is in balance and trades above prior day VAH.",
+          trigger: "Selling delta prints and price rotates back below VAH.",
+          entry: "Short at VAH re-entry.",
+          stopLoss: "Above swing excess high.",
+          target1: "Session POC.",
+          target2: "Prior VAL.",
+          rr: "3.5:1."
+        },
+        amtRules: [
+          "Rule 1: Responsive trading is only valid in Balanced market contexts.",
+          "Rule 2: Never execute responsive fades against an initiative trend."
+        ],
+        tipsAndTricks: [
+          "Look for delta divergence at highs to confirm responsive sellers are present."
+        ],
+        traps: "Confusing responsive selling with initiative breakdown."
+      },
+      'initiative-activity': {
+        name: "Initiative Activity (Driving New Value)",
+        tag: "Participant Psychology",
+        subtitle: "Buying at or above value, or selling at or below value to establish new price levels.",
+        overview: "Initiative activity requires high conviction because participants are willing to pay an 'expensive' price or sell at a 'cheap' price because they forecast value will move dramatically higher or lower.",
+        daltonPrinciples: [
+          "Initiative activity is the exclusive catalyst for market imbalance and trend days.",
+          "Initiative buying occurs AT or ABOVE value; initiative selling occurs AT or BELOW value."
+        ],
+        tradeSetup: {
+          title: "Initiative Value Migration Breakout",
+          type: "Initiative Trend",
+          precondition: "Price consolidates at VAH and breaks out with heavy volume.",
+          trigger: "First 15-min bar closes above VAH with positive CVD.",
+          entry: "Long on breakout retest.",
+          stopLoss: "Back inside the Value Area.",
+          target1: "1x balance height.",
+          target2: "Naked POC target.",
+          rr: "4:1."
+        },
+        amtRules: [
+          "Rule 1: Always trade with initiative participants when volume confirms.",
+          "Rule 2: Do not take profits too early on initiative trend days."
+        ],
+        tipsAndTricks: [
+          "Initiative buying shows up as stacked buying imbalances on footprint charts."
+        ],
+        traps: "Fading initiative moves because price looks 'too extended'."
+      },
+      'day-timeframe': {
+        name: "Day Timeframe (DTT - Retail & Scalpers)",
+        tag: "Participant Psychology",
+        subtitle: "Market actors who must square their positions before the closing bell.",
+        overview: "Day Timeframe traders include retail scalpers, prop day traders, and intraday algorithms. Because they must close positions by the bell, they have finite holding power and tight stops.",
+        daltonPrinciples: [
+          "DTT participants create intraday liquidity and noise.",
+          "They cannot sustain directional trends on their own.",
+          "Easily trapped at profile extremes when OTF enters."
+        ],
+        tradeSetup: {
+          title: "DTT Stop-Run Squeeze",
+          type: "Liquidity Sweep",
+          precondition: "DTT traders stacked stops just beyond a visible daily high/low.",
+          trigger: "Price probes past the level and stops trigger on the tape.",
+          entry: "Join the stop run or fade the exhaustion.",
+          stopLoss: "Behind the absorption zone.",
+          target1: "Next liquidity pocket.",
+          target2: "POC.",
+          rr: "2.5:1."
+        },
+        amtRules: [
+          "Rule 1: Recognize when the market is purely DTT-driven (overlapping brackets, low volume).",
+          "Rule 2: DTT-driven markets always mean-revert to POC."
+        ],
+        tipsAndTricks: [
+          "Low volume lunchtime trading (11:30 AM - 1:30 PM) is almost exclusively DTT."
+        ],
+        traps: "Expecting institutional continuation when only DTT is participating."
+      },
+      'other-timeframe': {
+        name: "Other Timeframe (OTF - Institutional Capital)",
+        tag: "Participant Psychology",
+        subtitle: "Large institutions, pension funds, and asset managers who drive trends.",
+        overview: "OTF participants operate with deep capital across multi-day, multi-week horizons. They do not care about intraday noise; they execute massive block orders to allocate capital or hedge risk.",
+        daltonPrinciples: [
+          "OTF is the sole force capable of causing sustained market imbalance.",
+          "When OTF enters, price trends in One-Time Framing."
+        ],
+        tradeSetup: {
+          title: "OTF Institutional Momentum Follow",
+          type: "Institutional Trend Following",
+          precondition: "OTF presence confirmed by high volume, expanding range, and single prints.",
+          trigger: "Shallow pullback to 20-period EMA or VWAP.",
+          entry: "Enter with institutional flow.",
+          stopLoss: "Below previous 30-min period low.",
+          target1: "Daily target 2x ATR.",
+          target2: "Multi-day swing target.",
+          rr: "5:1."
+        },
+        amtRules: [
+          "Rule 1: Align your bias with the Other Timeframe.",
+          "Rule 2: Never trade against OTF initiative activity."
+        ],
+        tipsAndTricks: [
+          "OTF presence is verified by expanding volume and wide price ranges."
+        ],
+        traps: "Trying to pick tops and bottoms against institutional order flow."
+      },
+      'delta-absorption': {
+        name: "Passive Delta Absorption (Order Flow Trigger)",
+        tag: "Order Flow Alignment",
+        subtitle: "Aggressive market orders soaked up by passive limit orders without moving price.",
+        overview: "Absorption occurs when aggressive market orders hit the bid or ask in massive quantities, yet price fails to advance. Institutional passive limit orders are absorbing all aggressive flow, signaling imminent exhaustion.",
+        daltonPrinciples: [
+          "Provides the precise micro-timing trigger for macro AMT setups.",
+          "Absorption at key AMT levels (VAH/VAL/POC) offers the lowest risk entries."
+        ],
+        tradeSetup: {
+          title: "Footprint Absorption Reversal",
+          type: "Order Flow Trigger",
+          precondition: "Price reaches key AMT level (VAH/VAL or prior day high/low).",
+          trigger: "Footprint shows high volume (+500 delta) at the high but zero price movement, followed by negative delta candle.",
+          entry: "Short on close of reversal candle.",
+          stopLoss: "1 tick above the absorption cluster.",
+          target1: "POC.",
+          target2: "Opposite Value Area boundary.",
+          rr: "4:1."
+        },
+        amtRules: [
+          "Rule 1: Always check footprint delta at key AMT levels before pulling the trigger.",
+          "Rule 2: Absorption without price advancement signals an institutional wall."
+        ],
+        tipsAndTricks: [
+          "Use Quantower Cluster charts to spot absorption nodes in real time."
+        ],
+        traps: "Buying into positive delta at resistance when price is clearly stalling."
+      },
+      'cvd': {
+        name: "Cumulative Volume Delta (CVD Divergence)",
+        tag: "Order Flow Alignment",
+        subtitle: "Divergence between price action and net buyer/seller market orders.",
+        overview: "CVD tracks the cumulative difference between buyer-initiated and seller-initiated volume. When price makes a higher high but CVD makes a lower high, it confirms aggressive buying is drying up.",
+        daltonPrinciples: [
+          "CVD divergences confirm responsive exhaustion at value area extremes.",
+          "Validates whether a breakout has genuine buying power."
+        ],
+        tradeSetup: {
+          title: "CVD Exhaustion Divergence Fade",
+          type: "Divergence Setup",
+          precondition: "Price prints higher high into resistance; CVD prints lower high.",
+          trigger: "First 5-minute candle closes red with negative delta.",
+          entry: "Short with momentum.",
+          stopLoss: "Above swing high.",
+          target1: "Developing POC.",
+          target2: "VAL.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: Do not rely on CVD divergence in powerful trend days where delta can stay trapped.",
+          "Rule 2: Best utilized in balanced and rotational sessions."
+        ],
+        tipsAndTricks: [
+          "Plot CVD alongside session Volume Profile for complete context."
+        ],
+        traps: "Shorting a trend day because CVD looks divergent."
+      },
+      'tpo': {
+        name: "TPO (Time Price Opportunity)",
+        tag: "Profile Construct",
+        subtitle: "The fundamental 30-minute building block of Market Profile.",
+        overview: "Created at the Chicago Board of Trade in 1984. Each 30-minute period is assigned a letter (A=09:30, B=10:00...). If price trades at that price during that period, a letter is stamped. Combining TPOs shows how price and time distribute across the session.",
+        daltonPrinciples: [
+          "TPOs measure the element of TIME at price.",
+          "Volume Profile measures the number of CONTRACTS at price.",
+          "True institutional edge comes from comparing TPO time acceptance against Volume volume acceptance."
+        ],
+        tradeSetup: {
+          title: "TPO Bracket Migration Scalp",
+          type: "Time-Price Analysis",
+          precondition: "Price spends multiple TPO periods rotating at a single level.",
+          trigger: "Price breaks out of the TPO cluster with clean single prints.",
+          entry: "Enter in breakout direction.",
+          stopLoss: "Back inside the prior TPO bracket.",
+          target1: "Next open TPO reference.",
+          target2: "Daily extreme.",
+          rr: "3:1."
+        },
+        amtRules: [
+          "Rule 1: High TPO count without high volume signals advertising without commercial success.",
+          "Rule 2: Low TPO count with high volume signals rapid institutional transaction."
+        ],
+        tipsAndTricks: [
+          "Period A and B establish the Initial Balance (IB)."
+        ],
+        traps: "Confusing TPOs with volume."
+      },
+      'bracket': {
+        name: "Bracket (Consolidation Range)",
+        tag: "Core Auction State",
+        subtitle: "A multi-day or multi-session horizontal balance area.",
+        overview: "A Bracket is a well-defined trading range where price oscillates between support and resistance across multiple sessions. In AMT, brackets represent balanced consolidation before the next major directional trend.",
+        daltonPrinciples: [
+          "The longer a market spends in a bracket, the larger the eventual breakout move will be.",
+          "Trade inside the bracket responsively; trade outside the bracket initiatively."
+        ],
+        tradeSetup: {
+          title: "Bracket Breakout & Measured Move",
+          type: "Structural Expansion",
+          precondition: "Market has compressed in a tight bracket for 3-5 sessions.",
+          trigger: "Decisive daily close outside the bracket with heavy volume surge.",
+          entry: "Enter on retest of the broken bracket border.",
+          stopLoss: "Back inside the bracket.",
+          target1: "1x bracket height measured move.",
+          target2: "2x bracket height.",
+          rr: "4:1 to 6:1."
+        },
+        amtRules: [
+          "Rule 1: Respect the bracket boundaries until broken with time and volume.",
+          "Rule 2: False breakouts that re-enter the bracket frequently sweep the opposite side."
+        ],
+        tipsAndTricks: [
+          "Calculate the height of the bracket to project measured move targets upon breakout."
+        ],
+        traps: "Chasing breakout trades in the middle of a bracket."
       }
     };
 
@@ -748,7 +1329,7 @@
                   <rect onclick="openDeepDive('excess-tail')" x="80" y="20" width="480" height="40" fill="#f43f5e" fill-opacity="0.12" class="hover:fill-opacity-25 transition"/>
                   <line x1="80" y1="60" x2="560" y2="60" stroke="#f43f5e" stroke-dasharray="4 4" stroke-width="1.5"/>
                   <text onclick="openDeepDive('excess-tail')" x="90" y="45" fill="#f43f5e" font-size="11" font-weight="700">Excess High (Unfair High / Price Rejected) 👆</text>
-                  <text onclick="openDeepDive('value-area')" x="550" y="55" fill="#f43f5e" font-size="11" text-anchor="end" font-weight="700">VAH</text>
+                  <text onclick="openDeepDive('vah-val')" x="550" y="55" fill="#f43f5e" font-size="11" text-anchor="end" font-weight="700">VAH</text>
 
                   <!-- Fair Value Area (68.2%) -->
                   <rect onclick="openDeepDive('value-area')" x="80" y="60" width="480" height="100" fill="url(#bellGrad)" stroke="#0284c7" stroke-width="1.5" class="hover:stroke-cyan-300 transition"/>
@@ -762,7 +1343,7 @@
                   <!-- Excess Low Zone -->
                   <line x1="80" y1="160" x2="560" y2="160" stroke="#10b981" stroke-dasharray="4 4" stroke-width="1.5"/>
                   <rect onclick="openDeepDive('excess-tail')" x="80" y="160" width="480" height="50" fill="#10b981" fill-opacity="0.12" class="hover:fill-opacity-25 transition"/>
-                  <text onclick="openDeepDive('value-area')" x="550" y="175" fill="#10b981" font-size="11" text-anchor="end" font-weight="700">VAL</text>
+                  <text onclick="openDeepDive('vah-val')" x="550" y="175" fill="#10b981" font-size="11" text-anchor="end" font-weight="700">VAL</text>
                   <text onclick="openDeepDive('excess-tail')" x="90" y="195" fill="#10b981" font-size="11" font-weight="700">Excess Low (Unfair Low / Price Rejected) 👆</text>
                 </svg>
               </div>
@@ -771,6 +1352,7 @@
               <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-dark-border">
                 <span class="text-[11px] font-mono text-slate-400 mr-1">Deep-Dive Pills:</span>
                 <button onclick="openDeepDive('value-area')" class="amt-term-btn">Value Area (68.2%)</button>
+                <button onclick="openDeepDive('vah-val')" class="amt-term-btn">VAH & VAL</button>
                 <button onclick="openDeepDive('poc')" class="amt-term-btn">Point of Control (POC)</button>
                 <button onclick="openDeepDive('excess-tail')" class="amt-term-btn">Excess Tails</button>
                 <button onclick="openDeepDive('poor-high-low')" class="amt-term-btn">Poor Highs / Lows</button>
@@ -889,7 +1471,7 @@
                 <span>Anatomy of Market Profile & Volume Profile</span>
               </h2>
               <p class="text-slate-300 text-sm leading-relaxed">
-                Understanding institutional market structure requires distinguishing between Time Price Opportunities (<button onclick="openDeepDive('value-area')" class="amt-term-btn">TPO</button>) and Volume Profile distributions.
+                Understanding institutional market structure requires distinguishing between Time Price Opportunities (<button onclick="openDeepDive('tpo')" class="amt-term-btn">TPO</button>) and Volume Profile distributions.
               </p>
             </div>
 
@@ -906,11 +1488,11 @@
                   </div>
                   <div class="flex justify-between items-center text-slate-400"><span>4520</span><span>A</span></div>
                   <div class="flex justify-between items-center text-slate-300"><span>4519</span><span>A B</span></div>
-                  <div onclick="openDeepDive('value-area')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4518</span><span>A B C <span class="text-[10px] text-cyan-300 ml-2">&larr; VAH 👆</span></span></div>
+                  <div onclick="openDeepDive('vah-val')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4518</span><span>A B C <span class="text-[10px] text-cyan-300 ml-2">&larr; VAH 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-200"><span>4517</span><span>A B C D</span></div>
                   <div onclick="openDeepDive('poc')" class="flex justify-between items-center text-amber-400 font-bold bg-amber-950/40 px-1.5 py-0.5 rounded cursor-pointer hover:bg-amber-900/50 transition"><span>4516</span><span>A B C D E F <span class="text-[10px] text-amber-300 ml-2">&larr; POC 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-200"><span>4515</span><span>B C D E</span></div>
-                  <div onclick="openDeepDive('value-area')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4514</span><span>C D <span class="text-[10px] text-cyan-300 ml-2">&larr; VAL 👆</span></span></div>
+                  <div onclick="openDeepDive('vah-val')" class="flex justify-between items-center text-cyan-400 font-bold bg-cyan-950/30 px-1.5 py-0.5 rounded cursor-pointer hover:bg-cyan-900/40 transition"><span>4514</span><span>C D <span class="text-[10px] text-cyan-300 ml-2">&larr; VAL 👆</span></span></div>
                   <div class="flex justify-between items-center text-slate-400"><span>4513</span><span>D</span></div>
                 </div>
 
@@ -922,11 +1504,11 @@
                   </div>
                   <div class="flex items-center space-x-2 text-slate-400"><span class="w-10">4520</span><div class="bg-slate-700 h-3 rounded" style="width: 15%"></div></div>
                   <div class="flex items-center space-x-2 text-slate-300"><span class="w-10">4519</span><div class="bg-slate-600 h-3 rounded" style="width: 30%"></div></div>
-                  <div onclick="openDeepDive('value-area')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4518</span><div class="bg-cyan-600 h-3 rounded" style="width: 55%"></div><span class="text-[10px] text-cyan-300">VAH</span></div>
+                  <div onclick="openDeepDive('vah-val')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4518</span><div class="bg-cyan-600 h-3 rounded" style="width: 55%"></div><span class="text-[10px] text-cyan-300">VAH</span></div>
                   <div class="flex items-center space-x-2 text-slate-200"><span class="w-10">4517</span><div class="bg-slate-500 h-3 rounded" style="width: 75%"></div></div>
                   <div onclick="openDeepDive('poc')" class="flex items-center space-x-2 text-amber-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4516</span><div class="bg-amber-500 h-3 rounded" style="width: 100%"></div><span class="text-[10px] text-amber-300">VPOC</span></div>
                   <div class="flex items-center space-x-2 text-slate-200"><span class="w-10">4515</span><div class="bg-slate-500 h-3 rounded" style="width: 70%"></div></div>
-                  <div onclick="openDeepDive('value-area')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4514</span><div class="bg-cyan-600 h-3 rounded" style="width: 45%"></div><span class="text-[10px] text-cyan-300">VAL</span></div>
+                  <div onclick="openDeepDive('vah-val')" class="flex items-center space-x-2 text-cyan-400 font-bold cursor-pointer hover:opacity-80 transition"><span class="w-10">4514</span><div class="bg-cyan-600 h-3 rounded" style="width: 45%"></div><span class="text-[10px] text-cyan-300">VAL</span></div>
                   <div class="flex items-center space-x-2 text-slate-400"><span class="w-10">4513</span><div class="bg-slate-700 h-3 rounded" style="width: 20%"></div></div>
                 </div>
 
@@ -1029,22 +1611,31 @@
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
-                <span class="text-xs font-mono font-bold text-cyan-400">2. Open-Test-Drive</span>
+              <div onclick="openDeepDive('open-test-drive')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-cyan-500/50 rounded-xl space-y-2 cursor-pointer group shadow-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-cyan-400">2. Open-Test-Drive</span>
+                  <span class="text-[10px] text-cyan-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price opens, tests an important key reference level (prior day high/low or VAH), meets fierce responsive rejection, and drives aggressively in the opposite direction.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
-                <span class="text-xs font-mono font-bold text-amber-400">3. Open-Rejection-Reverse</span>
+              <div onclick="openDeepDive('open-rejection-reverse')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-amber-500/50 rounded-xl space-y-2 cursor-pointer group shadow-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-amber-400">3. Open-Rejection-Reverse</span>
+                  <span class="text-[10px] text-amber-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price probes outside the prior day's range, finds zero continuation, reverses back through the entire opening range, and sweeps to the opposite side.
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
-                <span class="text-xs font-mono font-bold text-slate-400">4. Open-Auction</span>
+              <div onclick="openDeepDive('open-auction')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-slate-500/50 rounded-xl space-y-2 cursor-pointer group shadow-sm">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-slate-400">4. Open-Auction</span>
+                  <span class="text-[10px] text-slate-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price opens with zero clear conviction, oscillating quietly around the opening price. Indicates balanced conditions where responsive scalping dominates.
                 </p>
@@ -1197,10 +1788,13 @@
 
             <!-- Participant Comparison Table -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3 shadow-sm">
-                <div class="flex items-center space-x-2">
-                  <div class="w-2 h-2 rounded-full bg-slate-400"></div>
-                  <h3 class="text-sm font-bold text-white">Day Timeframe (DTT)</h3>
+              <div onclick="openDeepDive('day-timeframe')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-slate-500/50 rounded-xl space-y-3 shadow-sm cursor-pointer group">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 rounded-full bg-slate-400"></div>
+                    <h3 class="text-sm font-bold text-white">Day Timeframe (DTT)</h3>
+                  </div>
+                  <span class="text-[10px] text-slate-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
                 </div>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
                   <li>Scalpers, retail day traders, intraday algorithms.</li>
@@ -1211,10 +1805,13 @@
                 </ul>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-3 shadow-sm">
-                <div class="flex items-center space-x-2">
-                  <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
-                  <h3 class="text-sm font-bold text-white">Other Timeframe (OTF)</h3>
+              <div onclick="openDeepDive('other-timeframe')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-cyan-500/50 rounded-xl space-y-3 shadow-sm cursor-pointer group">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-2">
+                    <div class="w-2 h-2 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
+                    <h3 class="text-sm font-bold text-white">Other Timeframe (OTF)</h3>
+                  </div>
+                  <span class="text-[10px] text-cyan-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
                 </div>
                 <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
                   <li>Institutions, hedge funds, sovereign wealth, pension funds.</li>
@@ -1230,20 +1827,20 @@
             <div class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-3">
               <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider font-mono">The 4 Institutional Actions (Dalton Matrix)</h4>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div class="p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-lg">
-                  <span class="font-bold text-emerald-400">Initiative Buying:</span>
+                <div onclick="openDeepDive('initiative-activity')" class="btn-modern p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-lg cursor-pointer hover:bg-emerald-950/30">
+                  <span class="font-bold text-emerald-400">Initiative Buying 👆</span>
                   <p class="text-slate-300 mt-1">Buying at or above value. OTF is willing to pay high prices because they expect value to migrate higher.</p>
                 </div>
-                <div class="p-3 bg-blue-950/20 border border-blue-800/40 rounded-lg">
-                  <span class="font-bold text-blue-400">Responsive Buying:</span>
+                <div onclick="openDeepDive('responsive-activity')" class="btn-modern p-3 bg-blue-950/20 border border-blue-800/40 rounded-lg cursor-pointer hover:bg-blue-950/30">
+                  <span class="font-bold text-blue-400">Responsive Buying 👆</span>
                   <p class="text-slate-300 mt-1">Buying below value. Participants perceive the price as cheap and rotate price back to fair value.</p>
                 </div>
-                <div class="p-3 bg-rose-950/20 border border-rose-800/40 rounded-lg">
-                  <span class="font-bold text-rose-400">Initiative Selling:</span>
+                <div onclick="openDeepDive('initiative-activity')" class="btn-modern p-3 bg-rose-950/20 border border-rose-800/40 rounded-lg cursor-pointer hover:bg-rose-950/30">
+                  <span class="font-bold text-rose-400">Initiative Selling 👆</span>
                   <p class="text-slate-300 mt-1">Selling at or below value. OTF aggressively dumps because they expect fair value to plummet.</p>
                 </div>
-                <div class="p-3 bg-purple-950/20 border border-purple-800/40 rounded-lg">
-                  <span class="font-bold text-purple-400">Responsive Selling:</span>
+                <div onclick="openDeepDive('responsive-activity')" class="btn-modern p-3 bg-purple-950/20 border border-purple-800/40 rounded-lg cursor-pointer hover:bg-purple-950/30">
+                  <span class="font-bold text-purple-400">Responsive Selling 👆</span>
                   <p class="text-slate-300 mt-1">Selling above value. Participants perceive the price as expensive and rotate price back down.</p>
                 </div>
               </div>
@@ -1296,15 +1893,21 @@
 
             <!-- Order Flow Signals -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
-                <span class="text-xs font-mono font-bold text-amber-400">Passive Absorption at Extremes</span>
+              <div onclick="openDeepDive('delta-absorption')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-amber-500/50 rounded-xl space-y-2 shadow-sm cursor-pointer group">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-amber-400">Passive Absorption at Extremes</span>
+                  <span class="text-[10px] text-amber-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price hits VAH. Huge buy market orders print (+500 Delta on the footprint ladder), but the candle fails to tick higher. Passive limit sellers are reloading and absorbing all aggressive demand. <strong>High-probability short!</strong>
                 </p>
               </div>
 
-              <div class="p-4 bg-dark-card border border-dark-border rounded-xl space-y-2 shadow-sm">
-                <span class="text-xs font-mono font-bold text-cyan-400">Cumulative Volume Delta (CVD) Divergence</span>
+              <div onclick="openDeepDive('cvd')" class="btn-modern p-4 bg-dark-card border border-dark-border hover:border-cyan-500/50 rounded-xl space-y-2 shadow-sm cursor-pointer group">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-mono font-bold text-cyan-400">Cumulative Volume Delta (CVD) Divergence</span>
+                  <span class="text-[10px] text-cyan-400 group-hover:translate-x-1 transition-transform">View Sub-Lesson &rarr;</span>
+                </div>
                 <p class="text-xs text-slate-300 leading-relaxed">
                   Price prints a higher high into resistance, but CVD makes a decisive lower high. Aggressive buying volume is decaying while price is floating on low liquidity. Expect sharp mean reversion.
                 </p>
@@ -1505,21 +2108,29 @@
     let currentModuleId = "module-1";
     let completedModules = JSON.parse(localStorage.getItem('amt_completed_modules') || '[]');
     let quizAnswers = JSON.parse(localStorage.getItem('amt_quiz_answers') || '{}');
-    let heroVisible = false; // Hero is hidden by default once curriculum is started
+    let heroVisible = false;
 
     document.addEventListener("DOMContentLoaded", () => {
       renderNav();
       showModule(currentModuleId);
       updateProgressUI();
-      selectShapeTab('d-shape');
       renderDictionaryList();
       
-      // Default: hide hero banner if user has already visited or starts module
       const banner = document.getElementById("hero-welcome-banner");
       if (banner) {
         banner.style.display = "none";
       }
       updateHeroToggleLabel(false);
+
+      // Global ESC key listener to dismiss all open modals/drawers
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeDeepDiveModal();
+          closeTermDictionaryModal();
+          closeShareModal();
+          toggleSidebar(false);
+        }
+      });
     });
 
     /* =====================================================================
@@ -1734,9 +2345,12 @@
         updateHeroToggleLabel(false);
       }
 
+      const completeBtn = document.getElementById("btn-mark-complete");
+
       if (moduleId === 'interactive-tools') {
         renderInteractiveToolsView(viewport);
         document.getElementById("current-lesson-crumb").textContent = "Setup Calculators";
+        if (completeBtn) completeBtn.style.display = "none";
         updateNavHighlight();
         toggleSidebar(false);
         return;
@@ -1745,11 +2359,13 @@
       if (moduleId === 'mastery-drills') {
         renderDrillsView(viewport);
         document.getElementById("current-lesson-crumb").textContent = "Self-Assessment Drills";
+        if (completeBtn) completeBtn.style.display = "none";
         updateNavHighlight();
         toggleSidebar(false);
         return;
       }
 
+      if (completeBtn) completeBtn.style.display = "flex";
       const mod = MODULES.find(m => m.id === moduleId) || MODULES[0];
       document.getElementById("current-lesson-crumb").textContent = `Module ${MODULES.indexOf(mod) + 1}: ${mod.tag}`;
 
@@ -1768,6 +2384,11 @@
           <div>${mod.content}</div>
         </article>
       `;
+
+      // Auto-render Module 4 Archetype Tab if viewing Module 4
+      if (moduleId === 'module-4') {
+        selectShapeTab('d-shape');
+      }
 
       updateNavHighlight();
       updateCompleteButtonState();
@@ -1802,6 +2423,9 @@
     }
 
     function toggleCurrentModuleComplete() {
+      // Only complete valid lesson modules
+      if (!MODULES.some(m => m.id === currentModuleId)) return;
+
       if (completedModules.includes(currentModuleId)) {
         completedModules = completedModules.filter(id => id !== currentModuleId);
       } else {
@@ -1822,9 +2446,10 @@
     }
 
     function updateProgressUI() {
+      // Ensure only valid modules count and cap at 100%
+      const validCompleted = completedModules.filter(id => MODULES.some(m => m.id === id));
       const total = MODULES.length;
-      const count = completedModules.length;
-      const pct = Math.round((count / total) * 100);
+      const pct = Math.min(100, Math.round((validCompleted.length / total) * 100));
       
       const bar = document.getElementById("top-progress-bar");
       const txt = document.getElementById("top-progress-text");
