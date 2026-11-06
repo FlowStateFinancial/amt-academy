@@ -176,7 +176,7 @@
       <!-- Flashcards Mode -->
       <button onclick="openFlashcardsModal()" class="btn-modern flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-cyan-950/40 to-sky-950/40 hover:from-cyan-900/60 hover:to-sky-900/60 border border-cyan-800/60 hover:border-cyan-500 text-cyan-300 hover:text-white text-xs font-semibold shadow-sm transition">
         <svg class="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-        <span class="hidden sm:inline">Flashcards (28)</span>
+        <span class="hidden sm:inline">Flashcards (32)</span>
       </button>
 
       <!-- Web Audio Sound FX Toggle -->
@@ -474,7 +474,7 @@
           <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan"></div>
           <div>
             <h3 class="text-sm font-bold text-white uppercase font-mono tracking-wider">AMT Interactive Flashcards</h3>
-            <p class="text-[10px] text-slate-400">Master all 28 Institutional Auction Market Concepts</p>
+            <p class="text-[10px] text-slate-400">Master all 32 Institutional Auction Market Concepts</p>
           </div>
         </div>
         <button onclick="closeFlashcardsModal()" class="btn-modern text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-dark-surface">
@@ -486,7 +486,7 @@
       <div class="p-3 bg-dark-base border-b border-dark-border flex flex-wrap items-center justify-between gap-2 text-xs">
         <!-- Filter Tabs -->
         <div class="flex items-center space-x-1 font-mono text-[11px]">
-          <button id="fc-tab-all" onclick="setFlashcardFilter('all')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-800 font-bold transition">All (28)</button>
+          <button id="fc-tab-all" onclick="setFlashcardFilter('all')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-800 font-bold transition">All (32)</button>
           <button id="fc-tab-review" onclick="setFlashcardFilter('review')" class="px-2.5 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border transition">Need Review (<span id="fc-count-review">0</span>)</button>
           <button id="fc-tab-mastered" onclick="setFlashcardFilter('mastered')" class="px-2.5 py-1 rounded-lg bg-dark-surface text-slate-400 hover:text-white border border-dark-border transition">Mastered (<span id="fc-count-mastered">0</span>)</button>
         </div>
@@ -3386,6 +3386,7 @@ Price                                   Price
 
       // Keyboard shortcuts for Flashcards modal
       document.addEventListener("keydown", (e) => {
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)) return;
         const modal = document.getElementById("flashcards-modal");
         if (modal && !modal.classList.contains("hidden")) {
           if (e.code === "Space") {
@@ -4278,6 +4279,14 @@ Price                                   Price
 
       const resultContainer = document.getElementById("gp-results");
       if (!resultContainer) return;
+      if (vah <= val) {
+        resultContainer.innerHTML = `
+          <div class="p-4 bg-rose-950/40 border border-rose-800 text-rose-300 rounded-xl text-xs font-mono">
+            ⚠️ Invalid Input: Prior Day VAH (${vah.toFixed(2)}) must be greater than Prior Day VAL (${val.toFixed(2)}).
+          </div>
+        `;
+        return;
+      }
 
       let stateName = "";
       let stateBadge = "";
@@ -4695,6 +4704,14 @@ Price                                   Price
 
       const container = document.getElementById("calc-results");
       if (!container) return;
+      if (vah <= val) {
+        container.innerHTML = `
+          <div class="col-span-full p-3 bg-rose-950/40 border border-rose-800 text-rose-300 rounded-xl text-xs font-mono text-center">
+            ⚠️ Invalid Value Area: Prior VAH (${vah.toFixed(2)}) must be greater than VAL (${val.toFixed(2)}).
+          </div>
+        `;
+        return;
+      }
 
       if (isShort) {
         const entry = (vah - 1.0).toFixed(2);
@@ -5017,7 +5034,7 @@ Price                                   Price
         document.getElementById("fc-front-tag").textContent = "Empty";
         document.getElementById("fc-front-counter").textContent = "0 of 0";
         document.getElementById("fc-front-title").textContent = "No Cards in this Filter";
-        document.getElementById("fc-front-subtitle").textContent = "Select 'All (28)' or mark more cards to populate this list.";
+        document.getElementById("fc-front-subtitle").textContent = "Select 'All (32)' or mark more cards to populate this list.";
         return;
       }
 
