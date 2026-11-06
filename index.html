@@ -1446,6 +1446,126 @@
           "Calculate the height of the bracket to project measured move targets upon breakout."
         ],
         traps: "Chasing breakout trades in the middle of a bracket."
+      },
+      'd-shape': {
+        name: "D-Shape Profile (Balanced & Efficient Auction)",
+        tag: "Auction Archetype",
+        subtitle: "Normal Gaussian distribution with high-volume Point of Control in the middle.",
+        overview: "In Auction Market Theory, the D-Shape profile signifies a balanced, two-way efficient auction where buyers and sellers agree on price. Day Timeframe (DTT) participants rotate price back and forth between Value Area High (VAH) and Value Area Low (VAL), creating predictable mean-reversion conditions.",
+        daltonPrinciples: [
+          "70-80% of market sessions resolve into balanced D-shapes or horizontal brackets.",
+          "The Point of Control (POC) develops near the geometric center of the range, absorbing high volume.",
+          "Fading range extremes (VAH/VAL) carries statistical advantage until Other Timeframe (OTF) participants step in."
+        ],
+        tradeSetup: {
+          title: "The D-Shape Perimeter Responsive Fade",
+          type: "Responsive / Mean Reversion",
+          precondition: "Market shows horizontal rotational behavior with symmetric volume building around central POC.",
+          trigger: "Price probes VAH or VAL and shows delta exhaustion / passive absorption.",
+          entry: "Short at VAH / Long at VAL upon 5-min reversal confirmation.",
+          stopLoss: "1-2 ticks outside the swing excess wick.",
+          target1: "Session POC (60% position trim).",
+          target2: "Opposite Value Area boundary (VAL if short, VAH if long).",
+          rr: "3:1 to 5:1 Risk/Reward"
+        },
+        amtRules: [
+          "Rule 1: Never initiate trend breakout orders near the central POC of a D-shape.",
+          "Rule 2: Fade the outer perimeter until price establishes two consecutive 30-min bars outside value with increasing volume."
+        ],
+        tipsAndTricks: [
+          "Monitor Cumulative Volume Delta (CVD) at extremes: if price tags VAH but CVD is divergence-flat, sellers are absorbing bids."
+        ],
+        traps: "Retail traders often buy breakouts right at the top of a D-shape, getting trapped as institutions rotate price back to POC."
+      },
+      'p-shape': {
+        name: "P-Shape Profile (Upward Imbalance & Short Squeeze)",
+        tag: "Auction Archetype",
+        subtitle: "Thin stem of single prints below a high-volume distribution node at session highs.",
+        overview: "A P-shaped profile occurs when aggressive initiative buyers or an emotional short squeeze pushes price rapidly higher in the opening periods (Periods A/B), followed by two-way consolidation near the highs. The thin lower stem indicates price advertised opportunity so fast that little volume was transacted until reaching the upper node.",
+        daltonPrinciples: [
+          "The thin stem represents price rejection by lower timeframe sellers (an area of low trade facilitation).",
+          "If price holds above the thin stem in subsequent sessions, it confirms true value migration higher.",
+          "If the move was purely driven by short covering, lack of follow-through buying will cause price to slide rapidly down the stem."
+        ],
+        tradeSetup: {
+          title: "The P-Shape Stem Retest & Value Acceptance Play",
+          type: "Trend Continuation or Stem Reversion",
+          precondition: "Market rallies sharply in early periods leaving single prints, then forms a tight high-volume node near highs.",
+          trigger: "Price pulls back to retest the base of the upper distribution (top of single-print stem) and prints positive delta absorption.",
+          entry: "Enter long on confirmation of rejection at the top of the stem.",
+          stopLoss: "2 ticks below the upper distribution boundary (inside the stem).",
+          target1: "Upper distribution POC.",
+          target2: "New session high extension.",
+          rr: "3:1 to 4:1 Risk/Reward"
+        },
+        amtRules: [
+          "Rule 1: Never blindly short the highs of a P-shape while price remains accepted above the stem.",
+          "Rule 2: If price accepts two consecutive 30-min bars below the upper distribution into the stem, the buying drive has failed. Short the stem traversal down to the day's open."
+        ],
+        tipsAndTricks: [
+          "Check volume at highs: institutional accumulation shows sustained high volume, whereas an emotional short squeeze dies down quickly."
+        ],
+        traps: "Retail traders often try to pick tops at the high of a P-shape because price 'moved up too far', getting run over by institutional absorption."
+      },
+      'b-shape': {
+        name: "b-Shape Profile (Downward Imbalance & Long Liquidation)",
+        tag: "Auction Archetype",
+        subtitle: "Thin stem of single prints above a high-volume distribution node at session lows.",
+        overview: "A b-shaped profile occurs when aggressive initiative sellers or a cascade of long-liquidation flushes price down rapidly during the morning session, followed by consolidation at lower levels. The upper thin stem represents an area where buyers were absent, forcing the auction down until responsive buyers stepped in to facilitate trade.",
+        daltonPrinciples: [
+          "The upper stem represents rapid price exploration and rejection of higher prices.",
+          "Consolidation at the lows builds a new lower fair value. If price spends 60+ minutes at the lows, the lower prices are accepted.",
+          "If the move was merely long liquidation (not fresh shorting), selling dries up and price can mount a sharp short-covering rally back into the stem."
+        ],
+        tradeSetup: {
+          title: "The b-Shape Lower Node Breakdown or Stem Fade",
+          type: "Trend Continuation or Liquidation Bounce",
+          precondition: "Price flushes lower in Periods A/B leaving a thin stem, then consolidates in a flat distribution at session lows.",
+          trigger: "Pullback into the ceiling of the lower distribution (bottom of the thin stem) with negative delta absorption.",
+          entry: "Enter short on confirmation of failure at the base of the thin stem.",
+          stopLoss: "2 ticks above the lower distribution boundary (inside the stem).",
+          target1: "Lower distribution POC.",
+          target2: "Session low extension.",
+          rr: "3:1 to 5:1 Risk/Reward"
+        },
+        amtRules: [
+          "Rule 1: Do not buy blindly at the low of a b-shape thinking it is cheap; lower value acceptance is actively forming.",
+          "Rule 2: If price spends 2+ hours inside the lower node, lower prices are accepted by OTF participants."
+        ],
+        tipsAndTricks: [
+          "Look for high negative delta at the lows that fails to make lower lows: this indicates passive institutional limit buyers are absorbing retail market sells."
+        ],
+        traps: "Retail traders buy the dip inside the thin stem only to get crushed as price slices through the lack of liquidity."
+      },
+      'B-shape': {
+        name: "B-Shape Profile (Double Distribution Trend Day)",
+        tag: "Auction Archetype",
+        subtitle: "Two distinct high-volume balance distributions separated by a low-volume zone of single prints.",
+        overview: "A Double Distribution (B-Shape) represents a trend day that paused to build initial value, followed by an aggressive second wave of Other Timeframe (OTF) initiative activity that drove price into a completely separate second distribution zone. The single prints between the two distributions represent the defining dividing line.",
+        daltonPrinciples: [
+          "The single-print zone separating the two distributions is paramount support (in an uptrend) or resistance (in a downtrend).",
+          "As long as the single prints remain unfilled, the second distribution is the active market and directional bias remains intact.",
+          "If the single prints are breached and price accepts inside the first distribution, the breakout has failed."
+        ],
+        tradeSetup: {
+          title: "The Double Distribution Single-Print Retest",
+          type: "Trend Continuation",
+          precondition: "Market breaks out of an initial balance, prints 3+ rows of single prints, and establishes an upper distribution.",
+          trigger: "Price pulls back to retest the upper edge of the single-print zone. Buyers defend the singles with positive delta.",
+          entry: "Long at the upper boundary of the separating single prints.",
+          stopLoss: "Below the midpoint of the single-print zone.",
+          target1: "Upper distribution POC.",
+          target2: "Upper distribution high extension.",
+          rr: "4:1 to 6:1 Risk/Reward"
+        },
+        amtRules: [
+          "Rule 1: Treat the single prints as a hard directional line in the sand. Always trade in the direction of the second distribution as long as singles hold.",
+          "Rule 2: If price closes inside the single-print zone and re-enters the first distribution, immediately target the first distribution POC."
+        ],
+        tipsAndTricks: [
+          "Mark the exact high and low price ticks of the single prints. Algorithmic traders place defensive limit orders right at the edge of the singles."
+        ],
+        traps: "Retail traders see the gap between distributions and try to trade a 'gap fill' while the market is in a powerful one-time framing trend."
       }
     };
 
@@ -2089,21 +2209,24 @@ Price                                   Price
             <!-- Interactive SVG Shape Viewer Component -->
             <div class="bg-dark-card border border-dark-border rounded-2xl p-5 sm:p-6 space-y-4 shadow-card">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-dark-border pb-3">
-                <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">4.3 Interactive Shape & Tactics Viewer</span>
-                <span class="text-[11px] font-mono text-slate-400">Click tabs to inspect SVG profiles</span>
+                <div class="space-y-0.5">
+                  <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">4.3 Interactive Profile Archetype Visualizer & Playbook</span>
+                  <p class="text-[11px] text-slate-400">Click any tab below to inspect live SVG market profile distributions, institutional dynamics, and execution rules</p>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">Interactive Visualizer</span>
               </div>
 
               <!-- Tabs -->
               <div class="flex flex-wrap gap-2 text-xs font-mono">
-                <button id="archetype-tab-d" onclick="switchArchetypeTab('d-shape')" class="btn-modern px-3 py-1.5 rounded-xl bg-cyan-500 text-slate-950 font-bold shadow-sm cursor-pointer">D-Shape</button>
-                <button id="archetype-tab-p" onclick="switchArchetypeTab('p-shape')" class="btn-modern px-3 py-1.5 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white cursor-pointer">P-Shape</button>
-                <button id="archetype-tab-b" onclick="switchArchetypeTab('b-shape')" class="btn-modern px-3 py-1.5 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white cursor-pointer">b-Shape</button>
-                <button id="archetype-tab-B" onclick="switchArchetypeTab('B-shape')" class="btn-modern px-3 py-1.5 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white cursor-pointer">B-Shape</button>
+                <button id="tab-d-shape" onclick="selectShapeTab('d-shape')" class="btn-modern px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold shadow-glow-cyan cursor-pointer transition">D-Shape (Balanced)</button>
+                <button id="tab-p-shape" onclick="selectShapeTab('p-shape')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white font-bold cursor-pointer transition">P-Shape (Short Covering)</button>
+                <button id="tab-b-shape" onclick="selectShapeTab('b-shape')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white font-bold cursor-pointer transition">b-Shape (Long Liquidation)</button>
+                <button id="tab-B-shape" onclick="selectShapeTab('B-shape')" class="btn-modern px-3.5 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-slate-300 hover:text-white font-bold cursor-pointer transition">B-Shape (Double Distribution)</button>
               </div>
 
               <!-- Display Box -->
-              <div id="archetype-display-box" class="p-4 bg-dark-surface rounded-xl border border-dark-border space-y-3">
-                <!-- Injected via switchArchetypeTab in script -->
+              <div id="shape-display" class="p-5 bg-dark-surface rounded-2xl border border-dark-border space-y-4 shadow-inner">
+                <!-- Dynamically injected via selectShapeTab -->
               </div>
             </div>
           </div>
@@ -3714,40 +3837,67 @@ Price                                   Price
        PROFILE SHAPES TAB SWITCHER (FOR MODULE 4)
        ===================================================================== */
     function selectShapeTab(shapeKey) {
-      SoundFX.click();
-      ['d-shape', 'p-shape', 'b-shape', 'B-shape'].forEach(k => {
-        const btn = document.getElementById(`tab-${k}`);
-        if (btn) {
-          if (k === shapeKey) {
-            btn.className = "btn-modern px-3 py-1.5 rounded-lg bg-cyan-500 text-slate-950 font-bold text-xs font-mono shadow-glow-cyan transition";
-          } else {
-            btn.className = "btn-modern px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white transition";
+      if (window.SoundFX && SoundFX.click) SoundFX.click();
+      
+      const keys = ['d-shape', 'p-shape', 'b-shape', 'B-shape'];
+      keys.forEach(k => {
+        const btn1 = document.getElementById(`tab-${k}`);
+        const btn2 = document.getElementById(`archetype-tab-${k.charAt(0)}`);
+        [btn1, btn2].forEach(btn => {
+          if (btn) {
+            if (k === shapeKey) {
+              btn.className = "btn-modern px-3.5 py-2 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs font-mono shadow-glow-cyan transition";
+            } else {
+              btn.className = "btn-modern px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-slate-300 font-bold text-xs font-mono hover:text-white hover:bg-dark-card transition";
+            }
           }
-        }
+        });
       });
 
       const data = SHAPE_DATA[shapeKey];
-      const container = document.getElementById("shape-display");
+      const container = document.getElementById("shape-display") || document.getElementById("archetype-display-box");
       if (container && data) {
+        const deepDiveKey = shapeKey === 'd-shape' ? 'd-shape' : shapeKey;
         container.innerHTML = `
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm font-bold text-white font-mono">${data.title}</h3>
-              <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-[10px] font-bold border border-cyan-800">${data.badge}</span>
+          <div class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-dark-border/60 pb-3">
+              <div class="space-y-0.5">
+                <h3 class="text-base font-bold text-white font-mono flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-glow-cyan animate-pulse"></span>
+                  <span>${data.title}</span>
+                </h3>
+                <p class="text-xs text-slate-400 font-sans">Institutional Market Bias: <strong class="text-amber-300">${data.bias}</strong></p>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="px-2.5 py-1 rounded-lg bg-cyan-950 text-cyan-300 text-[10px] font-mono font-bold border border-cyan-800">${data.badge}</span>
+                <button onclick="openDeepDive('${deepDiveKey}')" class="btn-modern px-3 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs font-mono flex items-center space-x-1 shadow-sm transition cursor-pointer">
+                  <span>Full Deep Dive &rarr;</span>
+                </button>
+              </div>
             </div>
             
-            <div class="p-3 bg-dark-card rounded-lg border border-dark-border">
+            <div class="p-4 bg-dark-card/90 rounded-xl border border-dark-border/80 flex justify-center items-center shadow-inner">
               ${data.svg}
             </div>
 
-            <div class="text-xs text-slate-300 space-y-1.5 pt-1">
-              <p><strong>Auction Context:</strong> ${data.description}</p>
-              <p><strong>Actionable Tactics:</strong> <span class="text-cyan-300 font-semibold">${data.tactics}</span></p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+              <div class="p-4 bg-dark-card rounded-xl border border-dark-border space-y-1.5 shadow-sm">
+                <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block">Auction Context</span>
+                <p class="text-xs text-slate-200 leading-relaxed">${data.description}</p>
+              </div>
+              <div class="p-4 bg-dark-card rounded-xl border border-cyan-900/40 space-y-1.5 shadow-sm">
+                <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-wider block">Actionable Playbook & Tactics</span>
+                <p class="text-xs text-cyan-200 leading-relaxed font-sans">${data.tactics}</p>
+              </div>
             </div>
           </div>
         `;
       }
     }
+
+    // Alias for backward compatibility
+    function switchArchetypeTab(shapeKey) { return selectShapeTab(shapeKey); }
+    window.switchArchetypeTab = selectShapeTab;
 
     /* =====================================================================
        TPO SIMULATOR DATA & LOGIC ENGINE
